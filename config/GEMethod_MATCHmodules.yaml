@@ -1,15 +1,15 @@
 GenPart_momFirstCopy:
     name: GenPart_momPrompt
-    path: Base.Modules.GenPart_momPrompt
+    path: GEM.Modules.GenPart_momPrompt
     parameters:
         isMC: self.dataset.process.isMC
 
 Z_MCtruth_matching:
     name: ZMatch
-    path: Base.Modules.DiMuonSelec
+    path: GEM.Modules.DiMuonSelec
     parameters:
         isMC: self.dataset.process.isMC
 
 DiMuon_Selector:
     name: DiMuonSelec
-    path: Base.Modules.DiMuonSelec
+    path: GEM.Modules.DiMuonSelec

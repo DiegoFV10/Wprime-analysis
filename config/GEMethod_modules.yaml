@@ -1,21 +1,21 @@
 GenPart_momFirstCopy:
     name: GenPart_momPrompt
-    path: Base.Modules.GenPart_momPrompt
+    path: GEM.Modules.GenPart_momPrompt
     parameters:
         isDY: self.dataset.process.get_aux('isDY', False)
 
 DY_Stitching:
     name: DY_Overlapping
-    path: Base.Modules.Sample_Overlapping
+    path: GEM.Modules.Sample_Overlapping
     parameters:
         isDY: self.dataset.process.get_aux('isDY', False)
 
 TTbar_Stitching:
     name: TTbar_Overlapping
-    path: Base.Modules.Sample_Overlapping
+    path: GEM.Modules.Sample_Overlapping
     parameters:
         isTT: self.dataset.process.get_aux('isTT', False)
 
 DiMuon_Selector:
     name: DiMuonSelec
-    path: Base.Modules.DiMuonSelec
+    path: GEM.Modules.DiMuonSelec
