@@ -15,10 +15,10 @@ puweight:
         # year: self.config.year
         # isUL: self.dataset.has_tag('ul')
 
-dystitching:
-    name: DYstitchingRDF
-    path: Tools.Tools.dyreweighting
-    parameters:
-        year: self.config.year
-        isDY: self.dataset.process.get_aux('isDY', False)
-        isUL: self.dataset.has_tag('ul')
+#dystitching:
+#    name: DYstitchingRDF
+#    path: Tools.Tools.dyreweighting
+#    parameters:
+#        year: self.config.year
+#        isDY: self.dataset.process.get_aux('isDY', False)
+#        isUL: self.dataset.has_tag('ul')

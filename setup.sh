@@ -237,6 +237,12 @@ action() {
           compile="1"
         fi
 
+	export GEMMODULES_PATH="GEM/Modules"
+        if [ ! -d "$GEMMODULES_PATH" ]; then
+          git clone https://gitlab.cern.ch/diegof/gem-modules.git GEM/Modules
+          compile="1"
+        fi
+
         if [ "$compile" == "1" ]
         then
             scram b
