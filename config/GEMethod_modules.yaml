@@ -4,11 +4,23 @@ GenPart_momFirstCopy:
     parameters:
         isDY: self.dataset.process.get_aux('isDY', False)
 
-DY_Stitching:
-    name: DY_Overlapping
+DY_TauStitching:
+    name: DY_TauDecay
     path: GEM.Modules.Sample_Overlapping
     parameters:
         isDY: self.dataset.process.get_aux('isDY', False)
+
+DY_MassStitching:
+    name: DY_MassOverlapping
+    path: GEM.Modules.Sample_Overlapping
+    parameters:
+        isFirstMbin: self.dataset.process.get_aux('isFirstMbin', False)
+
+DY_HTStitching:
+    name: DY_HTOverlapping
+    path: GEM.Modules.Sample_Overlapping
+    parameters:
+        isHTbin: self.dataset.process.get_aux('isHTbin', False)
 
 TTbar_Stitching:
     name: TTbar_Overlapping

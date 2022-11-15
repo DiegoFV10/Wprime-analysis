@@ -137,7 +137,8 @@ action() {
     export GFAL_PLUGIN_DIR="$CMT_GFAL_DIR/lib/gfal2-plugins"
 
     # certificate proxy handling
-    [ "$CMT_REMOTE_JOB" != "1" ] && export X509_USER_PROXY="/tmp/x509up_u$( id -u )"
+    #[ "$CMT_REMOTE_JOB" != "1" ] && export X509_USER_PROXY="/tmp/x509up_u$( id -u )" #old
+    [ "$CMT_REMOTE_JOB" != "1" ] && export X509_USER_PROXY="$CMT_BASE/x509up"
 
     # software that is used in this project
     cmt_setup_software() {
