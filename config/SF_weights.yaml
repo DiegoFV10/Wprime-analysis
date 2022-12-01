@@ -1,0 +1,15 @@
+puweight:
+    name: puWeightRDF
+    path: Corrections.LUM.puWeight
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+        isUL: self.dataset.has_tag('ul')
+
+Muon_SFs:
+    name: MuonSF
+    path: Corrections.MUO.muonSF_GEMethod
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+        isUL: self.dataset.has_tag('ul')

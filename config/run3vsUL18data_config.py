@@ -53,425 +53,95 @@ class Config():
 
         categories = [
             Category("base", "base category", selection = ""),
-            Category("preselection_UL18", "GEMethod Preselection for UL18", selection = "nMuon > 1 && (HLT_Mu50 == 1 || HLT_TkMu100 == 1 || HLT_OldMu100 == 1)")
+            Category("preselRun3_Mu50", "GEMethod Preselection for Run3 2022 HLT_Mu50", selection = "nMuon > 1 && (HLT_Mu50 == 1)"),
+            Category("preselRun3_HighPtPath", "GEMethod Preselection for Run3 2022 full path for HighPt muons", selection = "nMuon > 1 && (HLT_Mu50 == 1 || HLT_HighPtTkMu100 == 1 || HLT_CascadeMu100 == 1)"),
         ]
         return ObjectCollection(categories)
 
     def add_processes(self):
 
         processes = [
-            Process("DrellYan", Label("DY"), color=ROOT.kAzure+1), # (13,182,241)
-            #Process("DY", Label("Z #rightarrow #tau#tau"), color=(255,255,0), isDY=True, parent_process="DrellYan"),
-            #Process("Zmumu", Label("Z #rightarrow #mu#mu off-shell"), color=ROOT.kBlue+1, parent_process="DrellYan"), # Para HT checks
-            Process("DY_HT", Label("Z boosted"), color=(206,30,30), isHTbin=True, parent_process="DrellYan"),
-
-            # Muestras buenas para plots normales
-            Process("Zmumu1", Label("Zmumu_50-120"), color=(255, 241, 0), isFirstMbin=True, parent_process="DrellYan"),
-            Process("Zmumu2", Label("Zmumu_120-200"), color=(255, 140, 0), parent_process="DrellYan"),
-            Process("Zmumu3", Label("Zmumu_200-400"), color=(232, 17, 35), parent_process="DrellYan"),
-            Process("Zmumu4", Label("Zmumu_400-800"), color=(236, 0, 140), parent_process="DrellYan"),
-            Process("Zmumu5", Label("Zmumu_800-1400"), color=(104, 33, 122), parent_process="DrellYan"),
-            Process("Zmumu6", Label("Zmumu_1400-2300"), color=(0, 24, 143), parent_process="DrellYan"),
-            Process("Zmumu7", Label("Zmumu_2300-3500"), color=(0, 188, 242), parent_process="DrellYan"),
-            Process("Zmumu8", Label("Zmumu_3500-4500"), color=(0, 178, 148), parent_process="DrellYan"),
-            Process("Zmumu9", Label("Zmumu_4500-6000"), color=(0, 158, 73), parent_process="DrellYan"),
-            Process("Zmumu10", Label("Zmumu_6000-Inf"), color=(186, 216, 10), parent_process="DrellYan"),
-
-            # Para plots de HT checks
-            #Process("Zmumu1", Label("Z #rightarrow #mu#mu on-shell"), color=ROOT.kAzure+10, isFirstMbin=True, parent_process="DrellYan"),
-            #Process("Zmumu2", Label("Zmumu_120-200"), color=(255, 140, 0), parent_process="Zmumu"),
-            #Process("Zmumu3", Label("Zmumu_200-400"), color=(232, 17, 35), parent_process="Zmumu"),
-            #Process("Zmumu4", Label("Zmumu_400-800"), color=(236, 0, 140), parent_process="Zmumu"),
-            #Process("Zmumu5", Label("Zmumu_800-1400"), color=(104, 33, 122), parent_process="Zmumu"),
-            #Process("Zmumu6", Label("Zmumu_1400-2300"), color=(0, 24, 143), parent_process="Zmumu"),
-            #Process("Zmumu7", Label("Zmumu_2300-3500"), color=(0, 188, 242), parent_process="Zmumu"),
-            #Process("Zmumu8", Label("Zmumu_3500-4500"), color=(0, 178, 148), parent_process="Zmumu"),
-            #Process("Zmumu9", Label("Zmumu_4500-6000"), color=(0, 158, 73), parent_process="Zmumu"),
-            #Process("Zmumu10", Label("Zmumu_6000-Inf"), color=(186, 216, 10), parent_process="Zmumu"),
-
-            Process("Top", Label("Top"), color=(36, 147, 25)), # (17,168,31)
-            Process("TTbar", Label("TT"), color=(255, 153, 0), isTT=True, parent_process="Top"),
-            Process("TTbar_high", Label("TT"), color=(255, 153, 0), parent_process="Top"),
-            Process("ST", Label("ST"), color=(255, 153, 0), parent_process="Top"),
-
-            Process("DiBoson", Label("DiBoson"), color=(206, 30, 30)), # (230,28,28)
-            Process("WZ", Label("WZ"), color=(134, 136, 138), parent_process="DiBoson"),
-            Process("WW", Label("WW"), color=(134, 136, 138), parent_process="DiBoson"),
-            Process("ZZ", Label("ZZ"), color=(134, 136, 138), parent_process="DiBoson"),
-
-            Process("DataUL18", Label("DATA"), color=(0, 0, 0), isData=True),
-            Process("DataUL18_BAD", Label("DATA"), color=(0, 0, 0), isData=True),
+            Process("DataUL18", Label("Data UL18"), color=ROOT.kAzure+1),
+            Process("Data2022", Label("Data 2022 CDEF"), color=(0, 0, 0), isData=True),
         ]
 
         process_group_names = {
-            "UL18_bad": [
-                "DrellYan",
-                "Top",
-                "DiBoson",
-                "DataUL18_BAD",
-            ],
-            "UL18_corrected": [
-                "DrellYan",
-                "Top",
-                "DiBoson",
+
+            "2022vsUL18": [
                 "DataUL18",
+                "Data2022",
             ],
-            "Zmumu_binned": [
-                "Zmumu1",
-                "Zmumu2",
-                "Zmumu3",
-                "Zmumu4",
-                "Zmumu5",
-                "Zmumu6",
-                "Zmumu7",
-                "Zmumu8",
-                "Zmumu9",
-                "Zmumu10",
-            ],
-            "HT_checks": [
-                "DY",
-                "Zmumu1",
-                "Zmumu",
-                "DY_HT",
-            ],
+
         }
 
         return ObjectCollection(processes), process_group_names
 
     def add_datasets(self):
         datasets = [
-            #Dataset("DY",
-            #    dataset="/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/"
-            #        "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v2/"
-            #        "NANOAODSIM",
-            #    process=self.processes.get("DY"),
-                # prefix="xrootd-cms.infn.it//",
-            #    xs=5765.4, # Paper Zprime AN-2018/011 (NNLO)
-            #    tags=["ul"]),
-
-            Dataset("Zmumu_M-50to120",
-                dataset="/ZToMuMu_M-50To120_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("Zmumu1"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=2112.904, # Taken from AN-2018/011 (NLO), scalable to NNLO by k-factors?
-                tags=["ul"]),
-
-            Dataset("Zmumu_M-120to200",
-                dataset="/ZToMuMu_M-120To200_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("Zmumu2"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=20.553,
-                tags=["ul"]),
-
-            Dataset("Zmumu_M-200to400",
-                dataset="/ZToMuMu_M-200To400_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("Zmumu3"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=2.886,
-                tags=["ul"]),
-
-            Dataset("Zmumu_M-400to800",
-                dataset="/ZToMuMu_M-400To800_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("Zmumu4"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=0.2517,
-                tags=["ul"]),
-
-            Dataset("Zmumu_M-800to1400",
-                dataset="/ZToMuMu_M-800To1400_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("Zmumu5"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=0.01707,
-                tags=["ul"]),
-
-            Dataset("Zmumu_M-1400to2300",
-                dataset="/ZToMuMu_M-1400To2300_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("Zmumu6"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=0.001366,
-                tags=["ul"]),
-
-            Dataset("Zmumu_M-2300to3500",
-                dataset="/ZToMuMu_M-2300To3500_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("Zmumu7"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=0.00008178,
-                tags=["ul"]),
-
-            Dataset("Zmumu_M-3500to4500",
-                dataset="/ZToMuMu_M-3500To4500_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("Zmumu8"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=0.000003191,
-                tags=["ul"]),
-
-            Dataset("Zmumu_M-4500to6000",
-                dataset="/ZToMuMu_M-4500To6000_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("Zmumu9"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=0.0000002787,
-                tags=["ul"]),
-
-            Dataset("Zmumu_M-6000toInf",
-                dataset="/ZToMuMu_M-6000ToInf_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("Zmumu10"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=0.000000009569,
-                tags=["ul"]),
-
-            Dataset("DY_HT-70to100",
-                dataset="/DYJetsToLL_M-50_HT-70to100_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("DY_HT"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=146.5, # DAS (LO)
-                tags=["ul"]),
-
-            Dataset("DY_HT-100to200",
-                dataset="/DYJetsToLL_M-50_HT-100to200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("DY_HT"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=160.7,
-                tags=["ul"]),
-
-            Dataset("DY_HT-200to400",
-                dataset="/DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("DY_HT"),
-                # prefix="xrootd-cms.infn.it//",
-                #xs=48.63, # DAS
-                xs=40.99, # AN2019-107
-                tags=["ul"]),
-
-            Dataset("DY_HT-400to600",
-                dataset="/DYJetsToLL_M-50_HT-400to600_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("DY_HT"),
-                # prefix="xrootd-cms.infn.it//",
-                #xs=6.993,
-                xs=5.678,
-                tags=["ul"]),
-
-            Dataset("DY_HT-600to800",
-                dataset="/DYJetsToLL_M-50_HT-600to800_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("DY_HT"),
-                # prefix="xrootd-cms.infn.it//",
-                #xs=1.761,
-                xs=1.367,
-                tags=["ul"]),
-
-            Dataset("DY_HT-800to1200",
-                dataset="/DYJetsToLL_M-50_HT-800to1200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("DY_HT"),
-                # prefix="xrootd-cms.infn.it//",
-                #xs=0.8021,
-                xs=0.6304,
-                tags=["ul"]),
-
-            Dataset("DY_HT-1200to2500",
-                dataset="/DYJetsToLL_M-50_HT-1200to2500_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("DY_HT"),
-                # prefix="xrootd-cms.infn.it//",
-                #xs=0.1937,
-                xs=0.1514,
-                tags=["ul"]),
-
-            Dataset("DY_HT-2500toInf",
-                dataset="/DYJetsToLL_M-50_HT-2500toInf_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("DY_HT"),
-                # prefix="xrootd-cms.infn.it//",
-                #xs=0.003514,
-                xs=0.003565,
-                tags=["ul"]),
-
-            Dataset("TT_2l2nu",
-                dataset="/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("TTbar"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=87.31, # AN-2018/011 (NNLO)
-                tags=["ul"]),
-
-            Dataset("TT_semilep",
-                dataset="/TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("TTbar"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=365.34, # DAS (NNLO)
-                tags=["ul"]),
-
-            Dataset("TT_Mtt-700to1000",
-                dataset="/TT_Mtt-700to1000_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("TTbar_high"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=66.85, # DAS (NLO)
-                tags=["ul"]),
-
-            Dataset("TT_Mtt-1000toInf",
-                dataset="/TT_Mtt-1000toInf_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("TTbar_high"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=16.42, # DAS (NLO)
-                tags=["ul"]),
-
-            Dataset("ST_t-top",
-                dataset="/ST_t-channel_top_4f_InclusiveDecays_TuneCP5_13TeV-powheg-madspin-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("ST"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=115.3, # DAS (NLO)
-                tags=["ul"]),
-
-            Dataset("ST_t-antitop",
-                dataset="/ST_t-channel_antitop_4f_InclusiveDecays_TuneCP5_13TeV-powheg-madspin-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("ST"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=69.09, # DAS (NLO)
-                tags=["ul"]),
-
-            Dataset("ST_tW-top",
-                dataset="/ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v2/"
-                    "NANOAODSIM",
-                process=self.processes.get("ST"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=35.6, # AN-2018/011 (NNLO)
-                tags=["ul"]),
-
-            Dataset("ST_tW-antitop",
-                dataset="/ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v2/"
-                    "NANOAODSIM",
-                process=self.processes.get("ST"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=35.6, # AN-2018/011 (NNLO)
-                tags=["ul"]),
-
-            Dataset("ST_s",
-                dataset="/ST_s-channel_4f_leptonDecays_TuneCP5_13TeV-amcatnlo-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("ST"),
-                # prefix="xrootd-cms.infn.it//",
-                xs=3.549, # DAS (unknown)
-                tags=["ul"]),
-
-            Dataset("WZ",
-                dataset="/WZ_TuneCP5_13TeV-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("WZ"),
-                # prefix="xrootd-cms.infn.it//",
-                    xs=47.13, # AN-2018/011 (NLO) ==> En DAS 27.6 (LO)
-                tags=["ul"]),
-
-            Dataset("WW",
-                dataset="/WW_TuneCP5_13TeV-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("WW"),
-                # prefix="xrootd-cms.infn.it//",
-                    xs=118.7, # AN-2018/011 (NNLO) ==> En DAS 75.95 (LO)
-                tags=["ul"]),
-
-            Dataset("ZZ",
-                dataset="/ZZ_TuneCP5_13TeV-pythia8/"
-                    "RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/"
-                    "NANOAODSIM",
-                process=self.processes.get("ZZ"),
-                # prefix="xrootd-cms.infn.it//",
-                    xs=16.523, # AN-2018/011 (NLO) ==> En DAS 12.14 (LO)
-                tags=["ul"]),
-
-            Dataset("DataUL18_A_BAD",
-                dataset="/SingleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD",
-                process=self.processes.get("DataUL18_BAD"),
-                # prefix="xrootd-cms.infn.it//",
-                tags=["ul"]),
-
-            Dataset("DataUL18_B_BAD",
-                dataset="/SingleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD",
-                process=self.processes.get("DataUL18_BAD"),
-                # prefix="xrootd-cms.infn.it//",
-                tags=["ul"]),
-
-            Dataset("DataUL18_C_BAD",
-                dataset="/SingleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD",
-                process=self.processes.get("DataUL18_BAD"),
-                # prefix="xrootd-cms.infn.it//",
-                tags=["ul"]),
-
-            Dataset("DataUL18_D_BAD",
-                dataset="/SingleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD",
-                process=self.processes.get("DataUL18_BAD"),
-                # prefix="xrootd-cms.infn.it//",
-                tags=["ul"]),
 
             Dataset("DataUL18_A",
                 dataset="/SingleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD",
                 process=self.processes.get("DataUL18"),
                 # prefix="xrootd-cms.infn.it//",
+                xs=1.0,
                 tags=["ul"]),
 
             Dataset("DataUL18_B",
                 dataset="/SingleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD",
                 process=self.processes.get("DataUL18"),
                 # prefix="xrootd-cms.infn.it//",
+                xs=1.0,
                 tags=["ul"]),
 
             Dataset("DataUL18_C",
                 dataset="/SingleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD",
                 process=self.processes.get("DataUL18"),
                 # prefix="xrootd-cms.infn.it//",
+                xs=1.0,
                 tags=["ul"]),
 
             Dataset("DataUL18_D",
                 dataset="/SingleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD",
                 process=self.processes.get("DataUL18"),
                 # prefix="xrootd-cms.infn.it//",
+                xs=1.0,
                 tags=["ul"]),
+
+            Dataset("SingleMu2022_C",
+                dataset="/SingleMuon/Run2022C-PromptNanoAODv10_v1-v1/NANOAOD",
+                process=self.processes.get("Data2022"),
+                # prefix="xrootd-cms.infn.it//",
+                ),
+
+            Dataset("Muon2022_C",
+                dataset="/Muon/Run2022C-PromptNanoAODv10_v1-v1/NANOAOD",
+                process=self.processes.get("Data2022"),
+                # prefix="xrootd-cms.infn.it//",
+                ),
+
+            Dataset("Muon2022_D_v1",
+                dataset="/Muon/Run2022D-PromptNanoAODv10_v1-v1/NANOAOD",
+                process=self.processes.get("Data2022"),
+                # prefix="xrootd-cms.infn.it//",
+                ),
+
+            Dataset("Muon2022_D_v2",
+                dataset="/Muon/Run2022D-PromptNanoAODv10_v2-v1/NANOAOD",
+                process=self.processes.get("Data2022"),
+                # prefix="xrootd-cms.infn.it//",
+                ),
+
+            Dataset("Muon2022_E",
+                dataset="/Muon/Run2022E-PromptNanoAODv10_v1-v3/NANOAOD",
+                process=self.processes.get("Data2022"),
+                # prefix="xrootd-cms.infn.it//",
+                ),
+
+            Dataset("Muon2022_F",
+                dataset="/Muon/Run2022F-PromptNanoAODv10_v1-v2/NANOAOD",
+                process=self.processes.get("Data2022"),
+                # prefix="xrootd-cms.infn.it//",
+                ),
 
         ]
         return ObjectCollection(datasets)
@@ -695,7 +365,7 @@ class Config():
         weights = DotDict()
         weights.default = "1"
 
-        weights.total_events_weights = ["genWeight", "puWeight"]
+        weights.total_events_weights = ["1"]
 
         weights.preselection_UL18 = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_trigSF_weight"]
 
