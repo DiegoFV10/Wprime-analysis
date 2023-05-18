@@ -1,3 +1,16 @@
+Golden_JSON:
+    name: lumiFilterRDF
+    path: Base.Modules.lumiFilter
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+
+HLT Trigger path:
+    name: HLTpath
+    path: GEM.Modules.HLTtrigger
+    parameters:
+        year: self.config.year
+
 GenPart_momFirstCopy:
     name: GenPart_momPrompt
     path: GEM.Modules.GenPart_momPrompt

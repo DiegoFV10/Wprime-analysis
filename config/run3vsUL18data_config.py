@@ -367,10 +367,8 @@ class Config():
 
         weights.total_events_weights = ["1"]
 
+        weights.preselRun3_Mu50 = ["1"]
         weights.preselection_UL18 = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_trigSF_weight"]
-
-        #weights.mutau = ["genWeight", "puWeight", "prescaleWeight", "trigSF",
-        #    "L1PreFiringWeight_Nom", "PUjetID_SF"]
 
         return weights
 
@@ -480,4 +478,4 @@ class Config():
                 weights.append(weight)
         return "*".join(weights)
 
-config = Config("base", year=2018, ecm=13, lumi_pb=59741)
+config = Config("base", year=2022, ecm=13.6, lumi_pb=28.02)

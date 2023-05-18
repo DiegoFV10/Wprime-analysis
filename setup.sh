@@ -81,8 +81,13 @@ action() {
     # specific eos dirs
     [ -z "$CMT_STORE_EOS_PREPROCESSING" ] && export CMT_STORE_EOS_PREPROCESSING="$CMT_STORE_EOS"
     [ -z "$CMT_STORE_EOS_CATEGORIZATION" ] && export CMT_STORE_EOS_CATEGORIZATION="$CMT_STORE_EOS"
+    [ -z "$CMT_STORE_EOS_MERGECATEGORIZATION" ] && export CMT_STORE_EOS_MERGECATEGORIZATION="$CMT_STORE_EOS"
     [ -z "$CMT_STORE_EOS_SHARDS" ] && export CMT_STORE_EOS_SHARDS="$CMT_STORE_EOS"
     [ -z "$CMT_STORE_EOS_EVALUATION" ] && export CMT_STORE_EOS_EVALUATION="$CMT_STORE_EOS"
+    if [ -n "$CMT_CIEMAT_USER" ]; then
+      export TMPDIR="/nfs/cms/$CMT_CIEMAT_USER/cmt/tmp"
+      mkdir -p "$TMPDIR"
+    fi
 
     # create some dirs already
     mkdir -p "$CMT_TMP_DIR"
@@ -184,7 +189,7 @@ action() {
 
         export BASEMODULES_PATH="Base/Modules"
         if [ ! -d "$BASEMODULES_PATH" ]; then
-          git clone https://github.com/jaimeleonh/cmt-base-modules.git Base/Modules
+          git clone https://gitlab.cern.ch/cms-phys-ciemat/cmt-base-modules.git Base/Modules
           compile="1"
         fi
 
