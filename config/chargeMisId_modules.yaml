@@ -1,0 +1,5 @@
+GenPart_momFirstCopy:
+    name: GenPart_momPrompt
+    path: GEM.Modules.GenPart_momPrompt
+    parameters:
+        isDY: self.dataset.process.get_aux('isDY', False)
