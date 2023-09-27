@@ -1,0 +1,6 @@
+deltaPhi(muon, MET):
+    name: deltaPhi
+    path: Wprime.Modules.deltaPhiMuMET
+    parameters:
+        postEE: self.dataset.has_tag('postEE')
+        isMC: self.dataset.process.isMC

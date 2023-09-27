@@ -1,0 +1,32 @@
+deltaPhi(muon, MET):
+    name: deltaPhi
+    path: Wprime.Modules.deltaPhiMuMET
+    parameters:
+        postEE: self.dataset.has_tag('postEE')
+        isMC: self.dataset.process.isMC
+
+puweight:
+    name: puWeightRDF
+    path: Corrections.LUM.puWeight
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+        isUL: self.dataset.has_tag('ul')
+        postEE: self.dataset.has_tag('postEE')
+
+# UL only
+# puweightCor:
+    # name: puWeightRDF
+    # path: Corrections.LUM.puWeightCor
+    # parameters:
+        # isMC: self.dataset.process.isMC
+        # year: self.config.year
+        # isUL: self.dataset.has_tag('ul')
+
+#dystitching:
+#    name: DYstitchingRDF
+#    path: Tools.Tools.dyreweighting
+#    parameters:
+#        year: self.config.year
+#        isDY: self.dataset.process.get_aux('isDY', False)
+#        isUL: self.dataset.has_tag('ul')
