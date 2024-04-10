@@ -1,20 +1,19 @@
-puweight:
-    name: puWeightRDF
-    path: Corrections.LUM.puWeight
+# PUweight from ROOT files:
+#    name: puWeightRDF
+#    path: Corrections.LUM.puWeight
+#    parameters:
+#        isMC: self.dataset.process.isMC
+#        year: self.config.year
+#        isUL: self.dataset.has_tag('ul')
+#        postEE: self.dataset.has_tag('postEE')
+
+PUweight from correctionlib:
+    name: puWeightRun3
+    path: Corrections.LUM.puWeightCor
     parameters:
         isMC: self.dataset.process.isMC
         year: self.config.year
-        isUL: self.dataset.has_tag('ul')
         postEE: self.dataset.has_tag('postEE')
-
-# UL only
-# puweightCor:
-    # name: puWeightRDF
-    # path: Corrections.LUM.puWeightCor
-    # parameters:
-        # isMC: self.dataset.process.isMC
-        # year: self.config.year
-        # isUL: self.dataset.has_tag('ul')
 
 #dystitching:
 #    name: DYstitchingRDF

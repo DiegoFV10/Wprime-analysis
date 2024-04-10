@@ -79,16 +79,9 @@ action() {
     [ -z "$CMT_PYTHON_VERSION" ] && export CMT_PYTHON_VERSION="3"
 
     # specific eos dirs
-    export CMT_STORE_EOS_MUOPOG="/eos/cms/store/group/phys_muon/diegof/cmt"
-#    [ -z "$CMT_STORE_EOS_PREPROCESSING" ] && export CMT_STORE_EOS_PREPROCESSING="/pnfs/ciemat.es/data/cms/store/user/$CMT_CERN_USER/cmt"
-
     [ -z "$CMT_STORE_EOS_PREPROCESSING" ] && export CMT_STORE_EOS_PREPROCESSING="$CMT_STORE_EOS"
     [ -z "$CMT_STORE_EOS_CATEGORIZATION" ] && export CMT_STORE_EOS_CATEGORIZATION="$CMT_STORE_EOS"
     [ -z "$CMT_STORE_EOS_MERGECATEGORIZATION" ] && export CMT_STORE_EOS_MERGECATEGORIZATION="$CMT_STORE_EOS"
-
-#    [ -z "$CMT_STORE_EOS_PREPROCESSING" ] && export CMT_STORE_EOS_PREPROCESSING="$CMT_STORE_EOS_MUOPOG"  # Set to MUPOG!
-#    [ -z "$CMT_STORE_EOS_CATEGORIZATION" ] && export CMT_STORE_EOS_CATEGORIZATION="$CMT_STORE_EOS_MUOPOG"  # Set to MUPOG!
-#    [ -z "$CMT_STORE_EOS_MERGECATEGORIZATION" ] && export CMT_STORE_EOS_MERGECATEGORIZATION="$CMT_STORE_EOS_MUOPOG" # Set to MUPOG!
     [ -z "$CMT_STORE_EOS_SHARDS" ] && export CMT_STORE_EOS_SHARDS="$CMT_STORE_EOS"
     [ -z "$CMT_STORE_EOS_EVALUATION" ] && export CMT_STORE_EOS_EVALUATION="$CMT_STORE_EOS"
     if [ -n "$CMT_CIEMAT_USER" ]; then
@@ -298,12 +291,8 @@ action() {
             cmt_pip_install --no-deps git+https://github.com/riga/law
             cmt_pip_install --no-deps git+https://github.com/riga/plotlib
             cmt_pip_install --no-deps gast==0.2.2  # https://github.com/tensorflow/autograph/issues/1
-            cmt_pip_install sphinx==5.2.2
-            cmt_pip_install sphinx_rtd_theme	    
-            cmt_pip_install sphinx_design
-            cmt_pip_install urllib3==1.26.6
-            cmt_pip_install envyaml
-
+            cmt_pip_install sphinx
+            cmt_pip_install sphinx_rtd_theme
         fi
 
         # gfal python bindings
@@ -312,8 +301,7 @@ action() {
         cmt_add_lib "$CMT_GFAL_DIR/lib"
 
         if [ ! -d "$CMT_GFAL_DIR" ]; then
-#            local lcg_base="/cvmfs/grid.cern.ch/centos7-ui-4.0.3-1_umd4v3/usr"
-	    local lcg_base="/cvmfs/grid.cern.ch/centos7-ui-200122/usr"
+            local lcg_base="/cvmfs/grid.cern.ch/centos7-ui-4.0.3-1_umd4v3/usr"
             if [ ! -d "$lcg_base" ]; then
                 2>&1 echo "LCG software directory $lcg_base not existing"
                 return "1"
@@ -327,12 +315,10 @@ action() {
                 ln -s "$lcg_base"/bin/gfal-* bin
                 ln -s "$lcg_base"/lib64/libgfal* lib
                 ln -s "$lcg_base"/lib64/gfal2-plugins/libgfal* lib/gfal2-plugins
-                ln -s "$lcg_base"/lib64/python3.6/site-packages/gfal* lib/python3/site-packages
+                ln -s "$lcg_base"/lib64/python3/site-packages/gfal* lib/python3/site-packages
                 cd lib/gfal2-plugins
                 rm libgfal_plugin_http.so libgfal_plugin_xrootd.so
-	       
-                curl https://cernbox.cern.ch/remote.php/dav/public-files/qgrogVY4bwcuCXt/libgfal_plugin_xrootd.so > libgfal_plugin_xrootd.so
-                # curl https://cernbox.cern.ch/index.php/s/qgrogVY4bwcuCXt/download > libgfal_plugin_xrootd.so
+                curl https://cernbox.cern.ch/index.php/s/qgrogVY4bwcuCXt/download > libgfal_plugin_xrootd.so
             )
         fi
     }
@@ -373,10 +359,6 @@ action() {
             export CMT_LUIGI_WORKER_KEEP_ALIVE="False"
         fi
     fi
-
-    # Set tmp dir for MergeCategorization
-    #export LAW_TARGET_TMP_DIR="/eos/home-d/diegof/tmp/"
-    export LAW_TARGET_TMP_DIR="/eos/cms/store/group/phys_muon/diegof/tmp/" # Set to MUPOG!
 
     # try to source the law completion script when available
     which law &> /dev/null && source "$( law completion )" ""

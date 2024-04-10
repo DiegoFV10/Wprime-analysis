@@ -1,19 +1,3 @@
-#Clean Wjets sample without pdgId=24:
-#    name: WjetsFilter
-#    path: Wprime.Modules.plotUtils
-#    parameters:
-#        isWjets: self.dataset.process.get_aux('isWjets', False)
-
-MET filters:
-    name: METfilter
-    path: Wprime.Modules.METfilters
-    parameters:
-        year: self.config.year
-
-To compute effective MET for Oscar:
-    name: METprime
-    path: Wprime.Modules.plotUtils
-
 deltaPhi(muon, MET):
     name: deltaPhi
     path: Wprime.Modules.plotUtils
@@ -21,16 +5,25 @@ deltaPhi(muon, MET):
         postEE: self.dataset.has_tag('postEE')
         isMC: self.dataset.process.isMC
 
+To compute effective MET for Oscar:
+    name: METprime
+    path: Wprime.Modules.plotUtils
+
+MET filters:
+    name: METfilter
+    path: Wprime.Modules.METfilters
+    parameters:
+        year: self.config.year
+
 Jet cleanup:
     name: jetCleanup
     path: Wprime.Modules.plotUtils
 
-#To compute gen-level Wmass & Wpt:
-#    name: genVars
-#    path: Wprime.Modules.plotUtils
-#    parameters:
-#        isMC: self.dataset.process.isMC
-#        isPythia: self.dataset.process.get_aux('isPythia', False)
+APPLY KINEMATIC SELECTION:
+    name: kinSel
+    path: Wprime.Modules.kinematicSelection
+    parameters:
+        postEE: self.dataset.has_tag('postEE')
 
 #PUweight from ROOT files:
 #    name: puWeightRDF
@@ -57,8 +50,8 @@ Muon SFs:
         year: self.config.year
         postEE: self.dataset.has_tag('postEE')
 
-Apply k-factor for HT-binned:
-    name: HTkfactor
-    path: Wprime.Modules.kfactor_Wboost
-    parameters:
-        isHTbin: self.dataset.process.get_aux('isHTbin', False)
+#Apply k-factor for HT-binned:
+#    name: HTkfactor
+#    path: Wprime.Modules.kfactor_Wboost
+#    parameters:
+#        isHTbin: self.dataset.process.get_aux('isHTbin', False)
