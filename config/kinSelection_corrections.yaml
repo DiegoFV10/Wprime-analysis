@@ -1,9 +1,6 @@
 deltaPhi(muon, MET):
     name: deltaPhi
     path: Wprime.Modules.plotUtils
-    parameters:
-        postEE: self.dataset.has_tag('postEE')
-        isMC: self.dataset.process.isMC
 
 To compute effective MET for Oscar:
     name: METprime
@@ -23,7 +20,7 @@ APPLY KINEMATIC SELECTION:
     name: kinSel
     path: Wprime.Modules.kinematicSelection
     parameters:
-        postEE: self.dataset.has_tag('postEE')
+        runPeriod: self.dataset.runPeriod
 
 #PUweight from ROOT files:
 #    name: puWeightRDF
@@ -40,7 +37,7 @@ PUweight from correctionlib:
     parameters:
         isMC: self.dataset.process.isMC
         year: self.config.year
-        postEE: self.dataset.has_tag('postEE')
+        runPeriod: self.dataset.runPeriod
 
 Muon SFs:
     name: MuonSF
@@ -48,7 +45,7 @@ Muon SFs:
     parameters:
         isMC: self.dataset.process.isMC
         year: self.config.year
-        postEE: self.dataset.has_tag('postEE')
+        runPeriod: self.dataset.runPeriod
 
 #Apply k-factor for HT-binned:
 #    name: HTkfactor

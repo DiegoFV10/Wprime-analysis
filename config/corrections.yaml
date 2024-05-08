@@ -17,9 +17,6 @@ To compute effective MET for Oscar:
 deltaPhi(muon, MET):
     name: deltaPhi
     path: Wprime.Modules.plotUtils
-    parameters:
-        postEE: self.dataset.has_tag('postEE')
-        isMC: self.dataset.process.isMC
 
 Jet cleanup:
     name: jetCleanup
@@ -47,7 +44,7 @@ PUweight from correctionlib:
     parameters:
         isMC: self.dataset.process.isMC
         year: self.config.year
-        postEE: self.dataset.has_tag('postEE')
+        runPeriod: self.dataset.runPeriod
 
 Muon SFs:
     name: MuonSF
@@ -55,10 +52,10 @@ Muon SFs:
     parameters:
         isMC: self.dataset.process.isMC
         year: self.config.year
-        postEE: self.dataset.has_tag('postEE')
+        runPeriod: self.dataset.runPeriod
 
-Apply k-factor for HT-binned:
-    name: HTkfactor
-    path: Wprime.Modules.kfactor_Wboost
-    parameters:
-        isHTbin: self.dataset.process.get_aux('isHTbin', False)
+#Apply k-factor for HT-binned:
+#    name: HTkfactor
+#    path: Wprime.Modules.kfactor_Wboost
+#    parameters:
+#        isHTbin: self.dataset.process.get_aux('isHTbin', False)
