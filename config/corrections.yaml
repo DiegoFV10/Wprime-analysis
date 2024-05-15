@@ -1,9 +1,3 @@
-#Clean Wjets sample without pdgId=24:
-#    name: WjetsFilter
-#    path: Wprime.Modules.plotUtils
-#    parameters:
-#        isWjets: self.dataset.process.get_aux('isWjets', False)
-
 MET filters:
     name: METfilter
     path: Wprime.Modules.METfilters
@@ -40,7 +34,7 @@ Jet cleanup:
 
 PUweight from correctionlib:
     name: puWeightRun3
-    path: Corrections.LUM.puWeightCor
+    path: Wprime.Modules.puWeightCor
     parameters:
         isMC: self.dataset.process.isMC
         year: self.config.year

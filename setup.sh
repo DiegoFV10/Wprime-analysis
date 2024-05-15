@@ -66,35 +66,48 @@ action() {
     [ -z "$CMT_SOFTWARE" ] && export CMT_SOFTWARE="$CMT_DATA/software"
     [ -z "$CMT_STORE_LOCAL" ] && export CMT_STORE_LOCAL="$CMT_DATA/store"
     if [ -n "$CMT_CIEMAT_USER" ]; then
-      [ -z "$CMT_STORE_EOS" ] && export CMT_STORE_EOS="/nfs/cms/$CMT_CIEMAT_USER/cmt"
+	#[ -z "$CMT_STORE_EOS" ] && export CMT_STORE_EOS="/nfs/cms/$CMT_CIEMAT_USER/cmt"
+	[ -z "$CMT_STORE_EOS" ] && export CMT_STORE_EOS="/pnfs/ciemat.es/data/cms/store/user/diegof/cmt"
     elif [ -n "$CMT_CERN_USER" ]; then
-      [ -z "$CMT_STORE_EOS" ] && export CMT_STORE_EOS="/eos/user/${CMT_CERN_USER:0:1}/$CMT_CERN_USER/cmt"
+	[ -z "$CMT_STORE_EOS" ] && export CMT_STORE_EOS="/eos/user/${CMT_CERN_USER:0:1}/$CMT_CERN_USER/cmt"
+	#[ -z "$CMT_STORE_EOS_MUOPOG" ] && export CMT_STORE_EOS_MUOPOG="/eos/cms/store/group/phys_muon/diegof/cmt" # UNCOMMENT FOR MUOPOG
     fi
     [ -z "$CMT_STORE" ] && export CMT_STORE="$CMT_STORE_EOS"
     [ -z "$CMT_JOB_DIR" ] && export CMT_JOB_DIR="$CMT_DATA/jobs"
+    [ -z "$CMT_JOB_META_DIR" ] && export CMT_JOB_META_DIR="$CMT_DATA/jobs_meta"
     [ -z "$CMT_TMP_DIR" ] && export CMT_TMP_DIR="$CMT_DATA/tmp"
     [ -z "$CMT_CMSSW_BASE" ] && export CMT_CMSSW_BASE="$CMT_DATA/cmssw"
-    [ -z "$CMT_SCRAM_ARCH" ] && export CMT_SCRAM_ARCH="slc7_amd64_gcc10"
-    [ -z "$CMT_CMSSW_VERSION" ] && export CMT_CMSSW_VERSION="CMSSW_12_3_0_pre6"
+    [ -z "$CMT_SCRAM_ARCH" ] && export CMT_SCRAM_ARCH="el9_amd64_gcc11"
+    [ -z "$CMT_CMSSW_VERSION" ] && export CMT_CMSSW_VERSION="CMSSW_13_0_13"
     [ -z "$CMT_PYTHON_VERSION" ] && export CMT_PYTHON_VERSION="3"
+    
+    if [ "$CMT_ON_CIEMAT" = "1" ]; then
+       if [ -n "$CMT_TMPDIR" ]; then
+         export TMPDIR="$CMT_TMPDIR"
+       else
+         export TMPDIR="/nfs/scratch_cms/$CMT_CIEMAT_USER/cmt/tmp" # Not needed? I set it up below
+       fi
+       mkdir -p "$TMPDIR"
+    fi
 
     # specific eos dirs
-    export CMT_STORE_EOS_MUOPOG="/eos/cms/store/group/phys_muon/diegof/cmt"
-#    [ -z "$CMT_STORE_EOS_PREPROCESSING" ] && export CMT_STORE_EOS_PREPROCESSING="/pnfs/ciemat.es/data/cms/store/user/$CMT_CERN_USER/cmt"
-
-#    [ -z "$CMT_STORE_EOS_PREPROCESSING" ] && export CMT_STORE_EOS_PREPROCESSING="$CMT_STORE_EOS"
-#    [ -z "$CMT_STORE_EOS_CATEGORIZATION" ] && export CMT_STORE_EOS_CATEGORIZATION="$CMT_STORE_EOS"
-#    [ -z "$CMT_STORE_EOS_MERGECATEGORIZATION" ] && export CMT_STORE_EOS_MERGECATEGORIZATION="$CMT_STORE_EOS"
-    [ -z "$CMT_STORE_EOS_PREPROCESSING" ] && export CMT_STORE_EOS_PREPROCESSING="$CMT_STORE_EOS_MUOPOG"  # Set to MUPOG!
-    [ -z "$CMT_STORE_EOS_CATEGORIZATION" ] && export CMT_STORE_EOS_CATEGORIZATION="$CMT_STORE_EOS_MUOPOG"  # Set to MUPOG!
-    [ -z "$CMT_STORE_EOS_MERGECATEGORIZATION" ] && export CMT_STORE_EOS_MERGECATEGORIZATION="$CMT_STORE_EOS_MUOPOG" # Set to MUPOG!
-
+    if [ "$CMT_ON_LXPLUS" = "1" ]; then
+	if [ -n "$CMT_STORE_EOS_MUOPOG" ]; then
+	    [ -z "$CMT_STORE_EOS_PREPROCESSING" ] && export CMT_STORE_EOS_PREPROCESSING="$CMT_STORE_EOS_MUOPOG"
+	    [ -z "$CMT_STORE_EOS_CATEGORIZATION" ] && export CMT_STORE_EOS_CATEGORIZATION="$CMT_STORE_EOS_MUOPOG"
+	    [ -z "$CMT_STORE_EOS_MERGECATEGORIZATION" ] && export CMT_STORE_EOS_MERGECATEGORIZATION="$CMT_STORE_EOS_MUOPOG"
+	else
+	    [ -z "$CMT_STORE_EOS_PREPROCESSING" ] && export CMT_STORE_EOS_PREPROCESSING="$CMT_STORE_EOS"
+	    [ -z "$CMT_STORE_EOS_CATEGORIZATION" ] && export CMT_STORE_EOS_CATEGORIZATION="$CMT_STORE_EOS"
+	    [ -z "$CMT_STORE_EOS_MERGECATEGORIZATION" ] && export CMT_STORE_EOS_MERGECATEGORIZATION="$CMT_STORE_EOS"
+	fi
+    else
+	[ -z "$CMT_STORE_EOS_PREPROCESSING" ] && export CMT_STORE_EOS_PREPROCESSING="$CMT_STORE_EOS"
+	[ -z "$CMT_STORE_EOS_CATEGORIZATION" ] && export CMT_STORE_EOS_CATEGORIZATION="$CMT_STORE_EOS"
+	[ -z "$CMT_STORE_EOS_MERGECATEGORIZATION" ] && export CMT_STORE_EOS_MERGECATEGORIZATION="$CMT_STORE_EOS"	
+    fi	
     [ -z "$CMT_STORE_EOS_SHARDS" ] && export CMT_STORE_EOS_SHARDS="$CMT_STORE_EOS"
     [ -z "$CMT_STORE_EOS_EVALUATION" ] && export CMT_STORE_EOS_EVALUATION="$CMT_STORE_EOS"
-    if [ -n "$CMT_CIEMAT_USER" ]; then
-      export TMPDIR="/nfs/cms/$CMT_CIEMAT_USER/cmt/tmp"
-      mkdir -p "$TMPDIR"
-    fi
 
     # create some dirs already
     mkdir -p "$CMT_TMP_DIR"
@@ -133,8 +146,7 @@ action() {
     }
     export -f cmt_add_root_inc
 
-
-
+    
     #
     # minimal software stack
     #
@@ -158,6 +170,13 @@ action() {
         local origin="$( pwd )"
         local mode="$1"
 
+        # get the python version
+        if [ "$CMT_PYTHON_VERSION" = "2" ]; then
+            local pyv="$( python -c "import sys; print('{0.major}.{0.minor}'.format(sys.version_info))" )"
+        else
+            local pyv="$( python3 -c "import sys; print('{0.major}.{0.minor}'.format(sys.version_info))" )"
+        fi
+
         # remove software directories when forced
         if [ "$mode" = "force" ] || [ "$mode" = "force_cmssw" ]; then
             echo "remove CMSSW checkout in $CMT_CMSSW_BASE/$CMT_CMSSW_VERSION"
@@ -172,6 +191,12 @@ action() {
         if [ "$mode" = "force" ] || [ "$mode" = "force_gfal" ]; then
             echo "remove gfal installation in $CMT_GFAL_DIR"
             rm -rf "$CMT_GFAL_DIR"
+        fi
+	
+	if [ "$mode" = "force" ] || [ "$mode" = "force_tools" ]; then
+            echo "remove anlysis_tools and plotting_tools installation in $CMT_SOFTWARE/lib/python$pyv/site-packages"
+	    rm -rf "$CMT_SOFTWARE/lib/python$pyv/site-packages/analysis_tools"
+	    rm -rf "$CMT_SOFTWARE/lib/python$pyv/site-packages/plotting_tools"
         fi
 
         # setup cmssw
@@ -196,64 +221,58 @@ action() {
 
         export BASEMODULES_PATH="Base/Modules"
         if [ ! -d "$BASEMODULES_PATH" ]; then
-          git clone https://gitlab.cern.ch/cms-phys-ciemat/cmt-base-modules.git Base/Modules
-          compile="1"
-        fi
-
-        export HHKINFIT_PATH="HHKinFit2"
-        if [ ! -d "$HHKINFIT_PATH" ]; then
-          git clone https://github.com/bvormwald/HHKinFit2.git -b CMSSWversion
-          rm -r HHKinFit2/HHKinFit2CMSSWPlugins/plugins/
-          compile="1"
-        fi
-
-        export SVFIT_PATH="TauAnalysis"
-        if [ ! -d "$SVFIT_PATH" ]; then
-          git clone https://github.com/LLRCMS/ClassicSVfit.git TauAnalysis/ClassicSVfit -b bbtautau_LegacyRun2
-          git clone https://github.com/svfit/SVfitTF TauAnalysis/SVfitTF
-          compile="1"
-        fi
-
-        export HTT_PATH="HTT-utilities"
-        if [ ! -d "$HTT_PATH" ]; then
-          git clone https://github.com/CMS-HTT/LeptonEff-interface.git HTT-utilities
-          cd HTT-utilities/LepEffInterface/
-          rm -rf data
-          git clone https://github.com/CMS-HTT/LeptonEfficiencies.git data
-          cd "$CMT_CMSSW_BASE/$CMT_CMSSW_VERSION/src"
-          mkdir TauAnalysisTools
-          git clone -b run2_SFs https://github.com/cms-tau-pog/TauTriggerSFs TauAnalysisTools/TauTriggerSFs
-          rm TauAnalysisTools/TauTriggerSFs/python/*.py
-          cd TauAnalysisTools/TauTriggerSFs/data
-          wget https://github.com/camendola/VBFTriggerSFs/raw/master/data/2017_VBFHTauTauTrigger_JetLegs.root
-          wget https://github.com/camendola/VBFTriggerSFs/raw/master/data/2018_VBFHTauTauTrigger_JetLegs.root
-          cd "$CMT_CMSSW_BASE/$CMT_CMSSW_VERSION/src"
-          compile="1"
-        fi
-
-        export HHBTAG_PATH="HHTools"
-        if [ ! -d "$HHBTAG_PATH" ]; then
-          git clone https://github.com/hh-italian-group/HHbtag.git HHTools/HHbtag
-          git clone https://github.com/jaimeleonh/InferenceTools.git Tools/Tools
+            git clone https://gitlab.cern.ch/cms-phys-ciemat/cmt-base-modules.git Base/Modules
+	    git clone https://gitlab.cern.ch/cms-phys-ciemat/event-filters.git Base/Filters
           compile="1"
         fi
 
         export CORRECTIONS_PATH="Corrections"
         cmt_add_root_inc $(correction config --incdir)
         if [ ! -d "$CORRECTIONS_PATH" ]; then
-          git clone https://github.com/jaimeleonh/correctionlib-wrapper --branch cmssw_version  Corrections/Wrapper
-          git clone https://gitlab.cern.ch/cms-phys-ciemat/tau-corrections.git Corrections/TAU
-          git clone https://gitlab.cern.ch/cms-phys-ciemat/jme-corrections.git Corrections/JME
-          git clone https://gitlab.cern.ch/cms-phys-ciemat/lum-corrections.git Corrections/LUM
-          git clone https://gitlab.cern.ch/cms-phys-ciemat/muo-corrections.git Corrections/MUO
-          git clone https://gitlab.cern.ch/cms-phys-ciemat/egm-corrections.git Corrections/EGM
-          git clone https://gitlab.cern.ch/cms-phys-ciemat/btv-corrections.git Corrections/BTV
+            #git clone https://github.com/jaimeleonh/correctionlib-wrapper --branch cmssw_version  Corrections/Wrapper
+            #git clone https://gitlab.cern.ch/cms-phys-ciemat/tau-corrections.git Corrections/TAU
+            git clone https://gitlab.cern.ch/cms-phys-ciemat/jme-corrections.git Corrections/JME
+	    cd Corrections/JME/data
+            wget https://github.com/cms-jet/JECDatabase/raw/master/tarballs/Summer19UL18_V5_MC.tar.gz
+            wget https://github.com/cms-jet/JECDatabase/raw/master/tarballs/Summer19UL17_V5_MC.tar.gz
+            wget https://github.com/cms-jet/JECDatabase/raw/master/tarballs/Summer19UL16_V7_MC.tar.gz
+            wget https://github.com/cms-jet/JECDatabase/raw/master/tarballs/Summer19UL16APV_V7_MC.tar.gz
+            cd -
+            git clone https://gitlab.cern.ch/cms-phys-ciemat/lum-corrections.git Corrections/LUM
+            git clone https://gitlab.cern.ch/cms-phys-ciemat/muo-corrections.git Corrections/MUO
+            git clone https://gitlab.cern.ch/cms-phys-ciemat/egm-corrections.git Corrections/EGM
+            git clone https://gitlab.cern.ch/cms-phys-ciemat/btv-corrections.git Corrections/BTV
+            compile="1"
+        fi
+
+	export GEMETHOD_PATH="GEM/Modules"
+        if [ ! -d "$GEMETHOD_PATH" ]; then
+            git clone https://gitlab.cern.ch/diegof/gem-modules.git GEM/Modules
+            compile="1"
+        fi
+
+	export WPRIME_PATH="Wprime/Modules"
+        if [ ! -d "$WPRIME_PATH" ]; then
+            git clone https://gitlab.cern.ch/diegof/wprime-modules.git Wprime/Modules
+            compile="1"
+        fi
+             
+        export COMBINE_PATH="HiggsAnalysis/CombinedLimit"
+        if [ ! -d "$COMBINE_PATH" ]; then
+          git clone https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit.git -b v9.1.0 HiggsAnalysis/CombinedLimit
           compile="1"
         fi
 
-	export GEMMODULES_PATH="GEM/Modules"
-        if [ ! -d "$GEMMODULES_PATH" ]; then
-          git clone https://gitlab.cern.ch/diegof/gem-modules.git GEM/Modules
+        export COMBINEHARVESTER_PATH="CombineHarvester"
+        if [ ! -d "$COMBINEHARVESTER_PATH" ]; then
+          git clone https://github.com/cms-analysis/CombineHarvester -b v2.1.0
+          cd CombineHarvester
+          rm -r CombinePdfs
+          rm CombineTools/bin/*
+          rm CombineTools/src/*
+          rm CombineTools/interface/*
+          rm CombineTools/macros/*
+          cd -
           compile="1"
         fi
 
@@ -261,24 +280,9 @@ action() {
         then
             scram b
         fi
-             
-        #export COMBINE_PATH="HiggsAnalysis/CombinedLimit"
-        #if [ ! -d "$COMBINE_PATH" ]; then
-        #    git clone https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit.git $COMBINE_PATH
-        #    cd $COMBINE_PATH
-        #    git checkout v8.0.1
-        #    cd -
-        #    scram b -j5
-        #fi
+
         eval `scramv1 runtime -sh`
         cd "$origin"
-
-        # get the python version
-        if [ "$CMT_PYTHON_VERSION" = "2" ]; then
-            local pyv="$( python -c "import sys; print('{0.major}.{0.minor}'.format(sys.version_info))" )"
-        else
-            local pyv="$( python3 -c "import sys; print('{0.major}.{0.minor}'.format(sys.version_info))" )"
-        fi
 
         # ammend software paths
         cmt_add_bin "$CMT_SOFTWARE/bin"
@@ -290,13 +294,21 @@ action() {
             mkdir -p "$CMT_SOFTWARE"
 
             cmt_pip_install pip
+	    cmt_pip_install wheel
+            cmt_pip_install setuptools
+            cmt_pip_install libclang
+            cmt_pip_install overrides
+            cmt_pip_install build
+            cmt_pip_install installer
+            cmt_pip_install pyproject-hooks
+            cmt_pip_install Flask
+            cmt_pip_install ordereddict
             cmt_pip_install flake8
             cmt_pip_install luigi==2.8.13
             cmt_pip_install tabulate
-            cmt_pip_install git+https://gitlab.cern.ch/cms-phys-ciemat/analysis_tools.git
-            cmt_pip_install git+https://gitlab.cern.ch/cms-phys-ciemat/plotting_tools.git
             cmt_pip_install --no-deps git+https://github.com/riga/law
             cmt_pip_install --no-deps git+https://github.com/riga/plotlib
+	    cmt_pip_install --no-deps git+https://github.com/riga/LBN
             cmt_pip_install --no-deps gast==0.2.2  # https://github.com/tensorflow/autograph/issues/1
             cmt_pip_install sphinx==5.2.2
             cmt_pip_install sphinx_rtd_theme	    
@@ -305,6 +317,16 @@ action() {
             cmt_pip_install envyaml
 
         fi
+
+	# download analysis and plotting tools
+        if [ ! -d "$CMT_SOFTWARE/lib/python$pyv/site-packages/analysis_tools" ]; then
+	    echo "installing analysis_tools in $CMT_SOFTWARE/lib/python$pyv/site-packages"
+	    cmt_pip_install git+https://gitlab.cern.ch/cms-phys-ciemat/analysis_tools.git
+	fi
+	if [ ! -d "$CMT_SOFTWARE/lib/python$pyv/site-packages/plotting_tools" ]; then
+	    echo "installing plotting_tools in $CMT_SOFTWARE/lib/python$pyv/site-packages"
+	    cmt_pip_install git+https://gitlab.cern.ch/cms-phys-ciemat/plotting_tools.git
+	fi
 
         # gfal python bindings
         cmt_add_bin "$CMT_GFAL_DIR/bin"
@@ -342,16 +364,18 @@ action() {
     if [ "$CMT_SKIP_SOFTWARE" != "1" ]; then
         if [ "$CMT_FORCE_SOFTWARE" = "1" ]; then
             cmt_setup_software force
+        elif [ "$CMT_FORCE_CMSSW" = "1" ]; then
+            cmt_setup_software force_cmssw
+        elif [ "$CMT_FORCE_PYTHON" = "1" ]; then
+            cmt_setup_software force_py
+        elif [ "$CMT_FORCE_TOOLS" = "1" ]; then
+            cmt_setup_software force_tools
         else
-            if [ "$CMT_FORCE_CMSSW" = "1" ]; then
-                cmt_setup_software force_cmssw
-            else
-                cmt_setup_software silent
-            fi
+            cmt_setup_software silent
         fi
     fi
 
-
+    
     #
     # law setup
     #
@@ -375,8 +399,15 @@ action() {
     fi
 
     # Set tmp dir for MergeCategorization
-    #export LAW_TARGET_TMP_DIR="/eos/home-d/diegof/tmp/"
-    export LAW_TARGET_TMP_DIR="/eos/cms/store/group/phys_muon/diegof/tmp/" # Set to MUPOG!
+    if [ "$CMT_ON_LXPLUS" = "1" ]; then
+	if [ -n "$CMT_STORE_EOS_MUOPOG" ]; then
+	    export LAW_TARGET_TMP_DIR="/eos/cms/store/group/phys_muon/diegof/tmp/"
+	else
+	    export LAW_TARGET_TMP_DIR="/eos/home-d/diegof/tmp/"
+	fi
+    else
+        export LAW_TARGET_TMP_DIR="/pnfs/ciemat.es/data/cms/store/user/diegof/tmp/"
+    fi
 
     # try to source the law completion script when available
     which law &> /dev/null && source "$( law completion )" ""
