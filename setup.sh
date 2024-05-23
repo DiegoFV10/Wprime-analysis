@@ -91,7 +91,7 @@ action() {
     fi
 
     # specific eos dirs
-    if [ "$CMT_ON_LXPLUS" = "1" ]; then
+    if [ -n "$CMT_CERN_USER" ]; then
 	if [ -n "$CMT_STORE_EOS_MUOPOG" ]; then
 	    [ -z "$CMT_STORE_EOS_PREPROCESSING" ] && export CMT_STORE_EOS_PREPROCESSING="$CMT_STORE_EOS_MUOPOG"
 	    [ -z "$CMT_STORE_EOS_CATEGORIZATION" ] && export CMT_STORE_EOS_CATEGORIZATION="$CMT_STORE_EOS_MUOPOG"
@@ -399,7 +399,7 @@ action() {
     fi
 
     # Set tmp dir for MergeCategorization
-    if [ "$CMT_ON_LXPLUS" = "1" ]; then
+    if [ -n "$CMT_CERN_USER" ]; then
 	if [ -n "$CMT_STORE_EOS_MUOPOG" ]; then
 	    export LAW_TARGET_TMP_DIR="/eos/cms/store/group/phys_muon/diegof/tmp/"
 	else
