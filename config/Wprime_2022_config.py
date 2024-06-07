@@ -55,7 +55,7 @@ class Config(base_config):
         self.systematics = self.add_systematics()
         self.default_module_files = self.add_default_module_files()
 
-        self.upper_left_text = "Private work"
+        self.upper_left_text = "Work in progress"
         self.label_size = 1.2
 
     def join_selection_channels(self, selection):
@@ -103,24 +103,29 @@ class Config(base_config):
             Process("Wprime5600_postEE", Label("W'M_{W'} = 5.6 TeV"), color=ROOT.kMagenta+1, isSignal=True, parent_process="Wprime5600"),
 
             ### Background Processes ###
-            # W off-shell pythia8
+            
+            ## W boson ##
             Process("W_boson", Label("W-boson"), color=ROOT.kAzure+1),
             Process("W_preEE", Label("W-boson"), color=ROOT.kAzure+1, parent_process="W_boson"),
             Process("W_postEE", Label("W-boson"), color=ROOT.kAzure+1, parent_process="W_boson"),
-            Process("Wmunu", Label("off-shell W #rightarrow #mu#nu"), color=ROOT.kAzure+1, isPythia=True, parent_process="W_preEE"),
-            Process("Wmunu_postEE", Label("off-shell W #rightarrow #mu#nu"), color=ROOT.kAzure+1, parent_process="W_postEE"),
-            Process("Wmunu1_postEE", Label("W #rightarrow #mu#nu M_{W} 100to200"), color=(255, 241, 0), isPythia=True, parent_process="Wmunu_postEE"),
-            Process("Wmunu2_postEE", Label("W #rightarrow #mu#nu M_{W} 200to500"), color=(255, 140, 0), isPythia=True, parent_process="Wmunu_postEE"),
-            Process("Wmunu3_postEE", Label("W #rightarrow #mu#nu M_{W} 500to1000"), color=(232, 17, 35), isPythia=True, parent_process="Wmunu_postEE"),
-            Process("Wmunu4_postEE", Label("W #rightarrow #mu#nu M_{W} 1000to2000"), color=(236, 0, 140), isPythia=True, parent_process="Wmunu_postEE"),
-            Process("Wmunu5_postEE", Label("W #rightarrow #mu#nu M_{W} 2000to3000"), color=(104, 33, 122), isPythia=True, parent_process="Wmunu_postEE"),
-            Process("Wmunu6_postEE", Label("W #rightarrow #mu#nu M_{W} 3000to4000"), color=(0, 24, 143), isPythia=True, parent_process="Wmunu_postEE"),
-            Process("Wmunu7_postEE", Label("W #rightarrow #mu#nu M_{W} 4000to5000"), color=(0, 188, 242), isPythia=True, parent_process="Wmunu_postEE"),
-            Process("Wmunu8_postEE", Label("W #rightarrow #mu#nu M_{W} 5000to6000"), color=(0, 178, 148), isPythia=True, parent_process="Wmunu_postEE"),
-            Process("Wmunu9_postEE", Label("W #rightarrow #mu#nu M_{W} 6000"), color=(0, 158, 73), isPythia=True, parent_process="Wmunu_postEE"),
-            Process("Wtaunu", Label("off-shell W #rightarrow #tau#nu"), color=ROOT.kAzure+3, isPythia=True, parent_process="W_preEE"),
-            Process("Wtaunu_postEE", Label("off-shell W #rightarrow #tau#nu"), color=ROOT.kAzure+3, isPythia=True, parent_process="W_postEE"),
-            # W+jets off-shell madgraph
+
+            ## Old W off-shell pythia background ==> Deprecated ##
+              Process("Wmunu", Label("off-shell W #rightarrow #mu#nu"), color=ROOT.kAzure+1, isPythia=True, parent_process="W_preEE"),
+              Process("Wmunu_postEE", Label("off-shell W #rightarrow #mu#nu"), color=ROOT.kAzure+1, parent_process="W_postEE"),
+              Process("Wmunu1_postEE", Label("W #rightarrow #mu#nu M_{W} 100to200"), color=(255, 241, 0), isPythia=True, parent_process="Wmunu_postEE"),
+              Process("Wmunu2_postEE", Label("W #rightarrow #mu#nu M_{W} 200to500"), color=(255, 140, 0), isPythia=True, parent_process="Wmunu_postEE"),
+              Process("Wmunu3_postEE", Label("W #rightarrow #mu#nu M_{W} 500to1000"), color=(232, 17, 35), isPythia=True, parent_process="Wmunu_postEE"),
+              Process("Wmunu4_postEE", Label("W #rightarrow #mu#nu M_{W} 1000to2000"), color=(236, 0, 140), isPythia=True, parent_process="Wmunu_postEE"),
+              Process("Wmunu5_postEE", Label("W #rightarrow #mu#nu M_{W} 2000to3000"), color=(104, 33, 122), isPythia=True, parent_process="Wmunu_postEE"),
+              Process("Wmunu6_postEE", Label("W #rightarrow #mu#nu M_{W} 3000to4000"), color=(0, 24, 143), isPythia=True, parent_process="Wmunu_postEE"),
+              Process("Wmunu7_postEE", Label("W #rightarrow #mu#nu M_{W} 4000to5000"), color=(0, 188, 242), isPythia=True, parent_process="Wmunu_postEE"),
+              Process("Wmunu8_postEE", Label("W #rightarrow #mu#nu M_{W} 5000to6000"), color=(0, 178, 148), isPythia=True, parent_process="Wmunu_postEE"),
+              Process("Wmunu9_postEE", Label("W #rightarrow #mu#nu M_{W} 6000"), color=(0, 158, 73), isPythia=True, parent_process="Wmunu_postEE"),
+              Process("Wtaunu", Label("off-shell W #rightarrow #tau#nu"), color=ROOT.kAzure+3, isPythia=True, parent_process="W_preEE"),
+              Process("Wtaunu_postEE", Label("off-shell W #rightarrow #tau#nu"), color=ROOT.kAzure+3, isPythia=True, parent_process="W_postEE"),
+            #######################################################
+            
+            # W off-shell madgraph 
             Process("Wlnu", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="W_preEE"),
             Process("Wlnu1", Label("W #rightarrow l#nu M_{W} 120to200"), color=(255, 241, 0), parent_process="Wlnu"),
             Process("Wlnu2", Label("W #rightarrow l#nu M_{W} 200to400"), color=(255, 140, 0), parent_process="Wlnu"),
@@ -132,14 +137,14 @@ class Config(base_config):
             Process("Wlnu8", Label("W #rightarrow l#nu M_{W} 6000"), color=(0, 178, 148), parent_process="Wlnu"),
             Process("Wlnu_postEE", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="W_postEE"),
 
-            # W on-shell
+            # W on-shell 
             Process("Wonshell", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_preEE", isWjets=True),
             Process("Wonshell_postEE", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_postEE", isWjets=True),
             # W+4j
             Process("W+4j", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_preEE", isWjets=True),
             Process("W+4j_postEE", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_postEE", isWjets=True),
 
-            # W boosted
+            # W boosted --> HT-binned LO
             Process("Wboost", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isHTbin=True, parent_process="W_preEE"),
             Process("Wboost0", Label("W #rightarrow l#nu HT 40to100"), color=(255, 140, 0), isHTbin=True, parent_process="Wboost"),
             Process("Wboost1", Label("W #rightarrow l#nu HT 100to400"), color=(232, 17, 35), isHTbin=True, parent_process="Wboost"),
@@ -149,7 +154,16 @@ class Config(base_config):
             Process("Wboost5", Label("W #rightarrow l#nu HT 2500"), color=(0, 188, 242), isHTbin=True, parent_process="Wboost"),
             Process("Wboost_postEE", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isHTbin=True, parent_process="W_postEE"),
 
-            # Top
+            # W boosted --> ptLNu-binned NLO
+            Process("W_ptW", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isWboost=True, parent_process="W_preEE"),
+            Process("W_ptW1", Label("W #rightarrow l#nu p_{T}^{l#nu} 40to100"), color=(255, 140, 0), isWboost=True, parent_process="W_ptW"),
+            Process("W_ptW2", Label("W #rightarrow l#nu p_{T}^{l#nu} 100to200"), color=(232, 17, 35), isWboost=True, parent_process="W_ptW"),
+            Process("W_ptW3", Label("W #rightarrow l#nu p_{T}^{l#nu} 200to400"), color=(236, 0, 140), isWboost=True, parent_process="W_ptW"),
+            Process("W_ptW4", Label("W #rightarrow l#nu p_{T}^{l#nu} 400to600"), color=(104, 33, 122), isWboost=True, parent_process="W_ptW"),
+            Process("W_ptW5", Label("W #rightarrow l#nu p_{T}^{l#nu} 600"), color=(0, 24, 143), isWboost=True, parent_process="W_ptW"),
+            Process("W_ptW_postEE", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isWboost=True, parent_process="W_postEE"),
+
+            ## Top ##
             Process("Top", Label("Top"), color=(255,255,0)),
             Process("Top_preEE", Label("Top"), color=(255,255,0), parent_process="Top"),
             Process("Top_postEE", Label("Top"), color=(255,255,0), parent_process="Top"),
@@ -158,7 +172,7 @@ class Config(base_config):
             Process("ST", Label("single t"), color=(255,255,0), parent_process="Top_preEE"),
             Process("ST_postEE", Label("single t"), color=(255,255,0), parent_process="Top_postEE"),
 
-            # Z boson
+            ## Z boson ##
             Process("Z_boson", Label("Z/#gamma #rightarrow ll"), color=(206, 30, 30)),
             Process("Z_boson_preEE", Label("Z/#gamma #rightarrow ll"), color=(206, 30, 30), parent_process="Z_boson"),
             Process("Z_boson_postEE", Label("Z/#gamma #rightarrow ll"), color=(206, 30, 30), parent_process="Z_boson"),
@@ -169,7 +183,7 @@ class Config(base_config):
             Process("Znunu", Label("Z/#gamma #rightarrow #nu#nu"), color=(255, 128, 0), parent_process="Z_boson_preEE"),
             Process("Znunu_postEE", Label("Z/#gamma #rightarrow #nu#nu"), color=(255, 128, 0), parent_process="Z_boson_postEE"),
 
-            # Di-Boson
+            ## Di-Boson ##
             Process("DiBoson", Label("DiBoson"), color=(36, 147, 25)),
             Process("DiBoson_preEE", Label("DiBoson"), color=(36, 147, 25), parent_process="DiBoson"),
             Process("DiBoson_postEE", Label("DiBoson"), color=(36, 147, 25), parent_process="DiBoson"),
@@ -182,7 +196,7 @@ class Config(base_config):
             Process("Wgamma", Label("W#gamma"), color=(14, 75, 7), parent_process="DiBoson_preEE"),
             Process("Wgamma_postEE", Label("W#gamma"), color=(14, 75, 7), parent_process="DiBoson_postEE"),
 
-            # QCD
+            ## QCD ##
             Process("QCD", Label("QCD"), color=(0, 0, 153)),
             Process("QCD_preEE", Label("QCD"), color=(0, 0, 153), parent_process="QCD"),
             Process("QCD_postEE", Label("QCD"), color=(0, 0, 153), parent_process="QCD"),
@@ -942,7 +956,7 @@ class Config(base_config):
                 tags=["postEE"]),
 
             
-            ### W boosted ###
+            ## W boosted --> HT-binned ##
 
             Dataset("Wlnu_HT-40to100",
                 dataset="/WtoLNu-4Jets_MLNu-0to120_HT-40to100_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -1061,8 +1075,212 @@ class Config(base_config):
                 runPeriod="postEE",
                 xs=0.03080,
                 tags=["postEE"]),
-            
 
+            ### W boosted --> ptLNu-binned ###
+
+            Dataset("Wlnu_ptW-40to100_1J",
+                dataset="/WtoLNu-2Jets_PTLNu-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v1/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW1"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="preEE",
+                xs=0,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-40to100_1J_postEE",
+                dataset="/WtoLNu-2Jets_PTLNu-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postEE"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="postEE",
+                xs=0,
+                tags=["postEE"]),
+            
+            Dataset("Wlnu_ptW-40to100_2J",
+                dataset="/WtoLNu-2Jets_PTLNu-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW1"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="preEE",
+                xs=0,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-40to100_2J_postEE",
+                dataset="/WtoLNu-2Jets_PTLNu-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postEE"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="postEE",
+                xs=0,
+                tags=["postEE"]),
+            
+            Dataset("Wlnu_ptW-100to200_1J",
+                dataset="/WtoLNu-2Jets_PTLNu-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v1/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW2"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="preEE",
+                xs=0,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-100to200_1J_postEE",
+                dataset="/WtoLNu-2Jets_PTLNu-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postEE"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="postEE",
+                xs=0,
+                tags=["postEE"]),
+            
+            Dataset("Wlnu_ptW-100to200_2J",
+                dataset="/WtoLNu-2Jets_PTLNu-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v1/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW2"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="preEE",
+                xs=0,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-100to200_2J_postEE",
+                dataset="/WtoLNu-2Jets_PTLNu-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postEE"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="postEE",
+                xs=0,
+                tags=["postEE"]),
+                    
+            Dataset("Wlnu_ptW-200to400_1J",
+                dataset="/WtoLNu-2Jets_PTLNu-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW3"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":2},
+                runPeriod="preEE",
+                xs=0,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-200to400_1J_postEE",
+                dataset="/WtoLNu-2Jets_PTLNu-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postEE"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":2},
+                runPeriod="postEE",
+                xs=0,
+                tags=["postEE"]),
+            
+            Dataset("Wlnu_ptW-200to400_2J",
+                dataset="/WtoLNu-2Jets_PTLNu-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v1/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW3"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":2},
+                runPeriod="preEE",
+                xs=0,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-200to400_2J_postEE",
+                dataset="/WtoLNu-2Jets_PTLNu-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v1/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postEE"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":2},
+                runPeriod="postEE",
+                xs=0,
+                tags=["postEE"]),
+                                    
+            Dataset("Wlnu_ptW-400to600_1J",
+                dataset="/WtoLNu-2Jets_PTLNu-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v1/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW4"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-400to600_1J_postEE",
+                dataset="/WtoLNu-2Jets_PTLNu-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v1/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postEE"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0,
+                tags=["postEE"]),
+            
+            Dataset("Wlnu_ptW-400to600_2J",
+                dataset="/WtoLNu-2Jets_PTLNu-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v1/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW4"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-400to600_2J_postEE",
+                dataset="/WtoLNu-2Jets_PTLNu-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v1/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postEE"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0,
+                tags=["postEE"]),
+                                                
+            Dataset("Wlnu_ptW-600_1J",
+                dataset="/WtoLNu-2Jets_PTLNu-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v1/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW5"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-600_1J_postEE",
+                dataset="/WtoLNu-2Jets_PTLNu-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v1/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postEE"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0,
+                tags=["postEE"]),
+            
+            Dataset("Wlnu_ptW-600_2J",
+                dataset="/WtoLNu-2Jets_PTLNu-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v1/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW5"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-600_2J_postEE",
+                dataset="/WtoLNu-2Jets_PTLNu-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v1/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postEE"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0,
+                tags=["postEE"]),
+            
+            
             ### Top ###
 
             # TTbar
@@ -1104,7 +1322,7 @@ class Config(base_config):
                     "NANOAODSIM",
                 process=self.processes.get("TTbar_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
-                merging={"preselection":3},
+                merging={"preselection":5},
                 runPeriod="postEE",
                 xs=404.0,
                 tags=["postEE"]),
@@ -1149,6 +1367,7 @@ class Config(base_config):
                 xs=4.663,
                 tags=["postEE"]),
 
+            # The 4q samples have a very low impact, so no longer used
             Dataset("ST_tW-4q",
                 dataset="/TWminusto4Q_TuneCP5_13p6TeV_powheg-pythia8/"
                     "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
@@ -1206,6 +1425,7 @@ class Config(base_config):
                 xs=4.663,
                 tags=["postEE"]),
 
+            # The 4q samples have a very low impact, so no longer used
             Dataset("ST_tbarW-4q",
                 dataset="/TbarWplusto4Q_TuneCP5_13p6TeV_powheg-pythia8/"
                     "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
@@ -1806,6 +2026,7 @@ class Config(base_config):
                 xs=53.73,
                 tags=["postEE"]),
 
+            # The 4q samples have a very low impact, so no longer used
             Dataset("WW_4q",
                 dataset="/WWto4Q_TuneCP5_13p6TeV_powheg-pythia8/"
                     "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
@@ -1909,6 +2130,7 @@ class Config(base_config):
                     "NANOAODSIM",
                 process=self.processes.get("Wgamma"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":2},
                 runPeriod="preEE",
                 xs=668.6,), 
 
@@ -1918,6 +2140,7 @@ class Config(base_config):
                     "NANOAODSIM",
                 process=self.processes.get("Wgamma_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":2},
                 runPeriod="postEE",
                 xs=668.6,
                 tags=["postEE"]),
@@ -2175,6 +2398,7 @@ class Config(base_config):
                 dataset="/Muon/Run2022F-22Sep2023-v2/NANOAOD",
                 process=self.processes.get("ReRecoData2022_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
                 runPeriod="postEE",
                 runEra="F",
                 tags=["postEE"]),
@@ -2555,8 +2779,8 @@ class Config(base_config):
 
         weights.total_events_weights = ["genWeight", "puWeight"]
 
-        weights.preselection  = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_hltSF_weight", "mu_recoSF_weight", "HTkfact"]
-        weights.kin_selection = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_hltSF_weight", "mu_recoSF_weight", "HTkfact"]
+        weights.preselection  = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_hltSF_weight", "mu_recoSF_weight"]#, "HTkfact"]
+        weights.kin_selection = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_hltSF_weight", "mu_recoSF_weight"]#, "HTkfact"]
 
         return weights
 

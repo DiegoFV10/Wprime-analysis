@@ -170,17 +170,26 @@ void compare(std::string dataA_files, std::string name_dataA, std::string dataB_
     down->Draw("SAME");
 
     // Draw upper panel
+    bool logY = true;
+    if ( histnames.at(var) == "jet1_eta" || histnames.at(var) == "jet1_eta_mT50" || histnames.at(var) == "muon_eta" || histnames.at(var) == "muon_eta_mT50" || histnames.at(var) == "muon_eta_pt200" || histnames.at(var) == "muon_phi" || histnames.at(var) == "muon_phi_mT50" || histnames.at(var) == "muon_phi_pt200" )
+      logY = false;
     float xlow = histA[histnames.at(var)]->GetXaxis()->GetXmin();
     float xup = histA[histnames.at(var)]->GetXaxis()->GetXmax();
     float ylow = 1E0;
-    if (scaling == 2)
+    if (scaling == 2 && logY)
       ylow = 1E-8;
-    float yup = histA[histnames.at(var)]->GetMaximum()*5;
-    if(histB[histnames.at(var)]->GetMaximum() > histA[histnames.at(var)]->GetMaximum())
-      yup = histB[histnames.at(var)]->GetMaximum()*5;
-
+    else if (scaling == 2 && logY == false)
+      ylow = 1E0;
+    float hmax = 1.0;
+    if (logY)
+      hmax = 5;
+    float yup = histA[histnames.at(var)]->GetMaximum()*hmax;
+      if(histB[histnames.at(var)]->GetMaximum() > histA[histnames.at(var)]->GetMaximum())
+	yup = histB[histnames.at(var)]->GetMaximum()*hmax;
+    
     up->cd();
-    up->SetLogy();
+    if (logY)
+      up->SetLogy();
     histB[histnames.at(var)]->GetXaxis()->SetTitle(histB[histnames.at(var)]->GetXaxis()->GetTitle());
     histB[histnames.at(var)]->SetMinimum(ylow);
     histB[histnames.at(var)]->SetMaximum(yup);
@@ -237,7 +246,7 @@ void compare(std::string dataA_files, std::string name_dataA, std::string dataB_
     preliminary->Draw();
 
     /// Save Plots ///
-    //c_rate[histnames.at(var)]->SaveAs(("plots/DataToData/22vs23/kinselection/"+ histnames.at(var) +"_scaledLumi.png").c_str());
+    c_rate[histnames.at(var)]->SaveAs(("plots/DataToData/22vs23/preselection/"+ histnames.at(var) +"_normUnity.png").c_str());
     
   }
 
@@ -247,10 +256,10 @@ void compare(std::string dataA_files, std::string name_dataA, std::string dataB_
 void DataToDataComparison(){
 
   /// 2022 vs 2023 at preselection ///
-  //compare("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/Inaugural_preselection_2022/root", "ReRecoData2022","/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/2023preliminary/root/", "PromptData2023", 2);
+  compare("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/Inaugural_preselection_2022/root", "ReRecoData2022","/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/2023preliminary/root/", "PromptData2023", 2);
 
     /// 2022 vs 2023 at kinselection ///
-  compare("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/Inaugural_kinselection_2022/root", "ReRecoData2022","/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/2023preliminary_kinselection/root/", "PromptData2023", 2);
+  //compare("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/Inaugural_kinselection_2022/root", "ReRecoData2022","/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/2023preliminary_kinselection/root/", "PromptData2023", 2);
 
 }
 

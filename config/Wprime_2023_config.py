@@ -578,6 +578,7 @@ class Config(base_config):
                     "NANOAODSIM",
                 process=self.processes.get("Wonshell_postBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":2},
                 runPeriod="postBPix",
                 xs=55710,
                 tags=["postBPix"]),
@@ -626,8 +627,6 @@ class Config(base_config):
 
             
             ### W boosted ###
-
-            ## NOTE: Some bins above HT > 800 missing ##
 
             Dataset("Wlnu_HT-40to100",
                 dataset="/WtoLNu-4Jets_MLNu-0to120_HT-40to100_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -690,24 +689,24 @@ class Config(base_config):
                 xs=59.70,
                 tags=["postBPix"]),
 
-#            Dataset("Wlnu_HT-800to1500",
-#                dataset="/WtoLNu-4Jets_MLNu-0to120_HT-800to1500_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
-#                    ""
-#                    "NANOAODSIM",
-#                process=self.processes.get("Wboost3"),
-#                prefix="xrootd-es-cie.ciemat.es:1096//",
-#                runPeriod="preBPix",
-#                xs=6.211,),
+            Dataset("Wlnu_HT-800to1500",
+                dataset="/WtoLNu-4Jets_MLNu-0to120_HT-800to1500_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v15-v5/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wboost3"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preBPix",
+                xs=6.211,),
 
-#            Dataset("Wlnu_HT-800to1500_postBPix",
-#                dataset="/WtoLNu-4Jets_MLNu-0to120_HT-800to1500_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
-#                    ""
-#                    "NANOAODSIM",
-#                process=self.processes.get("Wboost_postBPix"),
-#                prefix="xrootd-es-cie.ciemat.es:1096//",
-#                runPeriod="postBPix",
-#                xs=6.211,
-#                tags=["postBPix"]),
+            Dataset("Wlnu_HT-800to1500_postBPix",
+                dataset="/WtoLNu-4Jets_MLNu-0to120_HT-800to1500_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
+                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wboost_postBPix"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postBPix",
+                xs=6.211,
+                tags=["postBPix"]),
 
             Dataset("Wlnu_HT-1500to2500",
                 dataset="/WtoLNu-4Jets_MLNu-0to120_HT-1500to2500_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -737,15 +736,15 @@ class Config(base_config):
                 runPeriod="preBPix",
                 xs=0.03080,),
 
-#            Dataset("Wlnu_HT-2500_postBPix",
-#                dataset="/WtoLNu-4Jets_MLNu-0to120_HT-2500_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
-#                    ""
-#                    "NANOAODSIM",
-#                process=self.processes.get("Wboost_postBPix"),
-#                prefix="xrootd-es-cie.ciemat.es:1096//",
-#                runPeriod="postBPix",
-#                xs=0.03080,
-#                tags=["postBPix"]),
+            Dataset("Wlnu_HT-2500_postBPix",
+                dataset="/WtoLNu-4Jets_MLNu-0to120_HT-2500_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
+                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wboost_postBPix"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postBPix",
+                xs=0.03080,
+                tags=["postBPix"]),
             
 
             ### Top ###
@@ -796,7 +795,7 @@ class Config(base_config):
 
             # Single Top
 
-            ## NOTE: Missing 1 tW+, s-channel and t-channel ##
+            ## NOTE: Missing s-channel and t-channel ##
 
             Dataset("ST_tW-lnu2q",
                 dataset="/TWminustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/"
@@ -836,14 +835,14 @@ class Config(base_config):
                 xs=4.663,
                 tags=["postBPix"]),
 
-#            Dataset("ST_tbarW-lnu2q",
-#                dataset="/TbarWplustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/"
-#                    ""
-#                    "NANOAODSIM",
-#                process=self.processes.get("ST"),
-#                prefix="xrootd-es-cie.ciemat.es:1096//",
-#                runPeriod="preBPix",
-#                xs=19.31,), 
+            Dataset("ST_tbarW-lnu2q",
+                dataset="/TbarWplustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v15-v4/"
+                    "NANOAODSIM",
+                process=self.processes.get("ST"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preBPix",
+                xs=19.31,), 
 
             Dataset("ST_tbarW-lnu2q_postBPix",
                 dataset="/TbarWplustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/"
@@ -1300,16 +1299,14 @@ class Config(base_config):
 
             # ZtoNuNu
 
-            ## One point missing ##
-
-#            Dataset("Znunu_HT-100to200",
-#                dataset="/Zto2Nu-4Jets_HT-100to200_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
-#                    ""
-#                    "NANOAODSIM",
-#                process=self.processes.get("Znunu"),
-#                prefix="xrootd-es-cie.ciemat.es:1096//",
-#                runPeriod="preBPix",
-#                xs=273.5,), # From GenXSecAnalyzer (NLO)
+            Dataset("Znunu_HT-100to200",
+                dataset="/Zto2Nu-4Jets_HT-100to200_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Znunu"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preBPix",
+                xs=273.5,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Znunu_HT-100to200_postBPix",
                 dataset="/Zto2Nu-4Jets_HT-100to200_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -1823,9 +1820,9 @@ class Config(base_config):
                 runEra="C",),
 
             Dataset("Data1_2023C_v4",
-                dataset="/Muon1/Run2023C-22Sep2023_v4-v1/NANOAOD",
+                dataset="/Muon1/Run2023C-22Sep2023_v4-v2/NANOAOD",
                 process=self.processes.get("PromptData2023_preBPix"),
-                prefix="xrootd-es-cie.ciemat.es:1096//", # NOTE: Not fully completed, 98.28%
+                prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
                 runEra="C",),
 
