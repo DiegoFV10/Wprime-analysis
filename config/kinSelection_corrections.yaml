@@ -1,16 +1,41 @@
-deltaPhi(muon, MET):
-    name: deltaPhi
-    path: Wprime.Modules.plotUtils
+JetEnergy Corrections:
+    name: JERC
+    path: Wprime.Modules.JetCorrections
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod
+        runEra: self.dataset.runEra
 
-To compute effective MET for Oscar:
-    name: METprime
-    path: Wprime.Modules.plotUtils
+Type-I MET correction:
+    name: TypeICorrectedMET
+    path: Wprime.Modules.METcorrections
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod
+        runEra: self.dataset.runEra
 
 MET filters:
     name: METfilter
     path: Wprime.Modules.METfilters
     parameters:
         year: self.config.year
+
+Jet veto maps:
+    name: JetVetoMaps
+    path: Wprime.Modules.jetvetomap
+    parameters:
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod
+
+To compute effective MET for Oscar:
+    name: METprime
+    path: Wprime.Modules.plotUtils
+
+deltaPhi(muon, MET):
+    name: deltaPhi
+    path: Wprime.Modules.plotUtils
 
 Jet cleanup:
     name: jetCleanup
@@ -33,7 +58,7 @@ APPLY KINEMATIC SELECTION:
 
 PUweight from correctionlib:
     name: puWeightRun3
-    path: Corrections.LUM.puWeightCor
+    path: Wprime.Modules.puWeightCor
     parameters:
         isMC: self.dataset.process.isMC
         year: self.config.year

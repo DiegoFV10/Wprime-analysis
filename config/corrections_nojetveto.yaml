@@ -22,13 +22,6 @@ MET filters:
     parameters:
         year: self.config.year
 
-Jet veto maps:
-    name: JetVetoMaps
-    path: Wprime.Modules.jetvetomap
-    parameters:
-        year: self.config.year
-        runPeriod: self.dataset.runPeriod
-
 To compute effective MET for Oscar:
     name: METprime
     path: Wprime.Modules.plotUtils

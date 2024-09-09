@@ -52,7 +52,7 @@ class Config(base_config):
         self.systematics = self.add_systematics()
         self.default_module_files = self.add_default_module_files()
 
-        self.upper_left_text = "Private work"
+        self.upper_left_text = "Work in progress"
         self.label_size = 1.2
 
     def join_selection_channels(self, selection):
@@ -100,24 +100,13 @@ class Config(base_config):
             Process("Wprime5600_postBPix", Label("W'M_{W'} = 5.6 TeV"), color=ROOT.kMagenta+1, isSignal=True, parent_process="Wprime5600"),
 
             ### Background Processes ###
-            # W off-shell pythia8
+            
+            ## W boson ##
             Process("W_boson", Label("W-boson"), color=ROOT.kAzure+1),
             Process("W_preBPix", Label("W-boson"), color=ROOT.kAzure+1, parent_process="W_boson"),
             Process("W_postBPix", Label("W-boson"), color=ROOT.kAzure+1, parent_process="W_boson"),
-            Process("Wmunu", Label("off-shell W #rightarrow #mu#nu"), color=ROOT.kAzure+1, isPythia=True, parent_process="W_preBPix"),
-            Process("Wmunu_postBPix", Label("off-shell W #rightarrow #mu#nu"), color=ROOT.kAzure+1, parent_process="W_postBPix"),
-            Process("Wmunu1_postBPix", Label("W #rightarrow #mu#nu M_{W} 100to200"), color=(255, 241, 0), isPythia=True, parent_process="Wmunu_postBPix"),
-            Process("Wmunu2_postBPix", Label("W #rightarrow #mu#nu M_{W} 200to500"), color=(255, 140, 0), isPythia=True, parent_process="Wmunu_postBPix"),
-            Process("Wmunu3_postBPix", Label("W #rightarrow #mu#nu M_{W} 500to1000"), color=(232, 17, 35), isPythia=True, parent_process="Wmunu_postBPix"),
-            Process("Wmunu4_postBPix", Label("W #rightarrow #mu#nu M_{W} 1000to2000"), color=(236, 0, 140), isPythia=True, parent_process="Wmunu_postBPix"),
-            Process("Wmunu5_postBPix", Label("W #rightarrow #mu#nu M_{W} 2000to3000"), color=(104, 33, 122), isPythia=True, parent_process="Wmunu_postBPix"),
-            Process("Wmunu6_postBPix", Label("W #rightarrow #mu#nu M_{W} 3000to4000"), color=(0, 24, 143), isPythia=True, parent_process="Wmunu_postBPix"),
-            Process("Wmunu7_postBPix", Label("W #rightarrow #mu#nu M_{W} 4000to5000"), color=(0, 188, 242), isPythia=True, parent_process="Wmunu_postBPix"),
-            Process("Wmunu8_postBPix", Label("W #rightarrow #mu#nu M_{W} 5000to6000"), color=(0, 178, 148), isPythia=True, parent_process="Wmunu_postBPix"),
-            Process("Wmunu9_postBPix", Label("W #rightarrow #mu#nu M_{W} 6000"), color=(0, 158, 73), isPythia=True, parent_process="Wmunu_postBPix"),
-            Process("Wtaunu", Label("off-shell W #rightarrow #tau#nu"), color=ROOT.kAzure+3, isPythia=True, parent_process="W_preBPix"),
-            Process("Wtaunu_postBPix", Label("off-shell W #rightarrow #tau#nu"), color=ROOT.kAzure+3, isPythia=True, parent_process="W_postBPix"),
-            # W+jets off-shell madgraph
+
+            # W off-shell madgraph
             Process("Wlnu", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="W_preBPix"),
             Process("Wlnu1", Label("W #rightarrow l#nu M_{W} 120to200"), color=(255, 241, 0), parent_process="Wlnu"),
             Process("Wlnu2", Label("W #rightarrow l#nu M_{W} 200to400"), color=(255, 140, 0), parent_process="Wlnu"),
@@ -132,11 +121,11 @@ class Config(base_config):
             # W on-shell
             Process("Wonshell", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_preBPix", isWjets=True),
             Process("Wonshell_postBPix", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_postBPix", isWjets=True),
-            # W+4j
-            Process("W+4j", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_preBPix", isWjets=True),
-            Process("W+4j_postBPix", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_postBPix", isWjets=True),
+            # W+2j jet-binned ==> Deprecated
+            Process("W+2j_binned", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_preBPix", isWjets=True),
+            Process("W+2j_binned_postBPix", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_postBPix", isWjets=True),
 
-            # W boosted
+            # W boosted --> HT-binned LO
             Process("Wboost", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isHTbin=True, parent_process="W_preBPix"),
             Process("Wboost0", Label("W #rightarrow l#nu HT 40to100"), color=(255, 140, 0), isHTbin=True, parent_process="Wboost"),
             Process("Wboost1", Label("W #rightarrow l#nu HT 100to400"), color=(232, 17, 35), isHTbin=True, parent_process="Wboost"),
@@ -145,6 +134,14 @@ class Config(base_config):
             Process("Wboost4", Label("W #rightarrow l#nu HT 1500to2500"), color=(0, 24, 143), isHTbin=True, parent_process="Wboost"),
             Process("Wboost5", Label("W #rightarrow l#nu HT 2500"), color=(0, 188, 242), isHTbin=True, parent_process="Wboost"),
             Process("Wboost_postBPix", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isHTbin=True, parent_process="W_postBPix"),
+            # W boosted --> ptLNu-binned NLO
+            Process("W_ptW", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isWboost=True, parent_process="W_preBPix"),
+            Process("W_ptW1", Label("W #rightarrow l#nu p_{T}^{l#nu} 40to100"), color=(255, 140, 0), isWboost=True, parent_process="W_ptW"),
+            Process("W_ptW2", Label("W #rightarrow l#nu p_{T}^{l#nu} 100to200"), color=(232, 17, 35), isWboost=True, parent_process="W_ptW"),
+            Process("W_ptW3", Label("W #rightarrow l#nu p_{T}^{l#nu} 200to400"), color=(236, 0, 140), isWboost=True, parent_process="W_ptW"),
+            Process("W_ptW4", Label("W #rightarrow l#nu p_{T}^{l#nu} 400to600"), color=(104, 33, 122), isWboost=True, parent_process="W_ptW"),
+            Process("W_ptW5", Label("W #rightarrow l#nu p_{T}^{l#nu} 600"), color=(0, 24, 143), isWboost=True, parent_process="W_ptW"),
+            Process("W_ptW_postBPix", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isWboost=True, parent_process="W_postBPix"),
 
             # Top
             Process("Top", Label("Top"), color=(255,255,0)),
@@ -234,23 +231,6 @@ class Config(base_config):
 
 
             ########## CHECKS W SAMPLES ##########
-            "Woffshell_pythia": [
-                "Wmunu1_postBPix",
-                "Wmunu2_postBPix",
-                "Wmunu3_postBPix",
-                "Wmunu4_postBPix",
-                "Wmunu5_postBPix",
-                "Wmunu6_postBPix",
-                "Wmunu7_postBPix",
-                "Wmunu8_postBPix",
-                "Wmunu9_postBPix",
-            ],
-
-            "Wbkg_pythia": [
-                "Wmunu_postBPix",
-                "Wtaunu_postBPix",
-                "Wonshell_postBPix",
-            ],
 
             "Woffshell_madgraph": [
                 "Wlnu1",
@@ -281,29 +261,6 @@ class Config(base_config):
                 "Wonshell",
                 "Wlnu",
                 "Wboost",
-            ],
-
-
-            ######################################
-
-            # For check
-            "2023_postBPix_Wsplit": [
-                "Wprime2000_postBPix",
-                "Wprime3600_postBPix",
-                "Wprime5600_postBPix",
-                "W_postBPix",
-                "Wboost_postBPix",
-                "Top_postBPix",
-                "DiBoson_postBPix",
-                "QCD_postBPix",
-                "Z_boson_postBPix",
-                "PromptData2023_postBPix",
-            ],
-
-            "inclusiveVShtbinned": [
-                "Wonshell_postBPix",
-                "Wboost_postBPix",
-                "W+4j_postBPix",
             ],
 
         }
@@ -392,7 +349,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="preBPix",
-                xs=167.1*1.155,), # From Jeongeun --> GenXSecAnalyzer (LO) x k-factor for madgraph // NOTE: Using values of 29/02 meeting for first 2 bins, the rest from presentation (additive + mixed)
+                xs=167.1*1.150,), # From Jeongeun --> GenXSecAnalyzer (LO) x k-factor for madgraph // NOTE: Using additive k-factors from EXO presentation 4 June 2024
 
             Dataset("Wlnu120to200_postBPix",
                 dataset="/WtoLNu-4Jets_MLNu-120to200_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -401,7 +358,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postBPix",
-                xs=167.1*1.155, 
+                xs=167.1*1.150, 
                 tags=["postBPix"]),
 
             Dataset("Wlnu200to400",
@@ -411,7 +368,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu2"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                xs=20.43*1.203,), 
+                xs=20.43*1.201,), 
 
             Dataset("Wlnu200to400_postBPix",
                 dataset="/WtoLNu-4Jets_MLNu-200to400_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -420,7 +377,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postBPix",
-                xs=20.43*1.203, 
+                xs=20.43*1.201, 
                 tags=["postBPix"]),
 
             Dataset("Wlnu400to800",
@@ -430,7 +387,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu3"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                xs=1.596*1.249,), 
+                xs=1.596*1.260,), 
 
             Dataset("Wlnu400to800_postBPix",
                 dataset="/WtoLNu-4Jets_MLNu-400to800_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -439,7 +396,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postBPix",
-                xs=1.596*1.249,
+                xs=1.596*1.260,
                 tags=["postBPix"]),
 
             Dataset("Wlnu800to1500",
@@ -449,7 +406,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu4"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                xs=0.1095*1.241,),
+                xs=0.1095*1.246,),
 
             Dataset("Wlnu800to1500_postBPix",
                 dataset="/WtoLNu-4Jets_MLNu-800to1500_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -458,7 +415,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postBPix",
-                xs=0.1095*1.241,
+                xs=0.1095*1.246,
                 tags=["postBPix"]),
 
             Dataset("Wlnu1500to2500",
@@ -487,7 +444,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu6"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                xs=0.0003464*1.403,),
+                xs=0.0003464*1.235,),
 
             Dataset("Wlnu2500to4000_postBPix",
                 dataset="/WtoLNu-4Jets_MLNu-2500to4000_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -496,7 +453,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postBPix",
-                xs=0.0003464*1.403,
+                xs=0.0003464*1.235,
                 tags=["postBPix"]),
 
             Dataset("Wlnu4000to6000",
@@ -506,7 +463,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu7"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                xs=0.00001074*1.718,), 
+                xs=0.00001074*1.308,), 
 
             Dataset("Wlnu4000to6000_postBPix",
                 dataset="/WtoLNu-4Jets_MLNu-4000to6000_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -515,7 +472,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postBPix",
-                xs=0.00001074*1.718,
+                xs=0.00001074*1.308,
                 tags=["postBPix"]),
 
             Dataset("Wlnu6000",
@@ -525,7 +482,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu8"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                xs=0.0000004198*2.432,), 
+                xs=0.0000004198*1.507,), 
 
             Dataset("Wlnu6000_postBPix",
                 dataset="/WtoLNu-4Jets_MLNu-6000_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -534,39 +491,37 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postBPix",
-                xs=0.0000004198*2.432,
+                xs=0.0000004198*1.507,
                 tags=["postBPix"]),
 
         
             ### W + jets inclusive (NLO) ###
 
-            ## NOTE: The fully inclusive is not yet produced, using Jet-binned for the moment ##
+            Dataset("Wjets",
+                dataset="/WtoLNu-2Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v15-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wonshell"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preBPix",
+                xs=67710.0*0.9466,), # From SMP-22-017: Theoretical xs at NNNLO(QCD)xNLO(EWK) is 64092 pb ==> k-fact = 0.9466
 
-#            Dataset("Wjets",
-#                dataset="/WtoLNu-2Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
-#                    ""
-#                    "NANOAODSIM",
-#                process=self.processes.get("Wonshell"),
-#                prefix="xrootd-es-cie.ciemat.es:1096//",
-#                runPeriod="preBPix",
-#                xs=67710.0*0.9466,), # From SMP-22-017: Theoretical xs at NNNLO(QCD)xNLO(EWK) is 64092 pb ==> k-fact = 0.9466
+            Dataset("Wjets_postBPix",
+                dataset="/WtoLNu-2Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wonshell_postBPix"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postBPix",
+                xs=67710.0*0.9466,
+                tags=["postBPix"]),
 
-#            Dataset("Wjets_postBPix",
-#                dataset="/WtoLNu-2Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
-#                    ""
-#                    "NANOAODSIM",
-#                process=self.processes.get("Wonshell_postBPix"),
-#                prefix="xrootd-es-cie.ciemat.es:1096//",
-#                runPeriod="postBPix",
-#                xs=67710.0*0.9466,
-#                tags=["postBPix"]),
-
-
+            ## DEPRECATED ==> The jet-binned samples are not needed anymore ##
             Dataset("Wjets_0J",
                 dataset="/WtoLNu-2Jets_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
                     "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v3/"
                     "NANOAODSIM",
-                process=self.processes.get("Wonshell"),
+                process=self.processes.get("W+2j_binned"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="preBPix",
@@ -576,7 +531,7 @@ class Config(base_config):
                 dataset="/WtoLNu-2Jets_0J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
                     "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v3/"
                     "NANOAODSIM",
-                process=self.processes.get("Wonshell_postBPix"),
+                process=self.processes.get("W+2j_binned_postBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="postBPix",
@@ -587,7 +542,7 @@ class Config(base_config):
                 dataset="/WtoLNu-2Jets_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
                     "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v2/"
                     "NANOAODSIM",
-                process=self.processes.get("Wonshell"),
+                process=self.processes.get("W+2j_binned"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="preBPix",
@@ -597,7 +552,7 @@ class Config(base_config):
                 dataset="/WtoLNu-2Jets_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
                     "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v2/"
                     "NANOAODSIM",
-                process=self.processes.get("Wonshell_postBPix"),
+                process=self.processes.get("W+2j_binned_postBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="postBPix",
@@ -608,7 +563,7 @@ class Config(base_config):
                 dataset="/WtoLNu-2Jets_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
                     "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v2/"
                     "NANOAODSIM",
-                process=self.processes.get("Wonshell"),
+                process=self.processes.get("W+2j_binned"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="preBPix",
@@ -618,7 +573,7 @@ class Config(base_config):
                 dataset="/WtoLNu-2Jets_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
                     "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v2/"
                     "NANOAODSIM",
-                process=self.processes.get("Wonshell_postBPix"),
+                process=self.processes.get("W+2j_binned_postBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="postBPix",
@@ -626,7 +581,7 @@ class Config(base_config):
                 tags=["postBPix"]),
 
             
-            ### W boosted ###
+            ### W boosted --> HT-binned ###
 
             Dataset("Wlnu_HT-40to100",
                 dataset="/WtoLNu-4Jets_MLNu-0to120_HT-40to100_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -744,6 +699,210 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postBPix",
                 xs=0.03080,
+                tags=["postBPix"]),
+
+            ### W boosted --> ptLNu-binned ###
+            
+            Dataset("Wlnu_ptW-40to100_1J",
+                dataset="/WtoLNu-2Jets_PTLNu-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW1"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="preBPix",
+                xs=4379*0.9466,), # From GenXSecAnalyzer (NLO) x NNLO k-factor from inclusive W+2j sample
+
+            Dataset("Wlnu_ptW-40to100_1J_postBPix",
+                dataset="/WtoLNu-2Jets_PTLNu-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postBPix"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="postBPix",
+                xs=4379*0.9466,
+                tags=["postBPix"]),
+            
+            Dataset("Wlnu_ptW-40to100_2J",
+                dataset="/WtoLNu-2Jets_PTLNu-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW1"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="preBPix",
+                xs=1604*0.9466,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-40to100_2J_postBPix",
+                dataset="/WtoLNu-2Jets_PTLNu-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postBPix"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="postBPix",
+                xs=1604*0.9466,
+                tags=["postBPix"]),
+            
+            Dataset("Wlnu_ptW-100to200_1J",
+                dataset="/WtoLNu-2Jets_PTLNu-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW2"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="preBPix",
+                xs=367.5*0.9466,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-100to200_1J_postBPix",
+                dataset="/WtoLNu-2Jets_PTLNu-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postBPix"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="postBPix",
+                xs=367.5*0.9466,
+                tags=["postBPix"]),
+            
+            Dataset("Wlnu_ptW-100to200_2J",
+                dataset="/WtoLNu-2Jets_PTLNu-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW2"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="preBPix",
+                xs=420.7*0.9466,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-100to200_2J_postBPix",
+                dataset="/WtoLNu-2Jets_PTLNu-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postBPix"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":3},
+                runPeriod="postBPix",
+                xs=420.7*0.9466,
+                tags=["postBPix"]),
+                    
+            Dataset("Wlnu_ptW-200to400_1J",
+                dataset="/WtoLNu-2Jets_PTLNu-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW3"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":2},
+                runPeriod="preBPix",
+                xs=25.63*0.9466,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-200to400_1J_postBPix",
+                dataset="/WtoLNu-2Jets_PTLNu-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postBPix"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":2},
+                runPeriod="postBPix",
+                xs=25.63*0.9466,
+                tags=["postBPix"]),
+            
+            Dataset("Wlnu_ptW-200to400_2J",
+                dataset="/WtoLNu-2Jets_PTLNu-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW3"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":2},
+                runPeriod="preBPix",
+                xs=54.60*0.9466,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-200to400_2J_postBPix",
+                dataset="/WtoLNu-2Jets_PTLNu-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postBPix"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                merging={"preselection":2},
+                runPeriod="postBPix",
+                xs=54.60*0.9466,
+                tags=["postBPix"]),
+                                    
+            Dataset("Wlnu_ptW-400to600_1J",
+                dataset="/WtoLNu-2Jets_PTLNu-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW4"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preBPix",
+                xs=0.873*0.9466,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-400to600_1J_postBPix",
+                dataset="/WtoLNu-2Jets_PTLNu-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postBPix"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postBPix",
+                xs=0.873*0.9466,
+                tags=["postBPix"]),
+            
+            Dataset("Wlnu_ptW-400to600_2J",
+                dataset="/WtoLNu-2Jets_PTLNu-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW4"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preBPix",
+                xs=3.124*0.9466,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-400to600_2J_postBPix",
+                dataset="/WtoLNu-2Jets_PTLNu-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postBPix"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postBPix",
+                xs=3.124*0.9466,
+                tags=["postBPix"]),
+                                                
+            Dataset("Wlnu_ptW-600_1J",
+                dataset="/WtoLNu-2Jets_PTLNu-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW5"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preBPix",
+                xs=0.1025*0.9466,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-600_1J_postBPix",
+                dataset="/WtoLNu-2Jets_PTLNu-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postBPix"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postBPix",
+                xs=0.1025*0.9466,
+                tags=["postBPix"]),
+            
+            Dataset("Wlnu_ptW-600_2J",
+                dataset="/WtoLNu-2Jets_PTLNu-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v14-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW5"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preBPix",
+                xs=0.5262*0.9466,), # From GenXSecAnalyzer (NLO)
+
+            Dataset("Wlnu_ptW-600_2J_postBPix",
+                dataset="/WtoLNu-2Jets_PTLNu-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
+                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v2-v3/"
+                    "NANOAODSIM",
+                process=self.processes.get("W_ptW_postBPix"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postBPix",
+                xs=0.5262*0.9466,
                 tags=["postBPix"]),
             
 
@@ -875,7 +1034,7 @@ class Config(base_config):
 
 #            Dataset("ST_s-top",
 #                dataset="/TBbartoLplusNuBbar-s-channel-4FS_TuneCP5_13p6TeV_amcatnlo-pythia8/"
-#                    ""
+#                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v15-v2/"
 #                    "NANOAODSIM",
 #                process=self.processes.get("ST"),
 #                prefix="xrootd-es-cie.ciemat.es:1096//",
@@ -884,7 +1043,7 @@ class Config(base_config):
 
 #            Dataset("ST_s-top_postBPix",
 #                dataset="/TBbartoLplusNuBbar-s-channel-4FS_TuneCP5_13p6TeV_amcatnlo-pythia8/"
-#                    ""
+#                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v6-v2/"
 #                    "NANOAODSIM",
 #                process=self.processes.get("ST_postBPix"),
 #                prefix="xrootd-es-cie.ciemat.es:1096//",
@@ -894,7 +1053,7 @@ class Config(base_config):
 
 #            Dataset("ST_s-tbar",
 #                dataset="/TbarBtoLminusNuB-s-channel-4FS_TuneCP5_13p6TeV_amcatnlo-pythia8/"
-#                    ""
+#                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v15-v2/"
 #                    "NANOAODSIM",
 #                process=self.processes.get("ST"),
 #                prefix="xrootd-es-cie.ciemat.es:1096//",
@@ -903,7 +1062,7 @@ class Config(base_config):
 
 #            Dataset("ST_s-tbar_postBPix",
 #                dataset="/TbarBtoLminusNuB-s-channel-4FS_TuneCP5_13p6TeV_amcatnlo-pythia8/"
-#                    ""
+#                    "Run3Summer23BPixNanoAODv12-130X_mcRun3_2023_realistic_postBPix_v6-v2/"
 #                    "NANOAODSIM",
 #                process=self.processes.get("ST_postBPix"),
 #                prefix="xrootd-es-cie.ciemat.es:1096//",
@@ -1775,56 +1934,56 @@ class Config(base_config):
                 process=self.processes.get("PromptData2023_preBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                runEra="C",),
+                runEra="Cv123",),
 
             Dataset("Data0_2023C_v2",
                 dataset="/Muon0/Run2023C-22Sep2023_v2-v1/NANOAOD",
                 process=self.processes.get("PromptData2023_preBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                runEra="C",),
+                runEra="Cv123",),
 
             Dataset("Data0_2023C_v3",
                 dataset="/Muon0/Run2023C-22Sep2023_v3-v1/NANOAOD",
                 process=self.processes.get("PromptData2023_preBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                runEra="C",),
+                runEra="Cv123",),
 
             Dataset("Data0_2023C_v4",
                 dataset="/Muon0/Run2023C-22Sep2023_v4-v1/NANOAOD",
                 process=self.processes.get("PromptData2023_preBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                runEra="C",),
+                runEra="Cv4",),
 
             Dataset("Data1_2023C_v1",
                 dataset="/Muon1/Run2023C-22Sep2023_v1-v1/NANOAOD",
                 process=self.processes.get("PromptData2023_preBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                runEra="C",),
+                runEra="Cv123",),
 
             Dataset("Data1_2023C_v2",
                 dataset="/Muon1/Run2023C-22Sep2023_v2-v1/NANOAOD",
                 process=self.processes.get("PromptData2023_preBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                runEra="C",),
+                runEra="Cv123",),
 
             Dataset("Data1_2023C_v3",
                 dataset="/Muon1/Run2023C-22Sep2023_v3-v1/NANOAOD",
                 process=self.processes.get("PromptData2023_preBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                runEra="C",),
+                runEra="Cv123",),
 
             Dataset("Data1_2023C_v4",
                 dataset="/Muon1/Run2023C-22Sep2023_v4-v2/NANOAOD",
                 process=self.processes.get("PromptData2023_preBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                runEra="C",),
+                runEra="Cv4",),
 
             Dataset("Data0_2023D_v1",
                 dataset="/Muon0/Run2023D-22Sep2023_v1-v1/NANOAOD",
@@ -1878,7 +2037,21 @@ class Config(base_config):
 
             Feature("muon_eta_pt200", "Muon_eta.at(goodMuIdx)", binning=(50, -2.4, 2.4),
                 selection="Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) > 200.0",
-                    x_title=Label("#mu #eta (p_{T}^{#mu} > 200 GeV)")),
+                x_title=Label("#mu #eta (p_{T}^{#mu} > 200 GeV)")),
+
+            ### CHECKS FEDERICA ###
+            Feature("muon_eta_pt200_MET0-30", "Muon_eta.at(goodMuIdx)", binning=(50, -2.4, 2.4),
+                selection="Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) > 200.0 && PuppiMET_pt < 30.0",
+                x_title=Label("#mu #eta (p_{T}^{#mu} > 200 GeV, p_{T}^{miss} < 30 GeV)")),
+
+            Feature("muon_eta_pt200_MET30-100", "Muon_eta.at(goodMuIdx)", binning=(50, -2.4, 2.4),
+                selection="Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) > 200.0 && PuppiMET_pt > 30.0 && PuppiMET_pt < 100.0",
+                x_title=Label("#mu #eta (p_{T}^{#mu} > 200 GeV, 30 GeV < p_{T}^{miss} < 100 GeV)")),
+
+           Feature("muon_eta_pt200_MET100", "Muon_eta.at(goodMuIdx)", binning=(50, -2.4, 2.4),
+                selection="Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) > 200.0 && PuppiMET_pt > 100.0",
+                x_title=Label("#mu #eta (p_{T}^{#mu} > 200 GeV, p_{T}^{miss} > 100 GeV)")),             
+            #######################
 
             Feature("muon_phi", "Muon_phi.at(goodMuIdx)", binning=(50, -math.pi, math.pi),
                 x_title=Label("#mu #phi"),
@@ -1897,6 +2070,36 @@ class Config(base_config):
             Feature("MET_phi", "PuppiMET_phi", binning=(50, -math.pi, math.pi),
                 x_title=Label("p_{T}^{miss} #phi"),
                 units="rad"),
+
+            ### Different MET checks ###
+            Feature("PFMET_pt", "MET_pt", binning=(50, 0, 2000),
+                blinded_range=[750,10000],
+                x_title=Label("PF p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("PFMET_phi", "MET_phi", binning=(50, -math.pi, math.pi),
+                x_title=Label("PF p_{T}^{miss} #phi"),
+                units="rad"),
+            
+            Feature("TkMET_pt", "TkMET_pt", binning=(50, 0, 2000),
+                blinded_range=[750,10000],
+                x_title=Label("Tracker p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("TkMET_phi", "TkMET_phi", binning=(50, -math.pi, math.pi),
+                x_title=Label("Tracker p_{T}^{miss} #phi"),
+                units="rad"),
+
+            Feature("CaloMET_pt", "CaloMET_pt", binning=(50, 0, 2000),
+                blinded_range=[750,10000],
+                x_title=Label("Calo p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("CaloMET_phi", "CaloMET_phi", binning=(50, -math.pi, math.pi),
+                x_title=Label("Calo p_{T}^{miss} #phi"),
+                units="rad"),
+
+            ############################
 
             Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) )", binning=(60, 0, 4000),
                 blinded_range=[1500,10000],
@@ -1957,6 +2160,42 @@ class Config(base_config):
                 x_title=Label("p_{T}^{miss} #phi (m_{T} > 50 GeV)"),
                 units="rad"),
 
+            ### Different MET checks ###
+            Feature("PFMET_pt_mT50", "MET_pt", binning=(50, 0, 2000),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                blinded_range=[750,10000],
+                x_title=Label("PF p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("PFMET_phi_mT50", "MET_phi", binning=(50, -math.pi, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("PF p_{T}^{miss} #phi"),
+                units="rad"),
+            
+            Feature("TkMET_pt_mT50", "TkMET_pt", binning=(50, 0, 2000),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                blinded_range=[750,10000],
+                x_title=Label("Tracker p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("TkMET_phi_mT50", "TkMET_phi", binning=(50, -math.pi, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("Tracker p_{T}^{miss} #phi"),
+                units="rad"),
+
+            Feature("CaloMET_pt_mT50", "CaloMET_pt", binning=(50, 0, 2000),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                blinded_range=[750,10000],
+                x_title=Label("Calo p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("CaloMET_phi_mT50", "CaloMET_phi", binning=(50, -math.pi, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("Calo p_{T}^{miss} #phi"),
+                units="rad"),
+
+            ############################
+
             Feature("mT_mT50", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) )", binning=(60, 50, 4000),
                 selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
                 blinded_range=[1500,10000],
@@ -1995,6 +2234,10 @@ class Config(base_config):
 		selection="nGoodJets > 0",
                 x_title=Label("leading jet #eta")),
 
+            Feature("jet1_phi", "Jet_phi.at(goodJets.at(0))", binning=(50, -math.pi, math.pi),
+		selection="nGoodJets > 0",
+                x_title=Label("leading jet #phi")),
+            
             # Jet plots with mT cut
             Feature("Njets_mT50", "nGoodJets", binning=(15, 0, 15),
                 selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
@@ -2012,14 +2255,174 @@ class Config(base_config):
 	    Feature("jet1_eta_mT50", "Jet_eta.at(goodJets.at(0))", binning=(50, -2.5, 2.5),
 		selection="nGoodJets > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
                 x_title=Label("leading jet #eta (m_{T} > 50 GeV)")),
+            
+            Feature("jet1_phi_mT50", "Jet_phi.at(goodJets.at(0))", binning=(50, -math.pi, math.pi),
+		selection="nGoodJets > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("leading jet #phi")),
 
+            ##### JERC corrected jets #####
+
+            # Jet plots
+            Feature("CorrNjets", "nGoodJets_corr", binning=(15, 0, 15),
+                x_title=Label("Njets corr.")),
+
+            Feature("CorrJet1_btagScore", "Jet_btagDeepFlavB.at(goodJets_corr.at(0))", binning=(50, 0, 1),
+                selection="nGoodJets_corr > 0",
+                x_title=Label("leading jet DeepJet score corr.")),
+
+            Feature("CorrJet1_pt", "CorrJet_pt.at(goodJets_corr.at(0))", binning=(50, 0, 1500),
+		selection="nGoodJets_corr > 0",
+                x_title=Label("leading jet p_{T} corr."),
+                units="GeV"),
+
+	    Feature("CorrJet1_eta", "Jet_eta.at(goodJets_corr.at(0))", binning=(50, -2.5, 2.5),
+		selection="nGoodJets_corr > 0",
+                x_title=Label("leading jet #eta corr.")),
+            
+            Feature("CorrJet1_phi", "Jet_phi.at(goodJets_corr.at(0))", binning=(50, -math.pi, math.pi),
+		selection="nGoodJets_corr > 0",
+                x_title=Label("leading jet #phi corr.")),
+
+            # Jet plots with mT cut
+            Feature("CorrNjets_mT50", "nGoodJets_corr", binning=(15, 0, 15),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("Njets corr. (m_{T} > 50 GeV)")),
+
+            Feature("CorrJet1_btagScore_mT50", "Jet_btagDeepFlavB.at(goodJets_corr.at(0))", binning=(50, 0, 1),
+                selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("leading jet DeepJet score corr. (m_{T} > 50 GeV)")),
+
+            Feature("CorrJet1_pt_mT50", "CorrJet_pt.at(goodJets_corr.at(0))", binning=(50, 0, 1500),
+		selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("leading jet p_{T} corr. (m_{T} > 50 GeV)"),
+                units="GeV"),
+
+	    Feature("CorrJet1_eta_mT50", "Jet_eta.at(goodJets_corr.at(0))", binning=(50, -2.5, 2.5),
+		selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("leading jet #eta corr. (m_{T} > 50 GeV)")),
+            
+            Feature("CorrJet1_phi_mT50", "Jet_phi.at(goodJets_corr.at(0))", binning=(50, -math.pi, math.pi),
+		selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("leading jet #phi corr. (m_{T} > 50 GeV)")),
+            
 
             # PileUp plot
             Feature("nVertices", "PV_npvsGood", binning=(80, 0, 80),
                 x_title=Label("# of vertices")),
 
+            
+            # MET corrected by TuneP pT plots
+#            Feature("corrMET_pt", "TunePCorrMET_pt", binning=(50, 0, 2000),
+#                blinded_range=[750,10000],
+#                x_title=Label("p_{T}^{miss} corr."),
+#                units="GeV"),
 
+#            Feature("corrMET_phi", "TunePCorrMET_phi", binning=(50, -math.pi, math.pi),
+#                x_title=Label("p_{T}^{miss} #phi corr."),
+#                units="rad"),
 
+#            Feature("mT_corrMET", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TunePCorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TunePCorrMET_phi)) )", binning=(60, 0, 4000),
+#                blinded_range=[1500,10000],
+#                x_title=Label("M_{T} corr."),
+#                units="GeV"),
+
+#            Feature("muonPt_over_corrMET", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/TunePCorrMET_pt", binning=(50, 0, 6),
+#                x_title=Label("p_{T}^{#mu}/p_{T}^{miss} corr.")),
+
+#            Feature("cosDeltaPhi_corr", "cos(Muon_phi.at(goodMuIdx) - TunePCorrMET_phi)", binning=(50, -1.1, 1.1),
+#                x_title=Label("cos(#phi#mu - #phip_{T}^{miss}) corr.")),
+
+#            Feature("deltaPhi_corr", "acos(cos(Muon_phi.at(goodMuIdx) - TunePCorrMET_phi))", binning=(50, 0, math.pi),
+#                x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss}) corr."),
+#                units="rad"),
+
+            # MET corrected by TuneP pT plots + mT cut
+#            Feature("corrMET_pt_mT50", "TunePCorrMET_pt", binning=(50, 0, 2000),
+#                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TunePCorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TunePCorrMET_phi)) ) > 50.0",
+#                blinded_range=[750,10000],
+#                x_title=Label("p_{T}^{miss} corr."),
+#                units="GeV"),
+
+#            Feature("corrMET_phi_mT50", "TunePCorrMET_phi", binning=(50, -math.pi, math.pi),
+#                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TunePCorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TunePCorrMET_phi)) ) > 50.0",
+#                x_title=Label("p_{T}^{miss} #phi corr."),
+#                units="rad"),
+
+#            Feature("mT_corrMET_mT50", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TunePCorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TunePCorrMET_phi)) )", binning=(60, 50, 4000),
+#                blinded_range=[1500,10000],
+#                x_title=Label("M_{T} corr."),
+#                units="GeV"),
+
+#            Feature("muonPt_over_corrMET_mT50", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/TunePCorrMET_pt", binning=(50, 0, 6),
+#                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TunePCorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TunePCorrMET_phi)) ) > 50.0",
+#                x_title=Label("p_{T}^{#mu}/p_{T}^{miss} corr.")),
+
+#            Feature("cosDeltaPhi_corr_mT50", "cos(Muon_phi.at(goodMuIdx) - TunePCorrMET_phi)", binning=(50, -1.1, 1.1),
+#                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TunePCorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TunePCorrMET_phi)) ) > 50.0",
+#                x_title=Label("cos(#phi#mu - #phip_{T}^{miss}) corr.")),
+
+#            Feature("deltaPhi_corr_mT50", "acos(cos(Muon_phi.at(goodMuIdx) - TunePCorrMET_phi))", binning=(50, 0, math.pi),
+#                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TunePCorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TunePCorrMET_phi)) ) > 50.0",
+#                x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss}) corr."),
+#                units="rad"),
+
+            ###### Type-I CorrMET ######
+
+            # MET corrected by JES plots
+            Feature("T1CorrMET_pt", "TypeICorrMET_pt", binning=(50, 0, 2000),
+                blinded_range=[750,10000],
+                x_title=Label("p_{T}^{miss} TypeI-corr."),
+                units="GeV"),
+
+            Feature("T1CorrMET_phi", "TypeICorrMET_phi", binning=(50, -math.pi, math.pi),
+                x_title=Label("p_{T}^{miss} #phi TypeI-corr."),
+                units="rad"),
+
+            Feature("mT_T1CorrMET", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )", binning=(60, 0, 4000),
+                blinded_range=[1500,10000],
+                x_title=Label("M_{T} TypeI-corr."),
+                units="GeV"),
+
+            Feature("muonPt_over_T1CorrMET", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/TypeICorrMET_pt", binning=(50, 0, 6),
+                x_title=Label("p_{T}^{#mu}/p_{T}^{miss} TypeI-corr.")),
+
+            Feature("cosDeltaPhi_T1Corr", "cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)", binning=(50, -1.1, 1.1),
+                x_title=Label("cos(#phi#mu - #phip_{T}^{miss}) TypeI-corr.")),
+
+            Feature("deltaPhi_T1Corr", "acos(cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi))", binning=(50, 0, math.pi),
+                x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss}) TypeI-corr."),
+                units="rad"),
+
+            # MET corrected by JES plots + mT cut
+            Feature("T1CorrMET_pt_mT50", "TypeICorrMET_pt", binning=(50, 0, 2000),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                blinded_range=[750,10000],
+                x_title=Label("p_{T}^{miss} TypeI-corr. m_{T} > 50 GeV"),
+                units="GeV"),
+
+            Feature("T1CorrMET_phi_mT50", "TypeICorrMET_phi", binning=(50, -math.pi, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("p_{T}^{miss} #phi TypeI-corr. m_{T} > 50 GeV"),
+                units="rad"),
+
+            Feature("mT_T1CorrMET_mT50", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )", binning=(60, 50, 4000),
+                blinded_range=[1500,10000],
+                x_title=Label("M_{T} TypeI-corr."),
+                units="GeV"),
+
+            Feature("muonPt_over_T1CorrMET_mT50", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/TypeICorrMET_pt", binning=(50, 0, 6),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("p_{T}^{#mu}/p_{T}^{miss} TypeI-corr. m_{T} > 50 GeV")),
+
+            Feature("cosDeltaPhi_T1Corr_mT50", "cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)", binning=(50, -1.1, 1.1),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("cos(#phi#mu - #phip_{T}^{miss}) TypeI-corr. m_{T} > 50 GeV")),
+
+            Feature("deltaPhi_T1Corr_mT50", "acos(cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi))", binning=(50, 0, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss}) TypeI-corr. m_{T} > 50 GeV"),
+                units="rad"),
+            
 
             # Oscar Plots: Check behavior of jets
 #            Feature("jet1_pt", "Jet_pt.at(0)", binning=(50, 0, 1500),
@@ -2119,6 +2522,51 @@ class Config(base_config):
                 x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss})"),
                 units="rad"),
 
+            # Same plots with mT cut
+            Feature("muon_pt_mT50", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)", binning=(50, 50, 2000),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                blinded_range=[750,10000],
+                x_title=Label("p_{T}^{#mu}"),
+                units="GeV"),
+
+            Feature("muon_eta_mT50", "Muon_eta.at(goodMuIdx)", binning=(50, -2.4, 2.4),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("#mu #eta")),
+
+            Feature("muon_phi_mT50", "Muon_phi.at(goodMuIdx)", binning=(50, -math.pi, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("#mu #phi"),
+                units="rad"),
+
+            Feature("MET_pt_mT50", "PuppiMET_pt", binning=(50, 0, 2000),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                blinded_range=[750,10000],
+                x_title=Label("p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("MET_phi_mT50", "PuppiMET_phi", binning=(50, -math.pi, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("p_{T}^{miss} #phi"),
+                units="rad"),
+
+            Feature("mT_mT50", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) )", binning=(60, 50, 4000),
+                blinded_range=[1500,10000],
+                x_title=Label("M_{T}"),
+                units="GeV"),
+
+            Feature("muonPt_over_MET_mT50", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/PuppiMET_pt", binning=(40, 0.4, 1.5),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("p_{T}^{#mu}/p_{T}^{miss}")),
+
+            Feature("cosDeltaPhi_mT50", "cos(Muon_phi.at(goodMuIdx) - PuppiMET_phi)", binning=(40, -1.05, -0.85),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("cos(#phi#mu - #phip_{T}^{miss})")),
+
+            Feature("deltaPhi_mT50", "deltaPhi_MuMET", binning=(40, 2.5, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss})"),
+                units="rad"),
+
             # Jet plots
             Feature("Njets", "nGoodJets", binning=(8, 0, 8),
                 x_title=Label("Njets")),
@@ -2136,10 +2584,116 @@ class Config(base_config):
 		selection="nGoodJets > 0",
                 x_title=Label("leading jet #eta")),
 
+            # Jet plots with mT cut
+            Feature("Njets_mT50", "nGoodJets", binning=(8, 0, 8),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("Njets")),
+
+            Feature("jet1_btagScore_mT50", "Jet_btagDeepFlavB.at(goodJets.at(0))", binning=(50, 0, 1),
+                selection="nGoodJets > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("leading jet DeepJet score")),
+
+            Feature("jet1_pt_mT50", "Jet_pt.at(goodJets.at(0))", binning=(50, 0, 1500),
+                selection="nGoodJets > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("leading jet p_{T}"),
+                units="GeV"),
+
+	    Feature("jet1_eta_mT50", "Jet_eta.at(goodJets.at(0))", binning=(50, -2.5, 2.5),
+                selection="nGoodJets > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
+                x_title=Label("leading jet #eta")),
+
             # PileUp plot
             Feature("nVertices", "PV_npvsGood", binning=(80, 0, 80),
                 x_title=Label("# of vertices")),
 
+
+            ##### JERC corrected jets #####
+
+            # Jet plots
+            Feature("CorrNjets", "nGoodJets_corr", binning=(15, 0, 15),
+                x_title=Label("Njets corr.")),
+
+            Feature("CorrJet1_btagScore", "Jet_btagDeepFlavB.at(goodJets_corr.at(0))", binning=(50, 0, 1),
+                selection="nGoodJets_corr > 0",
+                x_title=Label("leading jet DeepJet score corr.")),
+
+            Feature("CorrJet1_pt", "CorrJet_pt.at(goodJets_corr.at(0))", binning=(50, 0, 1500),
+		selection="nGoodJets_corr > 0",
+                x_title=Label("leading jet p_{T} corr."),
+                units="GeV"),
+
+	    Feature("CorrJet1_eta", "Jet_eta.at(goodJets_corr.at(0))", binning=(50, -2.5, 2.5),
+		selection="nGoodJets_corr > 0",
+                x_title=Label("leading jet #eta corr.")),
+
+            # Jet plots with mT cut
+            Feature("CorrNjets_mT50", "nGoodJets_corr", binning=(15, 0, 15),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("Njets corr. (m_{T} > 50 GeV)")),
+
+            Feature("CorrJet1_btagScore_mT50", "Jet_btagDeepFlavB.at(goodJets_corr.at(0))", binning=(50, 0, 1),
+                selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("leading jet DeepJet score corr. (m_{T} > 50 GeV)")),
+
+            Feature("CorrJet1_pt_mT50", "CorrJet_pt.at(goodJets_corr.at(0))", binning=(50, 0, 1500),
+		selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("leading jet p_{T} corr. (m_{T} > 50 GeV)"),
+                units="GeV"),
+
+	    Feature("CorrJet1_eta_mT50", "Jet_eta.at(goodJets_corr.at(0))", binning=(50, -2.5, 2.5),
+		selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("leading jet #eta corr. (m_{T} > 50 GeV)")),            
+
+            ###### Type-I CorrMET ######
+
+            # MET corrected by JES plots
+            Feature("T1CorrMET_pt", "TypeICorrMET_pt", binning=(50, 0, 2000),
+                blinded_range=[750,10000],
+                x_title=Label("p_{T}^{miss} TypeI-corr."),
+                units="GeV"),
+
+            Feature("T1CorrMET_phi", "TypeICorrMET_phi", binning=(50, -math.pi, math.pi),
+                x_title=Label("p_{T}^{miss} #phi TypeI-corr."),
+                units="rad"),
+
+            Feature("mT_T1CorrMET", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )", binning=(60, 0, 4000),
+                blinded_range=[1500,10000],
+                x_title=Label("M_{T} TypeI-corr."),
+                units="GeV"),
+
+            Feature("muonPt_over_T1CorrMET", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/TypeICorrMET_pt", binning=(40, 0.4, 1.5),
+                x_title=Label("p_{T}^{#mu}/p_{T}^{miss} TypeI-corr.")),
+
+            Feature("deltaPhi_T1Corr", "acos(cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi))", binning=(40, 2.5, math.pi),
+                x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss}) TypeI-corr."),
+                units="rad"),
+
+            # MET corrected by JES plots + mT cut
+            Feature("T1CorrMET_pt_mT50", "TypeICorrMET_pt", binning=(50, 0, 2000),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                blinded_range=[750,10000],
+                x_title=Label("p_{T}^{miss} TypeI-corr. m_{T} > 50 GeV"),
+                units="GeV"),
+
+            Feature("T1CorrMET_phi_mT50", "TypeICorrMET_phi", binning=(50, -math.pi, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("p_{T}^{miss} #phi TypeI-corr. m_{T} > 50 GeV"),
+                units="rad"),
+
+            Feature("mT_T1CorrMET_mT50", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )", binning=(60, 50, 4000),
+                blinded_range=[1500,10000],
+                x_title=Label("M_{T} TypeI-corr."),
+                units="GeV"),
+
+            Feature("muonPt_over_T1CorrMET_mT50", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/TypeICorrMET_pt", binning=(40, 0.4, 1.5),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("p_{T}^{#mu}/p_{T}^{miss} TypeI-corr. m_{T} > 50 GeV")),
+
+            Feature("deltaPhi_T1Corr_mT50", "acos(cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi))", binning=(40, 2.5, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss}) TypeI-corr. m_{T} > 50 GeV"),
+                units="rad"),
+            
         ]
 
 
@@ -2211,7 +2765,32 @@ class Config(base_config):
         ]
 
 
-        return ObjectCollection(features_kinsel)
+                
+        ### EXTRA: MET object review ###
+
+        features_MET = [
+            Feature("T1CorrMET_pt_mT50", "TypeICorrMET_pt", binning=(50, 0, 2000),
+                selection="nGoodJets < 2 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                blinded_range=[750,10000],
+                x_title=Label("p_{T}^{miss} TypeI-corr. m_{T} > 50 GeV && # jets < 2"),
+                units="GeV"),
+
+            Feature("T1CorrMET_phi_mT50", "TypeICorrMET_phi", binning=(50, -math.pi, math.pi),
+                selection="nGoodJets < 2 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("p_{T}^{miss} #phi TypeI-corr. m_{T} > 50 GeV && # jets < 2"),
+                units="rad"),
+         
+            Feature("muonPt_over_T1CorrMET_mT50", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/TypeICorrMET_pt", binning=(50, 0, 6),
+                selection="nGoodJets < 2 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("p_{T}^{#mu}/p_{T}^{miss} TypeI-corr. m_{T} > 50 GeV && # jets < 2")),
+
+            Feature("deltaPhi_T1Corr_mT50", "acos(cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi))", binning=(50, 0, math.pi),
+                selection="nGoodJets < 2 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss}) TypeI-corr. m_{T} > 50 GeV && # jets < 2"),
+                units="rad"),   
+        ]
+
+        return ObjectCollection(features_MET)
 
     def add_versions(self):
         versions = {}
