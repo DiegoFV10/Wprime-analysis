@@ -45,6 +45,7 @@ APPLY KINEMATIC SELECTION:
     name: kinSel
     path: Wprime.Modules.kinematicSelection
     parameters:
+        year: self.config.year
         runPeriod: self.dataset.runPeriod
 
 #PUweight from ROOT files:
@@ -71,6 +72,15 @@ Muon SFs:
         isMC: self.dataset.process.isMC
         year: self.config.year
         runPeriod: self.dataset.runPeriod
+
+B-tagging SFs:
+    name: BtaggingSF
+    path: Wprime.Modules.btagSF
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod
+
 
 #Apply k-factor for HT-binned:
 #    name: HTkfactor

@@ -107,7 +107,12 @@ class Config(base_config):
             Process("W_postBPix", Label("W-boson"), color=ROOT.kAzure+1, parent_process="W_boson"),
 
             # W off-shell madgraph
-            Process("Wlnu", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="W_preBPix"),
+            # For W splitting
+            Process("Wlnu_full", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="W_boson"),
+            Process("Wlnu", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="Wlnu_full"),
+            Process("Wlnu_postBPix", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="Wlnu_full"),
+            # Old - original
+            #Process("Wlnu", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="W_preBPix"),
             Process("Wlnu1", Label("W #rightarrow l#nu M_{W} 120to200"), color=(255, 241, 0), parent_process="Wlnu"),
             Process("Wlnu2", Label("W #rightarrow l#nu M_{W} 200to400"), color=(255, 140, 0), parent_process="Wlnu"),
             Process("Wlnu3", Label("W #rightarrow l#nu M_{W} 400to800"), color=(232, 17, 35), parent_process="Wlnu"),
@@ -116,11 +121,16 @@ class Config(base_config):
             Process("Wlnu6", Label("W #rightarrow l#nu M_{W} 2500to4000"), color=(0, 24, 143), parent_process="Wlnu"),
             Process("Wlnu7", Label("W #rightarrow l#nu M_{W} 4000to6000"), color=(0, 188, 242), parent_process="Wlnu"),
             Process("Wlnu8", Label("W #rightarrow l#nu M_{W} 6000"), color=(0, 178, 148), parent_process="Wlnu"),
-            Process("Wlnu_postBPix", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="W_postBPix"),
+            #Process("Wlnu_postBPix", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="W_postBPix"),
 
             # W on-shell
-            Process("Wonshell", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_preBPix", isWjets=True),
-            Process("Wonshell_postBPix", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_postBPix", isWjets=True),
+            # For W splitting
+            Process("Wonshell_full", Label("onshell W #rightarrow l#nu"), color=ROOT.kAzure+10, parent_process="W_boson", isWjets=True),
+            Process("Wonshell", Label("onshell W #rightarrow l#nu"), color=ROOT.kAzure+10, parent_process="Wonshell_full", isWjets=True),
+            Process("Wonshell_postBPix", Label("onshell W #rightarrow l#nu"), color=ROOT.kAzure+10, parent_process="Wonshell_full", isWjets=True),
+            # Old - original
+            #Process("Wonshell", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_preBPix", isWjets=True),
+            #Process("Wonshell_postBPix", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_postBPix", isWjets=True),
             # W+2j jet-binned ==> Deprecated
             Process("W+2j_binned", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_preBPix", isWjets=True),
             Process("W+2j_binned_postBPix", Label("W #rightarrow l#nu + jets"), color=ROOT.kAzure+10, parent_process="W_postBPix", isWjets=True),
@@ -135,13 +145,18 @@ class Config(base_config):
             Process("Wboost5", Label("W #rightarrow l#nu HT 2500"), color=(0, 188, 242), isHTbin=True, parent_process="Wboost"),
             Process("Wboost_postBPix", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isHTbin=True, parent_process="W_postBPix"),
             # W boosted --> ptLNu-binned NLO
-            Process("W_ptW", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isWboost=True, parent_process="W_preBPix"),
+            # For W splitting
+            Process("W_ptW_full", Label("boosted W #rightarrow l#nu"), color=(255, 165, 0), isWboost=True, parent_process="W_boson"),
+            Process("W_ptW", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isWboost=True, parent_process="W_ptW_full"),
+            Process("W_ptW_postBPix", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isWboost=True, parent_process="W_ptW_full"),
+            # Old - original            
+            #Process("W_ptW", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isWboost=True, parent_process="W_preBPix"),
             Process("W_ptW1", Label("W #rightarrow l#nu p_{T}^{l#nu} 40to100"), color=(255, 140, 0), isWboost=True, parent_process="W_ptW"),
             Process("W_ptW2", Label("W #rightarrow l#nu p_{T}^{l#nu} 100to200"), color=(232, 17, 35), isWboost=True, parent_process="W_ptW"),
             Process("W_ptW3", Label("W #rightarrow l#nu p_{T}^{l#nu} 200to400"), color=(236, 0, 140), isWboost=True, parent_process="W_ptW"),
             Process("W_ptW4", Label("W #rightarrow l#nu p_{T}^{l#nu} 400to600"), color=(104, 33, 122), isWboost=True, parent_process="W_ptW"),
             Process("W_ptW5", Label("W #rightarrow l#nu p_{T}^{l#nu} 600"), color=(0, 24, 143), isWboost=True, parent_process="W_ptW"),
-            Process("W_ptW_postBPix", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isWboost=True, parent_process="W_postBPix"),
+            #Process("W_ptW_postBPix", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isWboost=True, parent_process="W_postBPix"),
 
             # Top
             Process("Top", Label("Top"), color=(255,255,0)),
@@ -261,6 +276,22 @@ class Config(base_config):
                 "Wonshell",
                 "Wlnu",
                 "Wboost",
+            ],
+
+            ######################################
+
+            "2023full_Wsplit": [
+                "Wprime2000",
+                "Wprime3600",
+                "Wprime5600",
+                "Wonshell_full",
+                "Wlnu_full",
+                "W_ptW_full",
+                "Top",
+                "DiBoson",
+                "QCD",
+                "Z_boson",
+                "PromptData2023",
             ],
 
         }
@@ -2789,8 +2820,47 @@ class Config(base_config):
                 x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss}) TypeI-corr. m_{T} > 50 GeV && # jets < 2"),
                 units="rad"),   
         ]
+        
+        features_BtagEff = [
+            
+            Feature("Jet_pt_b", "Jet_pt_b",
+                binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
+		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("b jet p_{T}"),
+                units="GeV"),
 
-        return ObjectCollection(features_MET)
+            Feature("Jet_pt_b_btag", "Jet_pt_b_btag",
+                binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
+		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("b-tagged b jet p_{T}"),
+                units="GeV"),
+                       
+            Feature("Jet_pt_c", "Jet_pt_c",
+                binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
+		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("c jet p_{T}"),
+                units="GeV"),
+
+            Feature("Jet_pt_c_btag", "Jet_pt_c_btag",
+                binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
+		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("b-tagged c jet p_{T}"),
+                units="GeV"),
+                       
+            Feature("Jet_pt_uds", "Jet_pt_uds",
+                binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
+		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("light jet p_{T}"),
+                units="GeV"),
+
+            Feature("Jet_pt_uds_btag", "Jet_pt_uds_btag",
+                binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
+		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("b-tagged light jet p_{T}"),
+                units="GeV"),
+        ]
+
+        return ObjectCollection(features_kinsel)
 
     def add_versions(self):
         versions = {}
@@ -2802,7 +2872,7 @@ class Config(base_config):
 
         weights.total_events_weights = ["genWeight", "puWeight"]
 
-        weights.preselection  = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_hltSF_weight", "mu_recoSF_weight"]
+        weights.preselection  = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_hltSF_weight", "mu_recoSF_weight", "btag_weight"]
 
         return weights
 

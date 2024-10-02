@@ -41,7 +41,7 @@ Jet cleanup:
     name: jetCleanup
     path: Wprime.Modules.plotUtils
 
-#To compute gen-level Wmass & Wpt:
+#To compute lhe(gen)-level variables i.e Wmass, Wpt:
 #    name: genVars
 #    path: Wprime.Modules.plotUtils
 #    parameters:
@@ -72,6 +72,12 @@ Muon SFs:
         isMC: self.dataset.process.isMC
         year: self.config.year
         runPeriod: self.dataset.runPeriod
+
+Dummy module for preselection ==> btag_weight = 1:
+    name: DummyBtaggingSF
+    path: Wprime.Modules.btagSF
+    parameters:
+        isMC: self.dataset.process.isMC
 
 #Apply k-factor for HT-binned:
 #    name: HTkfactor

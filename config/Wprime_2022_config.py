@@ -333,6 +333,11 @@ class Config(base_config):
                 "Wlnu",
                 "W_ptW",
             ],
+            
+            "Wbkg_LOvsNLO_stitching": [
+                "Wonshell",
+                "Wlnu",
+            ],
                 
             ######################################
 
@@ -806,7 +811,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="preEE",
-                xs=167.1*1.150,), # From Jeongeun --> GenXSecAnalyzer (LO) x k-factor for madgraph // NOTE: Using additive k-factors from EXO presentation 4 June 2024
+                xs=167.1*1.150,), # From Jeongeun --> GenXSecAnalyzer (LO) x k-factor for madgraph // NOTE: Using additive + mixed k-factors from MC&I presentation on August 2024
 
             Dataset("Wlnu120to200_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-120to200_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -962,7 +967,7 @@ class Config(base_config):
                 process=self.processes.get("Wonshell"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=67710.0*0.9466,), # From SMP-22-017: Theoretical xs at NNNLO(QCD)xNLO(EWK) is 64092 pb ==> k-fact = 0.9466
+                xs=67710.0*0.9214,), # From SMP-22-017: Theoretical xs at NNNLO(QCD)xNLO(EWK) is 62390 pb ==> k-fact = 0.9214
 
             Dataset("Wjets_postEE",
                 dataset="/WtoLNu-2Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -971,7 +976,7 @@ class Config(base_config):
                 process=self.processes.get("Wonshell_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=67710.0*0.9466,
+                xs=67710.0*0.9214,
                 tags=["postEE"]),
 
             ## W + 4jets inclusive (LO) ##
@@ -983,7 +988,7 @@ class Config(base_config):
                 process=self.processes.get("W+4j"),
                 #prefix="eoscms-ns-ip563.cern.ch:1098//",
                 runPeriod="preEE",
-                xs=55390,), # From SMP-22-017: Theoretical xs at NNNLO(QCD)xNLO(EWK) is 64092 pb ==> k-fact = 1.157
+                xs=55390,), # From SMP-22-017: Theoretical xs at NNNLO(QCD)xNLO(EWK) is 62390 pb ==> k-fact = 1.126
 
             Dataset("Wjets_4j_postEE",
                 dataset="/WtoLNu-4Jets_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -1127,7 +1132,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="preEE",
-                xs=4379*0.9466,), # From GenXSecAnalyzer (NLO) x NNLO k-factor from inclusive W+2j sample
+                xs=4379*0.9214,), # From GenXSecAnalyzer (NLO) x NNLO k-factor from inclusive W+2j sample
 
             Dataset("Wlnu_ptW-40to100_1J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1137,7 +1142,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="postEE",
-                xs=4379*0.9466,
+                xs=4379*0.9214,
                 tags=["postEE"]),
             
             Dataset("Wlnu_ptW-40to100_2J",
@@ -1148,7 +1153,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="preEE",
-                xs=1604*0.9466,), # From GenXSecAnalyzer (NLO)
+                xs=1604*0.9214,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-40to100_2J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1158,7 +1163,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="postEE",
-                xs=1604*0.9466,
+                xs=1604*0.9214,
                 tags=["postEE"]),
             
             Dataset("Wlnu_ptW-100to200_1J",
@@ -1169,7 +1174,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="preEE",
-                xs=367.5*0.9466,), # From GenXSecAnalyzer (NLO)
+                xs=367.5*0.9214,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-100to200_1J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1179,7 +1184,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="postEE",
-                xs=367.5*0.9466,
+                xs=367.5*0.9214,
                 tags=["postEE"]),
             
             Dataset("Wlnu_ptW-100to200_2J",
@@ -1190,7 +1195,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="preEE",
-                xs=420.7*0.9466,), # From GenXSecAnalyzer (NLO)
+                xs=420.7*0.9214,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-100to200_2J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1200,7 +1205,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="postEE",
-                xs=420.7*0.9466,
+                xs=420.7*0.9214,
                 tags=["postEE"]),
                     
             Dataset("Wlnu_ptW-200to400_1J",
@@ -1211,7 +1216,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="preEE",
-                xs=25.63*0.9466,), # From GenXSecAnalyzer (NLO)
+                xs=25.63*0.9214,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-200to400_1J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1221,7 +1226,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="postEE",
-                xs=25.63*0.9466,
+                xs=25.63*0.9214,
                 tags=["postEE"]),
             
             Dataset("Wlnu_ptW-200to400_2J",
@@ -1232,7 +1237,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="preEE",
-                xs=54.60*0.9466,), # From GenXSecAnalyzer (NLO)
+                xs=54.60*0.9214,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-200to400_2J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1242,7 +1247,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="postEE",
-                xs=54.60*0.9466,
+                xs=54.60*0.9214,
                 tags=["postEE"]),
                                     
             Dataset("Wlnu_ptW-400to600_1J",
@@ -1252,7 +1257,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW4"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.873*0.9466,), # From GenXSecAnalyzer (NLO)
+                xs=0.873*0.9214,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-400to600_1J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1261,7 +1266,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.873*0.9466,
+                xs=0.873*0.9214,
                 tags=["postEE"]),
             
             Dataset("Wlnu_ptW-400to600_2J",
@@ -1271,7 +1276,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW4"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=3.124*0.9466,), # From GenXSecAnalyzer (NLO)
+                xs=3.124*0.9214,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-400to600_2J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1280,7 +1285,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=3.124*0.9466,
+                xs=3.124*0.9214,
                 tags=["postEE"]),
                                                 
             Dataset("Wlnu_ptW-600_1J",
@@ -1290,7 +1295,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW5"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.1025*0.9466,), # From GenXSecAnalyzer (NLO)
+                xs=0.1025*0.9214,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-600_1J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1299,7 +1304,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.1025*0.9466,
+                xs=0.1025*0.9214,
                 tags=["postEE"]),
             
             Dataset("Wlnu_ptW-600_2J",
@@ -1309,7 +1314,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW5"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.5262*0.9466,), # From GenXSecAnalyzer (NLO)
+                xs=0.5262*0.9214,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-600_2J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1318,7 +1323,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.5262*0.9466,
+                xs=0.5262*0.9214,
                 tags=["postEE"]),
             
             
@@ -3218,8 +3223,47 @@ class Config(base_config):
                 x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss}) TypeI-corr. m_{T} > 50 GeV && # jets < 2"),
                 units="rad"),   
         ]
+
+        features_BtagEff = [
             
-        return ObjectCollection(features_MET)
+            Feature("Jet_pt_b", "Jet_pt_b",
+                binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
+		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("b jet p_{T}"),
+                units="GeV"),
+
+            Feature("Jet_pt_b_btag", "Jet_pt_b_btag",
+                binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
+		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("b-tagged b jet p_{T}"),
+                units="GeV"),
+                       
+            Feature("Jet_pt_c", "Jet_pt_c",
+                binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
+		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("c jet p_{T}"),
+                units="GeV"),
+
+            Feature("Jet_pt_c_btag", "Jet_pt_c_btag",
+                binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
+		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("b-tagged c jet p_{T}"),
+                units="GeV"),
+                       
+            Feature("Jet_pt_uds", "Jet_pt_uds",
+                binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
+		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("light jet p_{T}"),
+                units="GeV"),
+
+            Feature("Jet_pt_uds_btag", "Jet_pt_uds_btag",
+                binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
+		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("b-tagged light jet p_{T}"),
+                units="GeV"),
+        ]
+            
+        return ObjectCollection(features_kinsel)
 
     def add_versions(self):
         versions = {}
@@ -3231,7 +3275,7 @@ class Config(base_config):
 
         weights.total_events_weights = ["genWeight", "puWeight"]
 
-        weights.preselection  = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_hltSF_weight", "mu_recoSF_weight"]#, "HTkfact"]
+        weights.preselection  = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_hltSF_weight", "mu_recoSF_weight", "btag_weight"]
         weights.kin_selection = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_hltSF_weight", "mu_recoSF_weight"]#, "HTkfact"]
 
         return weights

@@ -22,9 +22,12 @@ MET filters:
     parameters:
         year: self.config.year
 
-To compute effective MET for Oscar:
-    name: METprime
-    path: Wprime.Modules.plotUtils
+Jet veto maps:
+    name: JetVetoMaps
+    path: Wprime.Modules.jetvetomap
+    parameters:
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod
 
 deltaPhi(muon, MET):
     name: deltaPhi
@@ -34,21 +37,9 @@ Jet cleanup:
     name: jetCleanup
     path: Wprime.Modules.plotUtils
 
-#To compute gen-level Wmass & Wpt:
-#    name: genVars
-#    path: Wprime.Modules.plotUtils
-#    parameters:
-#        isMC: self.dataset.process.isMC
-#        isPythia: self.dataset.process.get_aux('isPythia', False)
-
-#PUweight from ROOT files:
-#    name: puWeightRDF
-#    path: Corrections.LUM.puWeight
-#    parameters:
-#        isMC: self.dataset.process.isMC
-#        year: self.config.year
-#        isUL: self.dataset.has_tag('ul')
-#        postEE: self.dataset.has_tag('postEE')
+APPLY KINEMATIC SELECTION WITHOUT BTag:
+    name: kinSelNoBTag
+    path: Wprime.Modules.kinematicSelection
 
 PUweight from correctionlib:
     name: puWeightRun3
@@ -66,8 +57,10 @@ Muon SFs:
         year: self.config.year
         runPeriod: self.dataset.runPeriod
 
-#Apply k-factor for HT-binned:
-#    name: HTkfactor
-#    path: Wprime.Modules.kfactor_Wboost
-#    parameters:
-#        isHTbin: self.dataset.process.get_aux('isHTbin', False)
+Compute columns for btagging efficiency:
+    name: BTagEff
+    path: Wprime.Modules.BTagEfficiency
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod
