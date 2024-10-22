@@ -82,8 +82,7 @@ class Config(base_config):
         categories = [
             Category("base", "base category", selection = ""),
             Category("preselection", "category for the single muon preselection step", selection = ""),
-            Category("kin_selection", "category for the kinematic selection + top veto step", 
-                     #selection = "Muon_tunepRelPt[goodMuIdx]*Muon_pt[goodMuIdx]/PuppiMET_pt > 0.4 && Muon_tunepRelPt[goodMuIdx]*Muon_pt[goodMuIdx]/PuppiMET_pt < 1.5 && deltaPhi_MuMET > 2.5 && nJet < 6 && Jet_btagDeepFlavB[0] < 0.73"),
+            Category("kin_selection", "category for the kinematic selection + top veto step",
                      selection = "Muon_tunepRelPt[goodMuIdx]*Muon_pt[goodMuIdx]/PuppiMET_pt > 0.4 && Muon_tunepRelPt[goodMuIdx]*Muon_pt[goodMuIdx]/PuppiMET_pt < 1.5 && deltaPhi_MuMET > 2.5 && nJet < 6"), # DEPRECATED
         ]
         return ObjectCollection(categories)
@@ -811,7 +810,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="preEE",
-                xs=167.1*1.150,), # From Jeongeun --> GenXSecAnalyzer (LO) x k-factor for madgraph // NOTE: Using additive + mixed k-factors from MC&I presentation on August 2024
+                xs=167.1*1.143,), # From Jeongeun --> GenXSecAnalyzer (LO) x k-factor for madgraph // NOTE: Using final additive + mixed k-factors updated in October2024
 
             Dataset("Wlnu120to200_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-120to200_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -821,7 +820,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 #merging={"preselection":3}, # Descomenta para el proximo reprocess!!!
                 runPeriod="postEE",
-                xs=167.1*1.150, 
+                xs=167.1*1.143, 
                 tags=["postEE"]),
 
             Dataset("Wlnu200to400",
@@ -831,7 +830,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu2"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=20.43*1.201,), 
+                xs=20.43*1.217,), 
 
             Dataset("Wlnu200to400_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-200to400_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -840,7 +839,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=20.43*1.201, 
+                xs=20.43*1.217, 
                 tags=["postEE"]),
 
             Dataset("Wlnu400to800",
@@ -850,7 +849,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu3"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=1.596*1.260,), 
+                xs=1.596*1.215,), 
 
             Dataset("Wlnu400to800_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-400to800_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -859,7 +858,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=1.596*1.260,
+                xs=1.596*1.215,
                 tags=["postEE"]),
 
             Dataset("Wlnu800to1500",
@@ -869,7 +868,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu4"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.1095*1.246,),
+                xs=0.1095*1.214,),
 
             Dataset("Wlnu800to1500_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-800to1500_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -878,7 +877,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.1095*1.246,
+                xs=0.1095*1.214,
                 tags=["postEE"]),
 
             Dataset("Wlnu1500to2500",
@@ -888,7 +887,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu5"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.006377*1.207,), 
+                xs=0.006377*1.168,), 
 
             Dataset("Wlnu1500to2500_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-1500to2500_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -897,7 +896,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.006377*1.207,
+                xs=0.006377*1.168,
                 tags=["postEE"]),
 
             Dataset("Wlnu2500to4000",
@@ -907,7 +906,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu6"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.0003464*1.235,),
+                xs=0.0003464*1.148,),
 
             Dataset("Wlnu2500to4000_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-2500to4000_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -916,7 +915,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.0003464*1.235,
+                xs=0.0003464*1.148,
                 tags=["postEE"]),
 
             Dataset("Wlnu4000to6000",
@@ -926,7 +925,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu7"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.00001074*1.308,), 
+                xs=0.00001074*1.102,), 
 
             Dataset("Wlnu4000to6000_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-4000to6000_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -935,7 +934,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.00001074*1.308,
+                xs=0.00001074*1.102,
                 tags=["postEE"]),
 
             Dataset("Wlnu6000",
@@ -945,7 +944,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu8"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.0000004198*1.507,), 
+                xs=0.0000004198*1.084,), 
 
             Dataset("Wlnu6000_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-6000_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -954,7 +953,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.0000004198*1.507,
+                xs=0.0000004198*1.084,
                 tags=["postEE"]),
 
         
@@ -2928,7 +2927,7 @@ class Config(base_config):
                 x_title=Label("#mu #phi (p_{T}^{#mu} > 200 GeV)"),
                 units="rad"),
 
-            Feature("MET_pt", "PuppiMET_pt", binning=(50, 0, 2000),
+            Feature("MET_pt", "PuppiMET_pt", binning=(50, 35, 2000),
                 blinded_range=[750,10000],
                 x_title=Label("p_{T}^{miss}"),
                 units="GeV"),
@@ -2937,64 +2936,16 @@ class Config(base_config):
                 x_title=Label("p_{T}^{miss} #phi"),
                 units="rad"),
 
-            Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) )", binning=(60, 0, 4000),
+            Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - PuppiMET_phi)) )", binning=(60, 80, 4000),
                 blinded_range=[1500,10000],
-                x_title=Label("M_{T}"),
+                x_title=Label("m_{T}"),
                 units="GeV"),
 
             Feature("muonPt_over_MET", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/PuppiMET_pt", binning=(40, 0.4, 1.5),
                 x_title=Label("p_{T}^{#mu}/p_{T}^{miss}")),
 
-            Feature("cosDeltaPhi", "cos(Muon_phi.at(goodMuIdx) - PuppiMET_phi)", binning=(40, -1.05, -0.85),
-                x_title=Label("cos(#phi#mu - #phip_{T}^{miss})")),
-
-            Feature("deltaPhi", "deltaPhi_MuMET", binning=(40, 2.5, math.pi),
-                x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss})"),
-                units="rad"),
-
-            # Same plots with mT cut
-            Feature("muon_pt_mT50", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)", binning=(50, 50, 2000),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
-                blinded_range=[750,10000],
-                x_title=Label("p_{T}^{#mu}"),
-                units="GeV"),
-
-            Feature("muon_eta_mT50", "Muon_eta.at(goodMuIdx)", binning=(50, -2.4, 2.4),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
-                x_title=Label("#mu #eta")),
-
-            Feature("muon_phi_mT50", "Muon_phi.at(goodMuIdx)", binning=(50, -math.pi, math.pi),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
-                x_title=Label("#mu #phi"),
-                units="rad"),
-
-            Feature("MET_pt_mT50", "PuppiMET_pt", binning=(50, 0, 2000),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
-                blinded_range=[750,10000],
-                x_title=Label("p_{T}^{miss}"),
-                units="GeV"),
-
-            Feature("MET_phi_mT50", "PuppiMET_phi", binning=(50, -math.pi, math.pi),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
-                x_title=Label("p_{T}^{miss} #phi"),
-                units="rad"),
-
-            Feature("mT_mT50", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) )", binning=(60, 50, 4000),
-                blinded_range=[1500,10000],
-                x_title=Label("M_{T}"),
-                units="GeV"),
-
-            Feature("muonPt_over_MET_mT50", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/PuppiMET_pt", binning=(40, 0.4, 1.5),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
-                x_title=Label("p_{T}^{#mu}/p_{T}^{miss}")),
-
-            Feature("cosDeltaPhi_mT50", "cos(Muon_phi.at(goodMuIdx) - PuppiMET_phi)", binning=(40, -1.05, -0.85),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
-                x_title=Label("cos(#phi#mu - #phip_{T}^{miss})")),
-
-            Feature("deltaPhi_mT50", "deltaPhi_MuMET", binning=(40, 2.5, math.pi),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
-                x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss})"),
+            Feature("deltaPhi", "acos(cos(Muon_phi.at(goodMuIdx) - PuppiMET_phi))", binning=(40, 2.5, math.pi),
+                x_title=Label("#Delta#phi(p_{T}^{#mu}, p_{T}^{miss})"),
                 units="rad"),
 
             # Jet plots
@@ -3005,7 +2956,7 @@ class Config(base_config):
                 selection="nGoodJets > 0",
                 x_title=Label("leading jet DeepJet score")),
 
-            Feature("jet1_pt", "Jet_pt.at(goodJets.at(0))", binning=(50, 0, 1500),
+            Feature("jet1_pt", "Jet_pt.at(goodJets.at(0))", binning=(50, 30, 1500),
 		selection="nGoodJets > 0",
                 x_title=Label("leading jet p_{T}"),
                 units="GeV"),
@@ -3014,70 +2965,29 @@ class Config(base_config):
 		selection="nGoodJets > 0",
                 x_title=Label("leading jet #eta")),
 
-            # Jet plots with mT cut
-            Feature("Njets_mT50", "nGoodJets", binning=(8, 0, 8),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
-                x_title=Label("Njets")),
-
-            Feature("jet1_btagScore_mT50", "Jet_btagDeepFlavB.at(goodJets.at(0))", binning=(50, 0, 1),
-                selection="nGoodJets > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
-                x_title=Label("leading jet DeepJet score")),
-
-            Feature("jet1_pt_mT50", "Jet_pt.at(goodJets.at(0))", binning=(50, 0, 1500),
-                selection="nGoodJets > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
-                x_title=Label("leading jet p_{T}"),
-                units="GeV"),
-
-	    Feature("jet1_eta_mT50", "Jet_eta.at(goodJets.at(0))", binning=(50, -2.5, 2.5),
-                selection="nGoodJets > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(deltaPhi_MuMET)) ) > 50.0",
-                x_title=Label("leading jet #eta")),
-
             # PileUp plot
             Feature("nVertices", "PV_npvsGood", binning=(80, 0, 80),
                 x_title=Label("# of vertices")),
-
             
             ##### JERC corrected jets #####
-
-            # Jet plots
-            Feature("CorrNjets", "nGoodJets_corr", binning=(15, 0, 15),
+            Feature("CorrNjets", "nGoodJets_corr", binning=(8, 0, 8),
                 x_title=Label("Njets corr.")),
 
             Feature("CorrJet1_btagScore", "Jet_btagDeepFlavB.at(goodJets_corr.at(0))", binning=(50, 0, 1),
                 selection="nGoodJets_corr > 0",
                 x_title=Label("leading jet DeepJet score corr.")),
 
-            Feature("CorrJet1_pt", "CorrJet_pt.at(goodJets_corr.at(0))", binning=(50, 0, 1500),
+            Feature("CorrJet1_pt", "CorrJet_pt.at(goodJets_corr.at(0))", binning=(50, 30, 1500),
 		selection="nGoodJets_corr > 0",
                 x_title=Label("leading jet p_{T} corr."),
                 units="GeV"),
 
 	    Feature("CorrJet1_eta", "Jet_eta.at(goodJets_corr.at(0))", binning=(50, -2.5, 2.5),
 		selection="nGoodJets_corr > 0",
-                x_title=Label("leading jet #eta corr.")),
-
-            # Jet plots with mT cut
-            Feature("CorrNjets_mT50", "nGoodJets_corr", binning=(15, 0, 15),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
-                x_title=Label("Njets corr. (m_{T} > 50 GeV)")),
-
-            Feature("CorrJet1_btagScore_mT50", "Jet_btagDeepFlavB.at(goodJets_corr.at(0))", binning=(50, 0, 1),
-                selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
-                x_title=Label("leading jet DeepJet score corr. (m_{T} > 50 GeV)")),
-
-            Feature("CorrJet1_pt_mT50", "CorrJet_pt.at(goodJets_corr.at(0))", binning=(50, 0, 1500),
-		selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
-                x_title=Label("leading jet p_{T} corr. (m_{T} > 50 GeV)"),
-                units="GeV"),
-
-	    Feature("CorrJet1_eta_mT50", "Jet_eta.at(goodJets_corr.at(0))", binning=(50, -2.5, 2.5),
-		selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
-                x_title=Label("leading jet #eta corr. (m_{T} > 50 GeV)")),            
+                x_title=Label("leading jet #eta corr.")),            
 
             ###### Type-I CorrMET ######
-
-            # MET corrected by JES plots
-            Feature("T1CorrMET_pt", "TypeICorrMET_pt", binning=(50, 0, 2000),
+            Feature("T1CorrMET_pt", "TypeICorrMET_pt", binning=(50, 35, 2000),
                 blinded_range=[750,10000],
                 x_title=Label("p_{T}^{miss} TypeI-corr."),
                 units="GeV"),
@@ -3086,42 +2996,38 @@ class Config(base_config):
                 x_title=Label("p_{T}^{miss} #phi TypeI-corr."),
                 units="rad"),
 
-            Feature("mT_T1CorrMET", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )", binning=(60, 0, 4000),
+            Feature("mT_T1CorrMET", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )", binning=(60, 80, 4000),
                 blinded_range=[1500,10000],
-                x_title=Label("M_{T} TypeI-corr."),
+                x_title=Label("m_{T} TypeI-corr."),
                 units="GeV"),
 
             Feature("muonPt_over_T1CorrMET", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/TypeICorrMET_pt", binning=(40, 0.4, 1.5),
                 x_title=Label("p_{T}^{#mu}/p_{T}^{miss} TypeI-corr.")),
 
             Feature("deltaPhi_T1Corr", "acos(cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi))", binning=(40, 2.5, math.pi),
-                x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss}) TypeI-corr."),
+                x_title=Label("#Delta#phi(p_{T}^{#mu}, p_{T}^{miss}) TypeI-corr."),
                 units="rad"),
 
-            # MET corrected by JES plots + mT cut
-            Feature("T1CorrMET_pt_mT50", "TypeICorrMET_pt", binning=(50, 0, 2000),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+            ###### TuneP Corrected MET ######
+            Feature("TunePCorrMET_pt", "TunePCorrMET_pt", binning=(50, 35, 2000),
                 blinded_range=[750,10000],
-                x_title=Label("p_{T}^{miss} TypeI-corr. m_{T} > 50 GeV"),
+                x_title=Label("p_{T}^{miss} TuneP-corr."),
                 units="GeV"),
 
-            Feature("T1CorrMET_phi_mT50", "TypeICorrMET_phi", binning=(50, -math.pi, math.pi),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
-                x_title=Label("p_{T}^{miss} #phi TypeI-corr. m_{T} > 50 GeV"),
+            Feature("TunePCorrMET_phi", "TunePCorrMET_phi", binning=(50, -math.pi, math.pi),
+                x_title=Label("p_{T}^{miss} #phi TuneP-corr."),
                 units="rad"),
 
-            Feature("mT_T1CorrMET_mT50", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )", binning=(60, 50, 4000),
+            Feature("mT_TunePCorrMET", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TunePCorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TunePCorrMET_phi)) )", binning=(60, 80, 4000),
                 blinded_range=[1500,10000],
-                x_title=Label("M_{T} TypeI-corr."),
+                x_title=Label("m_{T} TuneP-corr."),
                 units="GeV"),
 
-            Feature("muonPt_over_T1CorrMET_mT50", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/TypeICorrMET_pt", binning=(40, 0.4, 1.5),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
-                x_title=Label("p_{T}^{#mu}/p_{T}^{miss} TypeI-corr. m_{T} > 50 GeV")),
+            Feature("muonPt_over_TunePCorrMET", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/TunePCorrMET_pt", binning=(40, 0.4, 1.5),
+                x_title=Label("p_{T}^{#mu}/p_{T}^{miss} TuneP-corr.")),
 
-            Feature("deltaPhi_T1Corr_mT50", "acos(cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi))", binning=(40, 2.5, math.pi),
-                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
-                x_title=Label("#Delta#phi(p_{T}^{#mu},p_{T}^{miss}) TypeI-corr. m_{T} > 50 GeV"),
+            Feature("deltaPhi_TunePCorr", "acos(cos(Muon_phi.at(goodMuIdx) - TunePCorrMET_phi))", binning=(40, 2.5, math.pi),
+                x_title=Label("#Delta#phi(p_{T}^{#mu}, p_{T}^{miss}) TuneP-corr."),
                 units="rad"),
             
         ]
@@ -3228,37 +3134,31 @@ class Config(base_config):
             
             Feature("Jet_pt_b", "Jet_pt_b",
                 binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
-		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
                 x_title=Label("b jet p_{T}"),
                 units="GeV"),
 
             Feature("Jet_pt_b_btag", "Jet_pt_b_btag",
                 binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
-		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
                 x_title=Label("b-tagged b jet p_{T}"),
                 units="GeV"),
                        
             Feature("Jet_pt_c", "Jet_pt_c",
                 binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
-		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
                 x_title=Label("c jet p_{T}"),
                 units="GeV"),
 
             Feature("Jet_pt_c_btag", "Jet_pt_c_btag",
                 binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
-		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
                 x_title=Label("b-tagged c jet p_{T}"),
                 units="GeV"),
                        
             Feature("Jet_pt_uds", "Jet_pt_uds",
                 binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
-		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
                 x_title=Label("light jet p_{T}"),
                 units="GeV"),
 
             Feature("Jet_pt_uds_btag", "Jet_pt_uds_btag",
                 binning=[30, 50, 70, 100, 140, 200, 300, 600, 1000],
-		selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
                 x_title=Label("b-tagged light jet p_{T}"),
                 units="GeV"),
         ]

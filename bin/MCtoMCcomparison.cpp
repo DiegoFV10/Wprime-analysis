@@ -188,7 +188,7 @@ void compare(string MCfile, string hist, string label, string name){
 
   /// Save Plot ///
   //c_rate->SaveAs(("plots/MCvsMC/"+ name +"_inclusiveVSbinned_postEE_All.png").c_str());  /// W boosted
-  c_rate->SaveAs(("plots/MCvsMC/"+ name +"_Woffshell_LOvsNLO_Jun24-kfact.png").c_str()); /// W offshell
+  c_rate->SaveAs(("plots/MCvsMC/"+ name +"_Woffshell_LOvsNLO_FinalOct24-kfact.png").c_str()); /// W offshell
 
   /// Save k-factors ///
   //for(int i = 0; i < rateA->GetNbinsX(); i++){
@@ -212,7 +212,7 @@ void MCtoMCcomparison(){
   //compare("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/Wboost_comparison_postEE_All/root/","lhe_mT__pg_inclusiveVShtbinned.root","lhe m_{T}","lhe_mT");
 
   /// W onshell-offshell stitching ///
-  compare("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/MCI_LOvsNLO_Wbkg_Jun24-kfact/root/","lhe_Wmass_peak__pg_Wbkg_LOvsNLO_stitching.root","lhe m_{W}","lhe_mW");
+  compare("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/MCI_LOvsNLO_Wbkg_FinalOct24-kfact/root/","lhe_Wmass_peak__pg_Wbkg_LOvsNLO_stitching.root","lhe m_{W}","lhe_mW");
 }
 
 

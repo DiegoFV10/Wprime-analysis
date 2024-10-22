@@ -1,0 +1,39 @@
+Golden_JSON:
+    name: lumiFilterRDF
+    path: Wprime.Modules.lumiFilter
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+
+HLT Trigger path:
+    name: HLTpath
+    path: Wprime.Modules.HLTtrigger
+    parameters:
+        year: self.config.year
+
+W on-shell Stitching:
+    name: Wonshell_Overlap
+    path: Wprime.Modules.Wboson_Stitching
+    parameters:
+        isWjets: self.dataset.process.get_aux('isWjets', False)
+
+W boosted Stitching:
+    name: Wboosted_Overlap
+    path: Wprime.Modules.Wboson_Stitching
+    parameters:
+        isWboost: self.dataset.process.get_aux('isWboost', False)
+
+ECAL tower filter:
+    name: ECALTowerFilter
+    path: Wprime.Modules.METfilters
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+
+Single Muon + Electron Selection:
+    name: DileptonicCR
+    path: Wprime.Modules.TopControlRegion
+
+MET corrected by TuneP:
+    name: TunePcorrectedMET
+    path: Wprime.Modules.METcorrections

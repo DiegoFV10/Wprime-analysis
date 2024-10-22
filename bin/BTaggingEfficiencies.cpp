@@ -66,7 +66,8 @@ void computeEff(string histFile, string year, string period){
   std::map<std::string, TGraphAsymmErrors*> c_eff;
   std::map<std::string, TGraphAsymmErrors*> uds_eff;
 
-  std::vector<std::string> backgrounds = {"Wprime2000", "W_boson", "Top", "Z_boson", "DiBoson", "QCD", "background"};
+  //std::vector<std::string> backgrounds = {"Wprime2000", "W_boson", "Top", "Z_boson", "DiBoson", "QCD", "background"};
+  std::vector<std::string> backgrounds = {"background"};
   
   for(auto & elem: backgrounds){
     std::string bkg = elem;
@@ -81,11 +82,16 @@ void computeEff(string histFile, string year, string period){
     c_eff[bkg] = new TGraphAsymmErrors(c_btag_hist[bkg], c_hist[bkg]);
     uds_eff[bkg] = new TGraphAsymmErrors(uds_btag_hist[bkg], uds_hist[bkg]);
 
-    TString title = "#bf{CMS} #it{Simulation}                                       2022 preEE (13.6 TeV)";
-    TLatex* preliminary = new TLatex(0.12,0.91, title);
-    preliminary->SetNDC();
-    preliminary->SetTextFont(42);
-    preliminary->SetTextSize(0.039);
+    TString title1 = "#bf{CMS} #it{Simulation}";
+    TString title2 = year +" "+ period +" (13.6 TeV)";
+    TLatex* preliminary1 = new TLatex(0.12,0.91, title1);
+    preliminary1->SetNDC();
+    preliminary1->SetTextFont(42);
+    preliminary1->SetTextSize(0.039);
+    TLatex* preliminary2 = new TLatex(0.61,0.91, title2);
+    preliminary2->SetNDC();
+    preliminary2->SetTextFont(42);
+    preliminary2->SetTextSize(0.039);
     
     TCanvas* c_b = new TCanvas(("b_" + bkg).c_str(),"",600,500);
     c_b->cd();
@@ -96,9 +102,12 @@ void computeEff(string histFile, string year, string period){
     b_eff[bkg]->GetXaxis()->SetRangeUser(0, 1000);
     b_eff[bkg]->GetYaxis()->SetTitle("Efficiency");
     b_eff[bkg]->GetYaxis()->SetTitleOffset(1.3);
+    b_eff[bkg]->SetMaximum(0.75);
+    b_eff[bkg]->SetMinimum(0.50);
     b_eff[bkg]->SetLineWidth(2);
     b_eff[bkg]->Draw("AP");
-    preliminary->Draw();
+    preliminary1->Draw();
+    preliminary2->Draw();
 
     TCanvas* c_c = new TCanvas(("c_" + bkg).c_str(),"",600,500);
     c_c->cd();
@@ -109,9 +118,12 @@ void computeEff(string histFile, string year, string period){
     c_eff[bkg]->GetXaxis()->SetRangeUser(0, 1000);
     c_eff[bkg]->GetYaxis()->SetTitle("Efficiency");
     c_eff[bkg]->GetYaxis()->SetTitleOffset(1.3);
+    c_eff[bkg]->SetMaximum(0.065);
+    c_eff[bkg]->SetMinimum(0.02);
     c_eff[bkg]->SetLineWidth(2);
     c_eff[bkg]->Draw("AP");
-    preliminary->Draw();
+    preliminary1->Draw();
+    preliminary2->Draw();
     
     TCanvas* c_uds = new TCanvas(("uds_" + bkg).c_str(),"",600,500);
     c_uds->cd();
@@ -124,8 +136,9 @@ void computeEff(string histFile, string year, string period){
     uds_eff[bkg]->GetYaxis()->SetTitleOffset(1.3);
     uds_eff[bkg]->SetLineWidth(2);
     uds_eff[bkg]->Draw("AP");
-    preliminary->Draw();
-
+    preliminary1->Draw();
+    preliminary2->Draw();
+    
     /// Save plots ///
     c_b->SaveAs(("plots/BTagEff/"+ bkg +"_b-eff_"+ year + period +".png").c_str());
     c_c->SaveAs(("plots/BTagEff/"+ bkg +"_c-eff_"+ year + period +".png").c_str());
@@ -157,10 +170,10 @@ void computeEff(string histFile, string year, string period){
 void BTaggingEfficiencies(){
 
   computeEff("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/BTagHist_2022preEE_v2_NoNorm/root/", "2022", "preEE");
-  //computeEff("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/BTagHist_2022postEE_v2_NoNorm/root/", "2022", "postEE");
+  computeEff("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/BTagHist_2022postEE_v2_NoNorm/root/", "2022", "postEE");
   
-  //computeEff("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/BTagHist_2023preBPix_v2_NoNorm/root/", "2023", "preBPix");
-  //computeEff("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/BTagHist_2023postBPix_v2_NoNorm/root/", "2023", "postBPix");
+  computeEff("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/BTagHist_2023preBPix_v2_NoNorm/root/", "2023", "preBPix");
+  computeEff("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/BTagHist_2023postBPix_v2_NoNorm/root/", "2023", "postBPix");
   
 }
 
