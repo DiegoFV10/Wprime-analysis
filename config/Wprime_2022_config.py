@@ -3162,8 +3162,35 @@ class Config(base_config):
                 x_title=Label("b-tagged light jet p_{T}"),
                 units="GeV"),
         ]
+
+        #### Features for Top Control Regions ####
+        
+        features_TopCR = [
             
-        return ObjectCollection(features_kinsel)
+            Feature("muon_eta", "Muon_eta.at(goodMuIdx)", binning=(50, -2.4, 2.4),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("#mu #eta")),
+
+            Feature("muon_phi", "Muon_phi.at(goodMuIdx)", binning=(50, -math.pi, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("#mu #phi"),
+                units="rad"),
+
+            Feature("CorrNjets", "nGoodJets_corr", binning=(8, 0, 8),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("Njets")),
+
+            Feature("CorrJets_btagScore", "Jet_btagDeepFlavB", binning=(50, 0, 1),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("jet DeepJet score")),
+
+            Feature("CorrJet1_btagScore", "Jet_btagDeepFlavB.at(goodJets_corr.at(0))", binning=(50, 0, 1),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) ) > 50.0",
+                x_title=Label("leading jet DeepJet score")),
+
+        ]
+            
+        return ObjectCollection(features_TopCR)
 
     def add_versions(self):
         versions = {}

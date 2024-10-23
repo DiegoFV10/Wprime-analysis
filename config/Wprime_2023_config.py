@@ -2737,7 +2737,29 @@ class Config(base_config):
                 units="GeV"),
         ]
 
-        return ObjectCollection(features_kinsel)
+        #### Features for Top Control Regions ####
+        
+        features_TopCR = [
+            
+            Feature("muon_eta", "Muon_eta.at(goodMuIdx)", binning=(50, -2.4, 2.4),
+                x_title=Label("#mu #eta")),
+
+            Feature("muon_phi", "Muon_phi.at(goodMuIdx)", binning=(50, -math.pi, math.pi),
+                x_title=Label("#mu #phi"),
+                units="rad"),
+
+            Feature("CorrNjets", "nGoodJets_corr", binning=(8, 0, 8),
+                x_title=Label("Njets")),
+
+            Feature("CorrJets_btagScore", "Jet_btagDeepFlavB", binning=(50, 0, 1),
+                x_title=Label("jet DeepJet score")),
+
+            Feature("CorrJet1_btagScore", "Jet_btagDeepFlavB.at(goodJets_corr.at(0))", binning=(50, 0, 1),
+                x_title=Label("leading jet DeepJet score")),
+
+        ]
+        
+        return ObjectCollection(features_TopCR)
 
     def add_versions(self):
         versions = {}
