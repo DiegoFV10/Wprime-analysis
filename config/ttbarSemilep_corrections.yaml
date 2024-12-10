@@ -16,6 +16,10 @@ Type-I MET correction:
         runPeriod: self.dataset.runPeriod
         runEra: self.dataset.runEra
 
+MET corrected by TuneP:
+    name: TunePcorrectedMET
+    path: Wprime.Modules.METcorrections
+
 MET filters:
     name: METfilter
     path: Wprime.Modules.METfilters
@@ -28,10 +32,6 @@ Jet veto maps:
     parameters:
         year: self.config.year
         runPeriod: self.dataset.runPeriod
-
-deltaPhi(muon, MET):
-    name: deltaPhi
-    path: Wprime.Modules.plotUtils
 
 Jet cleanup:
     name: jetCleanup

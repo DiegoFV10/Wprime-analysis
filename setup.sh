@@ -70,7 +70,7 @@ action() {
 	[ -z "$CMT_STORE_EOS" ] && export CMT_STORE_EOS="/pnfs/ciemat.es/data/cms/store/user/diegof/cmt"
     elif [ -n "$CMT_CERN_USER" ]; then
 	[ -z "$CMT_STORE_EOS" ] && export CMT_STORE_EOS="/eos/user/${CMT_CERN_USER:0:1}/$CMT_CERN_USER/cmt"
-	#[ -z "$CMT_STORE_EOS_MUOPOG" ] && export CMT_STORE_EOS_MUOPOG="/eos/cms/store/group/phys_muon/diegof/cmt" # UNCOMMENT FOR MUOPOG
+	[ -z "$CMT_STORE_EOS_MUOPOG" ] && export CMT_STORE_EOS_MUOPOG="/eos/cms/store/group/phys_muon/diegof/cmt" # UNCOMMENT FOR MUOPOG
     fi
     [ -z "$CMT_STORE" ] && export CMT_STORE="$CMT_STORE_EOS"
     [ -z "$CMT_JOB_DIR" ] && export CMT_JOB_DIR="$CMT_DATA/jobs"

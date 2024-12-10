@@ -16,6 +16,10 @@ Type-I MET correction:
         runPeriod: self.dataset.runPeriod
         runEra: self.dataset.runEra
 
+TuneP MET correction:
+    name: TunePcorrectedMET
+    path: Wprime.Modules.METcorrections
+
 MET filters:
     name: METfilter
     path: Wprime.Modules.METfilters

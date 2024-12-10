@@ -1,0 +1,28 @@
+# channels
+imax *
+# backgrounds
+jmax *
+# nuisance
+kmax *
+---------------
+shapes * * histograms_mW_2000_electrons.root $PROCESS $PROCESS_$SYSTEMATIC
+---------------
+bin channel
+observation 29919.0
+---------------
+bin    channel channel channel channel channel channel
+process Signal W Diboson DY top QCD
+process 0 1 2 3 4 5
+rate    26.6517738445  22623.957740 471.740337 275.486840 4710.002103 1653.398931
+---------------
+kfactor_ shape 1 1 0 0 1 0
+heep_ shape 1 1 1 1 1 1
+trigger_ shape 1 1 1 1 1 1
+pileup_ shape 1 1 1 1 1 1
+xs_vv lnN 0 0 1.040000 0 0 0
+xs_tt lnN 0 0 0 0 1.050000 0
+xs_qcd lnN 0 0 0 0 0 1.050000
+xs_dy lnN 0 0 0 1.020000 0 0
+xs_w lnN 0 1.050000 0 0 0 0
+lumi2022 lnN 1.014000 1.014000 1.014000 1.014000 1.014000 1.014000
+* autoMCStats 10

@@ -1,0 +1,27 @@
+Combination of muon_2022=2022/datacard_Wprime6000.txt  muon_2023=2023/datacard_Wprime6000.txt
+imax 2 number of bins
+jmax 5 number of processes minus 1
+kmax 7 number of nuisance parameters
+----------------------------------------------------------------------------------------------------------------------------------
+shapes *          muon_2022  /eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/SSMlimitPrelim_mT300_SignalNorm/root/mT__pg_SSMlimits2022.root histograms/$PROCESS
+shapes data_obs   muon_2022  /eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/SSMlimitPrelim_mT300_SignalNorm/root/mT__pg_SSMlimits2022.root histograms/ReRecoData2022
+shapes *          muon_2023  /eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/SSMlimitPrelim_mT300_SignalNorm/root/mT__pg_SSMlimits2023.root histograms/$PROCESS
+shapes data_obs   muon_2023  /eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/SSMlimitPrelim_mT300_SignalNorm/root/mT__pg_SSMlimits2023.root histograms/PromptData2023
+----------------------------------------------------------------------------------------------------------------------------------
+bin          muon_2022  muon_2023
+observation  31269      25781    
+----------------------------------------------------------------------------------------------------------------------------------
+bin                             muon_2022   muon_2022   muon_2022   muon_2022   muon_2022   muon_2022   muon_2023   muon_2023   muon_2023   muon_2023   muon_2023   muon_2023 
+process                         Wprime6000  W_boson     Top         Z_boson     DiBoson     QCD         Wprime6000  W_boson     Top         Z_boson     DiBoson     QCD       
+process                         0           1           2           3           4           5           0           1           2           3           4           5         
+rate                            19.261      24656.1     3644.5      1476        1111.5      297.61      15.422      19507.9     2793.8      1222.4      889.33      212.82    
+----------------------------------------------------------------------------------------------------------------------------------
+lumi2022                lnN     1.014       1.014       1.014       1.014       1.014       1.014       -           -           -           -           -           -         
+lumi2023                lnN     -           -           -           -           -           -           1.014       1.014       1.014       1.014       1.014       1.014     
+xsec_QCD                lnN     -           -           -           -           -           1.05        -           -           -           -           -           1.05      
+xsec_Top                lnN     -           -           1.05        -           -           -           -           -           1.05        -           -           -         
+xsec_VV                 lnN     -           -           -           -           1.04        -           -           -           -           -           1.04        -         
+xsec_W                  lnN     -           1.05        -           -           -           -           -           1.05        -           -           -           -         
+xsec_Z                  lnN     -           -           -           1.02        -           -           -           -           -           1.02        -           -         
+muon_2022 autoMCStats 0 0 1
+muon_2023 autoMCStats 0 0 1
