@@ -3067,7 +3067,7 @@ class Config(base_config):
                 units="GeV"),
         ]
         
-        return ObjectCollection(mT_limit)
+        return ObjectCollection(features_kinsel)
 
     def add_versions(self):
         versions = {}

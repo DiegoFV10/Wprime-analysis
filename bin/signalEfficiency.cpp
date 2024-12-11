@@ -105,8 +105,8 @@ void computeEff(string dirname, string rootfile, string histName, string year){
   signalEff->SetMaximum(1.0);
   signalEff->SetMarkerStyle(20);
   signalEff->SetMarkerSize(0.4);
-  signalEff->SetMarkerColor(kAzure+1);
-  signalEff->SetLineColor(kAzure+1);
+  signalEff->SetMarkerColor(kBlue); // kAzure+1
+  signalEff->SetLineColor(kBlue);
   signalEff->Draw("AP");
 
   TLegend* leg = new TLegend(0.70, 0.80, 0.88, 0.85);
