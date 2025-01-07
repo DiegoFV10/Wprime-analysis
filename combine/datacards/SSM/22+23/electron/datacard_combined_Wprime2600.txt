@@ -1,10 +1,10 @@
-Combination of ele_2022=../../2022/electron/datacard_Wprime2600.txt  ele_2023=../../2023/electron/datacard_Wprime2600.txt
+Combination of ele_2022=/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/datacards/SSM/2022/electron/datacard_Wprime2600.txt  ele_2023=/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/datacards/SSM/2023/electron/datacard_Wprime2600.txt
 imax 2 number of bins
 jmax 5 number of processes minus 1
 kmax 9 number of nuisance parameters
 ----------------------------------------------------------------------------------------------------------------------------------
-shapes *         ele_2022  ../../2022/electron/histograms_mW_2600_lumi_34.653.root $PROCESS $PROCESS_$SYSTEMATIC
-shapes *         ele_2023  ../../2023/electron/histograms_mW_2600_lumi_27.862.root $PROCESS $PROCESS_$SYSTEMATIC
+shapes *         ele_2022  /afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/datacards/SSM/2022/electron/histograms_mW_2600_lumi_34.653.root $PROCESS $PROCESS_$SYSTEMATIC
+shapes *         ele_2023  /afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/datacards/SSM/2023/electron/histograms_mW_2600_lumi_27.862.root $PROCESS $PROCESS_$SYSTEMATIC
 ----------------------------------------------------------------------------------------------------------------------------------
 bin          ele_2022  ele_2023
 observation  47682     38864   
@@ -14,11 +14,11 @@ process                           Wprime2600     W_boson        DiBoson        Z
 process                           0              1              2              3              4              5              0              1              2              3              4              5            
 rate                              25.96084821    35260.128134   1187.000093    294.828657     7092.025441    1336.100493    20.9195751725  27462.411168   1024.079881    157.977731     5640.070939    1406.673318  
 ----------------------------------------------------------------------------------------------------------------------------------
-eleSF                   shape     1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0          
-heep                    shape     1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0          
+eleSF_                  shape     1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0          
+heep_                   shape     1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0          
 lumi2022                lnN       1.014          1.014          1.014          1.014          1.014          1.014          -              -              -              -              -              -            
 lumi2023                lnN       -              -              -              -              -              -              1.014          1.014          1.014          1.014          1.014          1.014        
-plieup                  shape     1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0          
+plieup_                 shape     1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0          
 xsec_QCD                lnN       -              -              -              -              -              1.05           -              -              -              -              -              1.05         
 xsec_VV                 lnN       -              -              1.04           -              -              -              -              -              1.04           -              -              -            
 xsec_W                  lnN       -              1.05           -              -              -              -              -              1.05           -              -              -              -            

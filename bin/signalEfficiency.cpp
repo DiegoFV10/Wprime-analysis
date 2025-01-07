@@ -36,7 +36,7 @@
 namespace fs = std::filesystem;
 
 
-void computeEff(string dirname, string rootfile, string histName, string year){
+void computeEff(string dirname, string rootfile, string histName, string year, bool combine = false){
     
   gStyle->SetOptStat("e");
   gStyle->SetStatX(0.899514);
@@ -55,6 +55,8 @@ void computeEff(string dirname, string rootfile, string histName, string year){
   std::vector<double> eff_values;
   std::vector<double> mass_values;
   std::vector<double> eff_errors;
+
+  std::vector<double> eff_electron = {0.0, 0.448, 0.605, 0.701, 0.742, 0.751, 0.752, 0.742, 0.725, 0.705, 0.671, 0.654, 0.628, 0.616, 0.599};
   
   for(size_t i = 0; i < masses.size(); i++){
 
@@ -94,7 +96,8 @@ void computeEff(string dirname, string rootfile, string histName, string year){
 
   /// Draw the Efficiency Graph ///
   TGraphErrors *signalEff = new TGraphErrors(mass_values.size(), &mass_values[0], &eff_values[0], 0, &eff_errors[0]);
-
+  TGraphErrors *electronEff = new TGraphErrors(mass_values.size(), &mass_values[0], &eff_electron[0], 0, &eff_errors[0]);
+  
   TCanvas *cEff = new TCanvas("cEff", "", 800, 600);
   signalEff->SetTitle("");
   signalEff->GetXaxis()->SetTitle("M_{W'} (GeV)");
@@ -108,9 +111,22 @@ void computeEff(string dirname, string rootfile, string histName, string year){
   signalEff->SetMarkerColor(kBlue); // kAzure+1
   signalEff->SetLineColor(kBlue);
   signalEff->Draw("AP");
+  if(combine){
+    electronEff->SetMarkerStyle(20);
+    electronEff->SetMarkerSize(0.4);
+    electronEff->SetMarkerColor(kMagenta+1);
+    electronEff->SetLineColor(kMagenta+1);
+    electronEff->Draw("P SAME");
+  }
 
-  TLegend* leg = new TLegend(0.70, 0.80, 0.88, 0.85);
+  float yleg = 0.80;
+  if(combine)
+    yleg = 0.75;
+
+  TLegend* leg = new TLegend(0.70, yleg, 0.88, 0.85);
   leg->AddEntry(signalEff, "W' #rightarrow #mu#nu", "lep");
+  if(combine)
+    leg->AddEntry(electronEff, "W' #rightarrow e#nu", "lep");
   leg->SetBorderSize(0);
   leg->Draw();
 
@@ -131,15 +147,19 @@ void computeEff(string dirname, string rootfile, string histName, string year){
   preliminary2->Draw();
 
   // Save plot
-  cEff->SaveAs(("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/bin/plots/SignalEff/SignalEfficiency"+ year +".png").c_str());
-  
+  if(combine)
+    cEff->SaveAs(("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/bin/plots/SignalEff/SignalEfficiency"+ year +"_EleMu.png").c_str());
+  else
+    cEff->SaveAs(("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/bin/plots/SignalEff/SignalEfficiency"+ year +".png").c_str());
 }
 
 void signalEfficiency(){
 
   computeEff("/eos/user/d/diegof/cmt/PrePlot/Wprime_2022_config/", "/cat_preselection/kinSelection_NewColors_T1MET/data_0.root", "muon_eta", "2022");
   computeEff("/eos/user/d/diegof/cmt/PrePlot/Wprime_2023_config/", "/cat_preselection/kinSelection_NewColors_T1MET/data_0.root", "muon_eta", "2023");
-  
+
+  // Plot in same canvas muon & electron
+  computeEff("/eos/user/d/diegof/cmt/PrePlot/Wprime_2022_config/", "/cat_preselection/kinSelection_NewColors_T1MET/data_0.root", "muon_eta", "2022", true);
 }
 
 

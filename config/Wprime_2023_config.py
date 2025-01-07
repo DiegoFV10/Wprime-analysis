@@ -458,8 +458,8 @@ class Config(base_config):
                 process=self.processes.get("Wprime2000_preBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                #xs=0.189790,), # From AN-21-096, all of them (NNLO)
-                xs=0.001,), # For datacards
+                xs=0.189790,), # From AN-21-096, all of them (NNLO)
+                #xs=0.001,), # For datacards
 
             Dataset("Wprime2000_postBPix",
                 dataset="/WprimeToMuNu_M-2000_kR-1p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
@@ -468,8 +468,8 @@ class Config(base_config):
                 process=self.processes.get("Wprime2000_postBPix"),
                 #prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postBPix",
-                #xs=0.189790,
-                xs=0.001,
+                xs=0.189790,
+                #xs=0.001,
                 tags=["postBPix"]),
           
             Dataset("Wprime2600",
@@ -521,8 +521,8 @@ class Config(base_config):
                 process=self.processes.get("Wprime3600_preBPix"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                #xs=0.006262,),
-                xs=0.001,), # For datacards
+                xs=0.006262,),
+                #xs=0.001,), # For datacards
 
             Dataset("Wprime3600_postBPix",
                 dataset="/WprimeToMuNu_M-3600_kR-1p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
@@ -531,8 +531,8 @@ class Config(base_config):
                 process=self.processes.get("Wprime3600_postBPix"),
                 #prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postBPix",
-                #xs=0.006262,
-                xs=0.001,
+                xs=0.006262,
+                #xs=0.001,
                 tags=["postBPix"]),
            
             Dataset("Wprime4000",
@@ -605,8 +605,8 @@ class Config(base_config):
                 process=self.processes.get("Wprime5600_preBPix"),
                 #prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preBPix",
-                #xs=0.000411,),
-                xs=0.001,), # For datacards
+                xs=0.000411,),
+                #xs=0.001,), # For datacards
 
             Dataset("Wprime5600_postBPix",
                 dataset="/WprimeToMuNu_M-5600_kR-1p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
@@ -615,8 +615,8 @@ class Config(base_config):
                 process=self.processes.get("Wprime5600_postBPix"),
                 #prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postBPix",
-                #xs=0.000411,
-                xs=0.001,
+                xs=0.000411,
+                #xs=0.001,
                 tags=["postBPix"]),
 
             Dataset("Wprime6000",
@@ -3067,7 +3067,7 @@ class Config(base_config):
                 units="GeV"),
         ]
         
-        return ObjectCollection(features_kinsel)
+        return ObjectCollection(features_presel)
 
     def add_versions(self):
         versions = {}

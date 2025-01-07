@@ -59,9 +59,9 @@ bool readLimits(const std::string& filename, double& expected, double& low68, do
     return true;
 }
 
-void plotLimits(string output_dir, string model, string year){
+void plotLimits(string output_dir, string model, string year, string channel=""){
 
-  string limit_path = output_dir + model +"/"+ year;
+  string limit_path = output_dir + model +"/"+ year +"/"+ channel;
   string xsec_fileName = "/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/SSMCrossSections.txt";
 
   /* Part I: Read the theoretical cross sections */
@@ -97,26 +97,40 @@ void plotLimits(string output_dir, string model, string year){
   std::vector<double> expected_limits;
   std::vector<double> low68_limits, up68_limits;
   std::vector<double> low95_limits, up95_limits;
-    
+
+  std::vector<std::pair<double, std::string>> mass_file_pairs;
+
   for (const auto& entry : fs::directory_iterator(limit_path)) {
     std::string limit_file = entry.path().filename().string();
     if (limit_file.find("Wprime") != std::string::npos) {
       // Read mass value from the file name
       std::string mass_str = limit_file.substr(6, limit_file.find("_results") - 6);
       double mass_val = std::stod(mass_str);
-      masses_limits.push_back(mass_val);
-
-      // Read limits from each file
-      double expected, low68, up68, low95, up95;
-      if (readLimits(entry.path().string(), expected, low68, up68, low95, up95)) {
-	expected_limits.push_back(expected);
-	low68_limits.push_back(low68);
-	up68_limits.push_back(up68);
-	low95_limits.push_back(low95);
-	up95_limits.push_back(up95);
-      }
+      mass_file_pairs.push_back(std::make_pair(mass_val, entry.path().string()));
     }
   }
+  // Sort the mass vector
+  std::sort(mass_file_pairs.begin(), mass_file_pairs.end(), 
+	    [](const std::pair<double, std::string>& a, const std::pair<double, std::string>& b) {
+              return a.first < b.first;
+	    });
+
+  for (const auto& mass_file : mass_file_pairs) {
+    double mass_val = mass_file.first;
+    const std::string& file_path = mass_file.second;
+
+    masses_limits.push_back(mass_val);
+
+    // Read limits from each file
+    double expected, low68, up68, low95, up95;
+    if (readLimits(file_path, expected, low68, up68, low95, up95)) {
+      expected_limits.push_back(expected);
+      low68_limits.push_back(low68);
+      up68_limits.push_back(up68);
+      low95_limits.push_back(low95);
+      up95_limits.push_back(up95);
+    }
+  }  
 
   std::vector<double> errYlow68, errYup68, errYlow95, errYup95;
   for (size_t i = 0; i < masses_limits.size(); ++i) {
@@ -187,10 +201,15 @@ void plotLimits(string output_dir, string model, string year){
   leg2->SetBorderSize(0);
   leg2->Draw();
 
-  TString channel;
-  channel = "#bf{#mu + p_{T}^{miss}}";
+  TString channel_label;
+  if(channel == "muon")
+    channel_label = "#bf{#mu + p_{T}^{miss}}";
+  else if(channel == "ele+mu")
+    channel_label = "#bf{e/#mu + p_{T}^{miss}}";
+  else
+    channel_label = "#bf{#mu + p_{T}^{miss}}";
 
-  TLatex* ch = new TLatex(0.22, 0.72, channel);
+  TLatex* ch = new TLatex(0.22, 0.72, channel_label);
   ch->SetNDC();
   ch->SetTextFont(42);
   ch->SetTextSize(0.038);
@@ -225,15 +244,17 @@ void plotLimits(string output_dir, string model, string year){
   preliminary2->Draw();
 
   // Save limit plot
-  string plotName = "SSMlimit_muon_";
-  //SSMcanvas->SaveAs(("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/plots/" + model +"/"+ year +"/"+ plotName + year + ".png").c_str());
+  //SSMcanvas->SaveAs(("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/plots/" + model +"/"+ year +"/SSMlimit_"+ channel +"_"+ year + ".png").c_str());
   
 }
 
 void limitCurve(){
 
-  plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022");
-  plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2023");
-  plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "22+23");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2023");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "22+23", "muon");
+
+  // Electron & muon combined
+  plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "22+23", "ele+mu");
   
 }

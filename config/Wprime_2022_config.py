@@ -544,8 +544,8 @@ class Config(base_config):
                 process=self.processes.get("Wprime2000_preEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                #xs=0.18979,), # From AN-21-096, all of them (NNLO)
-                xs=0.001,), # For datacards
+                xs=0.18979,), # From AN-21-096, all of them (NNLO)
+                #xs=0.001,), # For datacards
 
             Dataset("Wprime2000_postEE",
                 dataset="/WprimetoMuNu_M-2000_kR-1p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
@@ -554,8 +554,8 @@ class Config(base_config):
                 process=self.processes.get("Wprime2000_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                #xs=0.18979,
-                xs=0.001,
+                xs=0.18979,
+                #xs=0.001,
                 tags=["postEE"]),
           
             Dataset("Wprime2600",
@@ -607,8 +607,8 @@ class Config(base_config):
                 process=self.processes.get("Wprime3600_preEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                #xs=0.006262,),
-                xs=0.001,), # For datacards
+                xs=0.006262,),
+                #xs=0.001,), # For datacards
 
             Dataset("Wprime3600_postEE",
                 dataset="/WprimetoMuNu_M-3600_kR-1p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
@@ -617,8 +617,8 @@ class Config(base_config):
                 process=self.processes.get("Wprime3600_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                #xs=0.006262,
-                xs=0.001,
+                xs=0.006262,
+                #xs=0.001,
                 tags=["postEE"]),
             
             Dataset("Wprime4000",
@@ -691,8 +691,8 @@ class Config(base_config):
                 process=self.processes.get("Wprime5600_preEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                #xs=0.000411,),
-                xs=0.001,), # For datacards
+                xs=0.000411,),
+                #xs=0.001,), # For datacards
 
             Dataset("Wprime5600_postEE",
                 dataset="/WprimetoMuNu_M-5600_kR-1p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
@@ -701,8 +701,8 @@ class Config(base_config):
                 process=self.processes.get("Wprime5600_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                #xs=0.000411,
-                xs=0.001,
+                xs=0.000411,
+                #xs=0.001,
                 tags=["postEE"]),
 
             Dataset("Wprime6000",
@@ -3502,12 +3502,50 @@ class Config(base_config):
         
         mT_limit = [
 
-            Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) )", binning=(67, 300, 7000),
+            Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )", binning=(67, 300, 7000),
+                systematics=["MET_typeI"],
                 x_title=Label("m_{T}"),
                 units="GeV"),
+
+            ## Weights for systematics ##
+            Feature("puWeight", "puWeight", binning=(20, 0, 2),
+                systematics=["pileup"],
+                x_title=Label("puWeight")),
+
+            Feature("mu_recoSF_weight", "mu_recoSF_weight", binning=(20, 0, 2),
+                systematics=["muRecoSF"],
+                x_title=Label("mu_recoSF_weight")),
+            
+            Feature("mu_idSF_weight", "mu_idSF_weight", binning=(20, 0, 2),
+                systematics=["muIdSF"],
+                x_title=Label("mu_idSF_weight")),
+            
+            Feature("mu_isoSF_weight", "mu_isoSF_weight", binning=(20, 0, 2),
+                systematics=["muIsoSF"],
+                x_title=Label("mu_isoSF_weight")),
+            
+            Feature("mu_hltSF_weight", "mu_hltSF_weight", binning=(20, 0, 2),
+                systematics=["muTrigSF"],
+                x_title=Label("mu_hltSF_weight")),
+
+            Feature("btag_weight", "btag_weight", binning=(20, 0, 2),
+                systematics=["btagSF"],
+                x_title=Label("btag_weight")),
+
+            ## Features for non-weight systematics ##
+            Feature("CorrMET_pt", "CorrMET_pt", binning=(50, 35, 4000),
+                systematics=["MET_typeI"],
+                x_title=Label("p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("CorrMET_phi", "CorrMET_phi", binning=(50, -math.pi, math.pi),
+                systematics=["MET_typeI"],
+                x_title=Label("p_{T}^{miss} #phi"),
+                units="rad"),
+
         ]
             
-        return ObjectCollection(mT_limit)
+        return ObjectCollection(features_presel)
 
     def add_versions(self):
         versions = {}
@@ -3525,7 +3563,16 @@ class Config(base_config):
         return weights
 
     def add_systematics(self):
-        systematics = []
+        systematics = [
+            Systematic("pileup", ""),
+            Systematic("muRecoSF", ""),
+            Systematic("muIdSF", ""),
+            Systematic("muIsoSF", ""),
+            Systematic("muTrigSF", ""),
+            Systematic("btagSF", ""),
+
+            Systematic("MET_typeI",""),
+        ]
 
         return ObjectCollection(systematics)
 
