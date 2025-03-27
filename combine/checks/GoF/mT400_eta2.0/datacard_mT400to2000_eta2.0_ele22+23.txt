@@ -1,0 +1,35 @@
+Combination of ele22=datacard_mT400to2000_eta2.0_ele22.txt  ele23=datacard_mT400to2000_eta2.0_ele23.txt
+imax 2 number of bins
+jmax 5 number of processes minus 1
+kmax 17 number of nuisance parameters
+----------------------------------------------------------------------------------------------------------------------------------
+shapes *      ele22  histograms_mW_2000_lumi_34.652.root $PROCESS $PROCESS_$SYSTEMATIC
+shapes *      ele23  histograms_mW_2000_lumi_27.245.root $PROCESS $PROCESS_$SYSTEMATIC
+----------------------------------------------------------------------------------------------------------------------------------
+bin          ele22  ele23
+observation  8796   6989 
+----------------------------------------------------------------------------------------------------------------------------------
+bin                                           ele22          ele22          ele22          ele22          ele22          ele22          ele23          ele23          ele23          ele23          ele23          ele23        
+process                                       Wprime2000     W_boson        DiBoson        Z_boson        Top            QCD            Wprime2000     W_boson        DiBoson        Z_boson        Top            QCD          
+process                                       0              1              2              3              4              5              0              1              2              3              4              5            
+rate                                          23.4431818058  7441.76437     263.77526      54.561878      1138.93992     43.326833      18.437031352   5756.726087    234.540552     28.639419      891.722828     30.31726     
+----------------------------------------------------------------------------------------------------------------------------------
+CMS_EXO24021_W_kfactor_   shape               -              1.0            -              -              -              -              -              1.0            -              -              -              -            
+CMS_EXO24021_Wprime_PDF+as   lnN              1.045          -              -              -              -              -              1.045          -              -              -              -              -            
+CMS_eff_e_id_2022_      shape                 1.0            1.0            1.0            1.0            1.0            1.0            -              -              -              -              -              -            
+CMS_eff_e_id_2023_      shape                 -              -              -              -              -              -              1.0            1.0            1.0            1.0            1.0            1.0          
+CMS_eff_e_trigger_2022_   shape               1.0            1.0            1.0            1.0            1.0            1.0            -              -              -              -              -              -            
+CMS_eff_e_trigger_2023_   shape               -              -              -              -              -              -              1.0            1.0            1.0            1.0            1.0            1.0          
+CMS_pileup_             shape                 1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0            1.0          
+CMS_scale_met_2022_     shape                 1.0            1.0            1.0            1.0            1.0            1.0            -              -              -              -              -              -            
+CMS_scale_met_2023_     shape                 -              -              -              -              -              -              1.0            1.0            1.0            1.0            1.0            1.0          
+lumi_13p6TeV_2022       lnN                   1.014          1.014          1.014          1.014          1.014          1.014          -              -              -              -              -              -            
+lumi_13p6TeV_2023       lnN                   -              -              -              -              -              -              1.013          1.013          1.013          1.013          1.013          1.013        
+pdf_qqbar_              shape                 -              1.0            1.0            1.0            1.0            1.0            -              1.0            1.0            1.0            1.0            1.0          
+qcd_scale_              shape                 -              1.0            1.0            1.0            1.0            1.0            -              1.0            1.0            1.0            1.0            1.0          
+xsec_QCD                lnN                   -              -              -              -              -              1.5            -              -              -              -              -              1.5          
+xsec_VV                 lnN                   -              -              1.04           -              -              -              -              -              1.04           -              -              -            
+xsec_Z                  lnN                   -              -              -              1.02           -              -              -              -              -              1.02           -              -            
+xsec_ttbar              lnN                   -              -              -              -              1.05           -              -              -              -              -              1.05           -            
+ele22 autoMCStats 10 0 1
+ele23 autoMCStats 10 0 1

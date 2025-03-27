@@ -70,7 +70,7 @@ action() {
 	[ -z "$CMT_STORE_EOS" ] && export CMT_STORE_EOS="/pnfs/ciemat.es/data/cms/store/user/diegof/cmt"
     elif [ -n "$CMT_CERN_USER" ]; then
 	[ -z "$CMT_STORE_EOS" ] && export CMT_STORE_EOS="/eos/user/${CMT_CERN_USER:0:1}/$CMT_CERN_USER/cmt"
-	[ -z "$CMT_STORE_EOS_MUOPOG" ] && export CMT_STORE_EOS_MUOPOG="/eos/cms/store/group/phys_muon/diegof/cmt" # UNCOMMENT FOR MUOPOG
+	#[ -z "$CMT_STORE_EOS_MUOPOG" ] && export CMT_STORE_EOS_MUOPOG="/eos/cms/store/group/phys_muon/diegof/cmt" # UNCOMMENT FOR MUOPOG
     fi
     [ -z "$CMT_STORE" ] && export CMT_STORE="$CMT_STORE_EOS"
     [ -z "$CMT_JOB_DIR" ] && export CMT_JOB_DIR="$CMT_DATA/jobs"
@@ -259,13 +259,13 @@ action() {
              
         export COMBINE_PATH="HiggsAnalysis/CombinedLimit"
         if [ ! -d "$COMBINE_PATH" ]; then
-          git clone https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit.git -b v9.1.0 HiggsAnalysis/CombinedLimit
+          git clone https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit.git -b v10.0.2 HiggsAnalysis/CombinedLimit
           compile="1"
         fi
 
         export COMBINEHARVESTER_PATH="CombineHarvester"
         if [ ! -d "$COMBINEHARVESTER_PATH" ]; then
-          git clone https://github.com/cms-analysis/CombineHarvester -b v2.1.0
+          git clone https://github.com/cms-analysis/CombineHarvester -b v3.0.0
           cd CombineHarvester
           rm -r CombinePdfs
           rm CombineTools/bin/*

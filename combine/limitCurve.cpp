@@ -22,6 +22,7 @@
 #include <assert.h>
 #include <TMVA/Reader.h>
 #include <algorithm>
+#include <regex>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -48,7 +49,7 @@
 namespace fs = std::filesystem;
 
 /* Routine to read limits from the output of a datacard for a given mass */
-bool readLimits(const std::string& filename, double& expected, double& low68, double& up68, double& low95, double& up95) {
+bool readLimitsOLD(const std::string& filename, double& expected, double& low68, double& up68, double& low95, double& up95) {
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error opening the file " << filename << std::endl;
@@ -59,9 +60,74 @@ bool readLimits(const std::string& filename, double& expected, double& low68, do
     return true;
 }
 
-void plotLimits(string output_dir, string model, string year, string channel=""){
+bool readLimits(const std::string& filename, double& medianLimit, double& low68, double& high68, double& low95, double& high95) {
+    std::ifstream infile(filename);
 
-  string limit_path = output_dir + model +"/"+ year +"/"+ channel;
+    if (!infile) {
+        std::cerr << "Error al abrir el archivo: " << filename << std::endl;
+        return false;
+    }
+
+    std::string line;
+
+    std::regex medianRegex(R"(median expected limit: r < ([0-9]*\.[0-9]+))");
+    std::regex band68Regex(R"(68% expected band : ([0-9]*\.[0-9]+) < r < ([0-9]*\.[0-9]+))");
+    std::regex band95Regex(R"(95% expected band : ([0-9]*\.[0-9]+) < r < ([0-9]*\.[0-9]+))");
+
+    while (std::getline(infile, line)) {
+        std::smatch match;
+
+        // Find median expected limit
+        if (std::regex_search(line, match, medianRegex)) {
+            medianLimit = std::stod(match[1]);
+        }
+
+        // Fin 68% expected band
+        if (std::regex_search(line, match, band68Regex)) {
+            low68 = std::stod(match[1]);
+            high68 = std::stod(match[2]);
+        }
+
+        // Find 95% expected band
+        if (std::regex_search(line, match, band95Regex)) {
+            low95 = std::stod(match[1]);
+            high95 = std::stod(match[2]);
+        }
+    }
+
+    infile.close();
+    return true;
+}
+
+/* For reading the observed limit */
+bool readObservedLimit(const std::string& fileName, double& observedLimit) {
+    std::ifstream infile(fileName);
+
+    if (!infile) {
+        std::cerr << "Error al abrir el archivo: " << fileName << std::endl;
+        return false;
+    }
+
+    std::string line;
+    std::regex observedRegex(R"(Limit: r < ([0-9]*\.[0-9]+))");
+
+    while (std::getline(infile, line)) {
+        std::smatch match;
+
+        if (std::regex_search(line, match, observedRegex)) {
+            observedLimit = std::stod(match[1]);
+            break;
+        }
+    }
+
+    infile.close();
+    return true;
+}
+
+
+void plotLimits(string output_dir, string model, string year, string channel="", string checkRegion="", bool observed = false){
+
+  string limit_path = output_dir + model +"/"+ year +"/"+ channel +"/"+ checkRegion;
   string xsec_fileName = "/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/SSMCrossSections.txt";
 
   /* Part I: Read the theoretical cross sections */
@@ -97,14 +163,16 @@ void plotLimits(string output_dir, string model, string year, string channel="")
   std::vector<double> expected_limits;
   std::vector<double> low68_limits, up68_limits;
   std::vector<double> low95_limits, up95_limits;
-
+  std::vector<double> observed_limits;
+  
   std::vector<std::pair<double, std::string>> mass_file_pairs;
 
   for (const auto& entry : fs::directory_iterator(limit_path)) {
     std::string limit_file = entry.path().filename().string();
     if (limit_file.find("Wprime") != std::string::npos) {
       // Read mass value from the file name
-      std::string mass_str = limit_file.substr(6, limit_file.find("_results") - 6);
+      //std::string mass_str = limit_file.substr(6, limit_file.find("_results") - 6);
+      std::string mass_str = limit_file.substr(6, limit_file.find('.') - 6);
       double mass_val = std::stod(mass_str);
       mass_file_pairs.push_back(std::make_pair(mass_val, entry.path().string()));
     }
@@ -121,7 +189,7 @@ void plotLimits(string output_dir, string model, string year, string channel="")
 
     masses_limits.push_back(mass_val);
 
-    // Read limits from each file
+    // Read expected limits from each file
     double expected, low68, up68, low95, up95;
     if (readLimits(file_path, expected, low68, up68, low95, up95)) {
       expected_limits.push_back(expected);
@@ -129,6 +197,19 @@ void plotLimits(string output_dir, string model, string year, string channel="")
       up68_limits.push_back(up68);
       low95_limits.push_back(low95);
       up95_limits.push_back(up95);
+    }
+
+    // Now read observed limit
+    if (observed){
+      std::string observed_file = "UnblindM" + std::to_string(static_cast<int>(mass_val)) + ".out";
+      std::string observed_file_path = limit_path + "/" + observed_file;
+
+      double observed;
+      if (readObservedLimit(observed_file_path, observed)) {
+	observed_limits.push_back(observed);
+      } else {
+	std::cerr << "No se pudo leer el límite observado para la masa: " << mass_val << std::endl;
+      }
     }
   }  
 
@@ -141,7 +222,7 @@ void plotLimits(string output_dir, string model, string year, string channel="")
   }
 
 
-  /* Part III: Draw the theoretical curve & expected limits  */
+  /* Part III: Draw the theoretical curve, expected limits and observed  */
 
   // Create the canvas
   TCanvas *SSMcanvas = new TCanvas("SSMcanvas", "", 800, 600);
@@ -176,6 +257,13 @@ void plotLimits(string output_dir, string model, string year, string channel="")
   expected_curve->SetLineColor(1);
   expected_curve->SetLineWidth(3);
   expected_curve->Draw("L SAME");
+
+  // Draw the observed curve
+  TGraph* observed_curve = new TGraph(masses_limits.size(), &masses_limits[0], &observed_limits[0]);
+  observed_curve->SetLineColor(kBlack);
+  observed_curve->SetLineStyle(1);      
+  observed_curve->SetLineWidth(2);      
+  observed_curve->Draw("L SAME");
   
   // Draw the theoretical curve with the PDF + alpha_s uncert. band
   TGraph *xsec_curve = new TGraph(masses.size(), &masses[0], &xsecs[0]);
@@ -194,12 +282,23 @@ void plotLimits(string output_dir, string model, string year, string channel="")
   leg1->SetBorderSize(0);
   leg1->Draw();
 
-  TLegend* leg2 = new TLegend(0.60, 0.60, 0.88, 0.75);
-  leg2->AddEntry(expected_curve, "Expected", "l");
-  leg2->AddEntry(band68, "#pm 1 s.d.", "f");
-  leg2->AddEntry(band95, "#pm 2 s.d.", "f");
-  leg2->SetBorderSize(0);
-  leg2->Draw();
+  if (observed){
+    TLegend* leg2 = new TLegend(0.60, 0.57, 0.88, 0.75);
+    leg2->AddEntry(observed_curve, "Observed", "l");
+    leg2->AddEntry(expected_curve, "Expected", "l");
+    leg2->AddEntry(band68, "#pm 1 s.d.", "f");
+    leg2->AddEntry(band95, "#pm 2 s.d.", "f");
+    leg2->SetBorderSize(0);
+    leg2->Draw();
+  }
+  else {
+    TLegend* leg2 = new TLegend(0.60, 0.60, 0.88, 0.75);
+    leg2->AddEntry(expected_curve, "Expected", "l");
+    leg2->AddEntry(band68, "#pm 1 s.d.", "f");
+    leg2->AddEntry(band95, "#pm 2 s.d.", "f");
+    leg2->SetBorderSize(0);
+    leg2->Draw();
+  }
 
   TString channel_label;
   if(channel == "muon")
@@ -243,18 +342,51 @@ void plotLimits(string output_dir, string model, string year, string channel="")
   preliminary2->SetTextSize(0.04);
   preliminary2->Draw();
 
-  // Save limit plot
-  //SSMcanvas->SaveAs(("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/plots/" + model +"/"+ year +"/SSMlimit_"+ channel +"_"+ year + ".png").c_str());
+  TString checks_label;
+  if(checkRegion == "mT200_eta2.0")
+    checks_label = "#bf{#splitline{m_{T} > 200 GeV}{#mu |#eta| < 2.0}}";
+  else if(checkRegion == "mT300_eta2.0")
+    checks_label = "#bf{#splitline{m_{T} > 300 GeV}{#mu |#eta| < 2.0}}";
+  else if(checkRegion == "mT400_eta2.0")
+    checks_label = "#bf{#splitline{m_{T} > 400 GeV}{#mu |#eta| < 2.0}}";
+
+  TLatex* check = new TLatex(0.37, 0.62, checks_label);
+  check->SetNDC();
+  check->SetTextFont(42);
+  check->SetTextSize(0.038);
+  check->Draw();
+
   
+  // Save limit plot
+  if (observed)
+    SSMcanvas->SaveAs(("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/plots/" + model +"/"+ year +"/SSMlimit_"+ channel +"_"+ year +"_"+ checkRegion + "_Observed.png").c_str());
+  else
+    SSMcanvas->SaveAs(("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/plots/" + model +"/"+ year +"/SSMlimit_"+ channel +"_"+ year +"_"+ checkRegion + ".png").c_str());
 }
 
 void limitCurve(){
 
-  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022");
-  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2023");
-  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "22+23", "muon");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "mT200_eta2.0");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "mT300_eta2.0");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "mT400_eta2.0");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "unblind");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "unblind_binRes");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "unblind_lastBinMerge");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "unblind_pTerror");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "unblind_QCDloose");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "unblind_QCDtight");
+  
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2023", "muon", "mT200_eta2.0");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2023", "muon", "mT300_eta2.0");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2023", "muon", "mT400_eta2.0");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2023", "muon", "unblind");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2023", "muon", "unblind_pTerror");
+  
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "22+23", "muon", "unblind");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "22+23", "muon", "unblind_pTerror");
 
   // Electron & muon combined
-  plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "22+23", "ele+mu");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "22+23", "ele+mu", "mT200");
+  plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "22+23", "ele+mu", "unblind_pTerror");
   
 }

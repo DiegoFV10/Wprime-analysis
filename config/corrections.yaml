@@ -83,8 +83,25 @@ Dummy module for preselection ==> btag_weight = 1:
     parameters:
         isMC: self.dataset.process.isMC
 
-#Apply k-factor for HT-binned:
-#    name: HTkfactor
-#    path: Wprime.Modules.kfactor_Wboost
-#    parameters:
-#        isHTbin: self.dataset.process.get_aux('isHTbin', False)
+W background k-factors:
+    name: Wkfactor
+    path: Wprime.Modules.Wkfactor
+    parameters:
+        isMC: self.dataset.process.isMC
+        isWoffshell: self.dataset.process.get_aux('isWoffshell', False)
+        isWjets: self.dataset.process.get_aux('isWjets', False)
+        isWboost: self.dataset.process.get_aux('isWboost', False)
+
+Muon momentum Scale:
+    name: MuonScale
+    path: Wprime.Modules.muonScale
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod
+
+Total PDF uncertainty:
+    name: PDFuncertainty
+    path: Wprime.Modules.PDFuncertainty
+    parameters:
+        isMC: self.dataset.process.isMC

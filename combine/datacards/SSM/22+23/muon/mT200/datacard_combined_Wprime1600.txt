@@ -1,0 +1,44 @@
+Combination of muon_2022=../../2022/muon/datacard_Wprime1600.txt  muon_2023=../../2023/muon/datacard_Wprime1600.txt
+imax 2 number of bins
+jmax 5 number of processes minus 1
+kmax 24 number of nuisance parameters
+----------------------------------------------------------------------------------------------------------------------------------
+shapes *          muon_2022  /eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/SSMlimit_mT200_PreAppFinal/root/mT__pg_SSMlimits2022.root histograms/$PROCESS histograms/$PROCESS_$SYSTEMATIC
+shapes data_obs   muon_2022  /eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/SSMlimit_mT200_PreAppFinal/root/mT__pg_SSMlimits2022.root histograms/ReRecoData2022
+shapes *          muon_2023  /eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/SSMlimit_mT200_PreAppFinal/root/mT__pg_SSMlimits2023.root histograms/$PROCESS histograms/$PROCESS_$SYSTEMATIC
+shapes data_obs   muon_2023  /eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/SSMlimit_mT200_PreAppFinal/root/mT__pg_SSMlimits2023.root histograms/PromptData2023
+----------------------------------------------------------------------------------------------------------------------------------
+bin          muon_2022  muon_2023
+observation  141215     116482   
+----------------------------------------------------------------------------------------------------------------------------------
+bin                                           muon_2022   muon_2022   muon_2022   muon_2022   muon_2022   muon_2022   muon_2023   muon_2023   muon_2023   muon_2023   muon_2023   muon_2023 
+process                                       Wprime1600  W_boson     Top         Z_boson     DiBoson     QCD         Wprime1600  W_boson     Top         Z_boson     DiBoson     QCD       
+process                                       0           1           2           3           4           5           0           1           2           3           4           5         
+rate                                          25.770237   108277.72   20364.963   8315.9164   4262.9751   1957.2702   20.83555    86105.673   15311.08    6850.1032   3405.2821   1399.7927 
+----------------------------------------------------------------------------------------------------------------------------------
+CMS_EXO24021_W_kfactor_   shape               -           1.0         -           -           -           -           -           1.0         -           -           -           -         
+CMS_EXO24021_Wprime_PDF+as   lnN              1.037       -           -           -           -           -           1.037       -           -           -           -           -         
+CMS_eff_b_2022_         shape                 1.0         1.0         1.0         1.0         1.0         1.0         -           -           -           -           -           -         
+CMS_eff_b_2023_         shape                 -           -           -           -           -           -           1.0         1.0         1.0         1.0         1.0         1.0       
+CMS_eff_m_id_2022_      shape                 1.0         1.0         1.0         1.0         1.0         1.0         -           -           -           -           -           -         
+CMS_eff_m_id_2023_      shape                 -           -           -           -           -           -           1.0         1.0         1.0         1.0         1.0         1.0       
+CMS_eff_m_iso_2022_     shape                 1.0         1.0         1.0         1.0         1.0         1.0         -           -           -           -           -           -         
+CMS_eff_m_iso_2023_     shape                 -           -           -           -           -           -           1.0         1.0         1.0         1.0         1.0         1.0       
+CMS_eff_m_reco_2022_    shape                 1.0         1.0         1.0         1.0         1.0         1.0         -           -           -           -           -           -         
+CMS_eff_m_reco_2023_    shape                 -           -           -           -           -           -           1.0         1.0         1.0         1.0         1.0         1.0       
+CMS_eff_m_trigger_2022_   shape               1.0         1.0         1.0         1.0         1.0         1.0         -           -           -           -           -           -         
+CMS_eff_m_trigger_2023_   shape               -           -           -           -           -           -           1.0         1.0         1.0         1.0         1.0         1.0       
+CMS_pileup_             shape                 1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0         1.0       
+CMS_scale_m_2022_       shape                 1.0         1.0         1.0         1.0         1.0         1.0         -           -           -           -           -           -         
+CMS_scale_m_2023_       shape                 -           -           -           -           -           -           1.0         1.0         1.0         1.0         1.0         1.0       
+CMS_scale_met_2022_     shape                 1.0         1.0         1.0         1.0         1.0         1.0         -           -           -           -           -           -         
+CMS_scale_met_2023_     shape                 -           -           -           -           -           -           1.0         1.0         1.0         1.0         1.0         1.0       
+lumi_13p6TeV_2022       lnN                   1.014       1.014       1.014       1.014       1.014       1.014       -           -           -           -           -           -         
+lumi_13p6TeV_2023       lnN                   -           -           -           -           -           -           1.013       1.013       1.013       1.013       1.013       1.013     
+pdf_qqbar_              shape                 -           1.0         1.0         1.0         1.0         -           -           1.0         1.0         1.0         1.0         -         
+xsec_QCD                lnN                   -           -           -           -           -           1.05        -           -           -           -           -           1.05      
+xsec_VV                 lnN                   -           -           -           -           1.04        -           -           -           -           -           1.04        -         
+xsec_Z                  lnN                   -           -           -           1.02        -           -           -           -           -           1.02        -           -         
+xsec_ttbar              lnN                   -           -           1.05        -           -           -           -           -           1.05        -           -           -         
+muon_2022 autoMCStats 10 0 1
+muon_2023 autoMCStats 10 0 1

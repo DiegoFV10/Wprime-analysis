@@ -82,8 +82,6 @@ class Config(base_config):
         categories = [
             Category("base", "base category", selection = ""),
             Category("preselection", "category for the single muon preselection step", selection = ""),
-            Category("kin_selection", "category for the kinematic selection + top veto step",
-                     selection = "Muon_tunepRelPt[goodMuIdx]*Muon_pt[goodMuIdx]/PuppiMET_pt > 0.4 && Muon_tunepRelPt[goodMuIdx]*Muon_pt[goodMuIdx]/PuppiMET_pt < 1.5 && deltaPhi_MuMET > 2.5 && nJet < 6"), # DEPRECATED
         ]
         return ObjectCollection(categories)
 
@@ -91,32 +89,100 @@ class Config(base_config):
 
         processes = [
             ### Signal Processes ###
-            Process("Wprime2000", Label("W' M = 2.0 TeV"), color=ROOT.kAzure+1, isSignal=True),
-            Process("Wprime2000_preEE", Label("W' M = 2.0 TeV"), color=ROOT.kAzure+1, isSignal=True, parent_process="Wprime2000"),
-            Process("Wprime2000_postEE", Label("W' M = 2.0 TeV"), color=ROOT.kAzure+1, isSignal=True, parent_process="Wprime2000"),
-            Process("Wprime3600", Label("W' M = 3.6 TeV"), color=ROOT.kGreen+1, isSignal=True),
-            Process("Wprime3600_preEE", Label("W' M = 3.6 TeV"), color=ROOT.kGreen+1, isSignal=True, parent_process="Wprime3600"),
-            Process("Wprime3600_postEE", Label("W' M = 3.6 TeV"), color=ROOT.kGreen+1, isSignal=True, parent_process="Wprime3600"),
-            Process("Wprime5600", Label("W'M_{W'} = 5.6 TeV"), color=ROOT.kMagenta+1, isSignal=True),
-            Process("Wprime5600_preEE", Label("W'M_{W'} = 5.6 TeV"), color=ROOT.kMagenta+1, isSignal=True, parent_process="Wprime5600"),
-            Process("Wprime5600_postEE", Label("W'M_{W'} = 5.6 TeV"), color=ROOT.kMagenta+1, isSignal=True, parent_process="Wprime5600"),
             Process("Wprime200", Label("W' M = 0.2 TeV"), color=(0, 0, 0), isSignal=True),
             Process("Wprime400", Label("W' M = 0.4 TeV"), color=(0, 0, 0), isSignal=True),
             Process("Wprime600", Label("W' M = 0.6 TeV"), color=(0, 0, 0), isSignal=True),
             Process("Wprime1000", Label("W' M = 1.0 TeV"), color=(0, 0, 0), isSignal=True),
             Process("Wprime1600", Label("W' M = 1.6 TeV"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime2000", Label("W' M = 2.0 TeV"), color=ROOT.kAzure+1, isSignal=True),
             Process("Wprime2600", Label("W' M = 2.6 TeV"), color=(0, 0, 0), isSignal=True),
             Process("Wprime3000", Label("W' M = 3.0 TeV"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime3600", Label("W' M = 3.6 TeV"), color=ROOT.kGreen+1, isSignal=True),
             Process("Wprime4000", Label("W' M = 4.0 TeV"), color=(0, 0, 0), isSignal=True),
             Process("Wprime4600", Label("W' M = 4.6 TeV"), color=(0, 0, 0), isSignal=True),
             Process("Wprime5000", Label("W' M = 5.0 TeV"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime5600", Label("W' M = 5.6 TeV"), color=ROOT.kMagenta+1, isSignal=True),
             Process("Wprime6000", Label("W' M = 6.0 TeV"), color=(0, 0, 0), isSignal=True),
             Process("Wprime6600", Label("W' M = 6.6 TeV"), color=(0, 0, 0), isSignal=True),
 
+            ## Variable Coupling ##
+            Process("Wprime400_kR0.01", Label("W' M = 0.4 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime400_kR0.1", Label("W' M = 0.4 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime400_kR2", Label("W' M = 0.4 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime400_kR3", Label("W' M = 0.4 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime400_kR5", Label("W' M = 0.4 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime600_kR0.01", Label("W' M = 0.6 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime600_kR0.1", Label("W' M = 0.6 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime600_kR2", Label("W' M = 0.6 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime600_kR3", Label("W' M = 0.6 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime600_kR5", Label("W' M = 0.6 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime1000_kR0.01", Label("W' M = 1.0 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime1000_kR0.1", Label("W' M = 1.0 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime1000_kR2", Label("W' M = 1.0 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime1000_kR3", Label("W' M = 1.0 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime1000_kR5", Label("W' M = 1.0 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),    
+            Process("Wprime1600_kR0.01", Label("W' M = 1.6 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime1600_kR0.1", Label("W' M = 1.6 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime1600_kR2", Label("W' M = 1.6 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime1600_kR3", Label("W' M = 1.6 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime1600_kR5", Label("W' M = 1.6 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime2000_kR0.01", Label("W' M = 2.0 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime2000_kR0.1", Label("W' M = 2.0 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime2000_kR2", Label("W' M = 2.0 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime2000_kR3", Label("W' M = 2.0 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime2000_kR5", Label("W' M = 2.0 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime2600_kR0.01", Label("W' M = 2.6 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime2600_kR0.1", Label("W' M = 2.6 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime2600_kR2", Label("W' M = 2.6 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime2600_kR3", Label("W' M = 2.6 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime2600_kR5", Label("W' M = 2.6 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime3000_kR0.01", Label("W' M = 3.0 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime3000_kR0.1", Label("W' M = 3.0 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime3000_kR2", Label("W' M = 3.0 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime3000_kR3", Label("W' M = 3.0 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime3000_kR5", Label("W' M = 3.0 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime3600_kR0.01", Label("W' M = 3.6 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime3600_kR0.1", Label("W' M = 3.6 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime3600_kR2", Label("W' M = 3.6 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime3600_kR3", Label("W' M = 3.6 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime3600_kR5", Label("W' M = 3.6 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime4000_kR0.01", Label("W' M = 4.0 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime4000_kR0.1", Label("W' M = 4.0 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime4000_kR2", Label("W' M = 4.0 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime4000_kR3", Label("W' M = 4.0 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime4000_kR5", Label("W' M = 4.0 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime4600_kR0.01", Label("W' M = 4.6 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime4600_kR0.1", Label("W' M = 4.6 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime4600_kR2", Label("W' M = 4.6 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime4600_kR3", Label("W' M = 4.6 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime4600_kR5", Label("W' M = 4.6 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime5000_kR0.01", Label("W' M = 5.0 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime5000_kR0.1", Label("W' M = 5.0 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime5000_kR2", Label("W' M = 5.0 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime5000_kR3", Label("W' M = 5.0 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime5000_kR5", Label("W' M = 5.0 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime5600_kR0.01", Label("W' M = 5.6 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime5600_kR0.1", Label("W' M = 5.6 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime5600_kR2", Label("W' M = 5.6 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime5600_kR3", Label("W' M = 5.6 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime5600_kR5", Label("W' M = 5.6 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime6000_kR0.01", Label("W' M = 6.0 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime6000_kR0.1", Label("W' M = 6.0 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime6000_kR2", Label("W' M = 6.0 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime6000_kR3", Label("W' M = 6.0 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime6000_kR5", Label("W' M = 6.0 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime6600_kR0.01", Label("W' M = 6.6 TeV g_{W'}/g_{W} = 0.01"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime6600_kR0.1", Label("W' M = 6.6 TeV g_{W'}/g_{W} = 0.1"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime6600_kR2", Label("W' M = 6.6 TeV g_{W'}/g_{W} = 2"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime6600_kR3", Label("W' M = 6.6 TeV g_{W'}/g_{W} = 3"), color=(0, 0, 0), isSignal=True),
+            Process("Wprime6600_kR5", Label("W' M = 6.6 TeV g_{W'}/g_{W} = 5"), color=(0, 0, 0), isSignal=True),
+
+            
             ### Background Processes ###
+            Process("background", Label("Background"), color=(63, 144, 218)),
             
             ## W boson ##
-            Process("W_boson", Label("W-boson"), color=(63, 144, 218)),
+            Process("W_boson", Label("W-boson"), color=(63, 144, 218), parent_process="background"),
             Process("W_preEE", Label("W-boson"), color=(63, 144, 218), parent_process="W_boson"),
             Process("W_postEE", Label("W-boson"), color=(63, 144, 218), parent_process="W_boson"),
 
@@ -138,26 +204,27 @@ class Config(base_config):
             
             # W off-shell madgraph
             # For W splitting
-            Process("Wlnu_full", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="W_boson"),
-            Process("Wlnu", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="Wlnu_full"),
-            Process("Wlnu_postEE", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="Wlnu_full"),
+            Process("Wlnu_full", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, isWoffshell=True, parent_process="W_boson"),
+            Process("Wlnu", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, isWoffshell=True, parent_process="Wlnu_full"),
+            Process("Wlnu_postEE", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, isWoffshell=True, parent_process="Wlnu_full"),
             # Old - original
-            #Process("Wlnu", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="W_preEE"),
-            Process("Wlnu1", Label("W #rightarrow l#nu M_{W} 120to200"), color=(255, 241, 0), parent_process="Wlnu"),
-            Process("Wlnu2", Label("W #rightarrow l#nu M_{W} 200to400"), color=(255, 140, 0), parent_process="Wlnu"),
-            Process("Wlnu3", Label("W #rightarrow l#nu M_{W} 400to800"), color=(232, 17, 35), parent_process="Wlnu"),
-            Process("Wlnu4", Label("W #rightarrow l#nu M_{W} 800to1500"), color=(236, 0, 140), parent_process="Wlnu"),
-            Process("Wlnu5", Label("W #rightarrow l#nu M_{W} 1500to2500"), color=(104, 33, 122), parent_process="Wlnu"),
-            Process("Wlnu6", Label("W #rightarrow l#nu M_{W} 2500to4000"), color=(0, 24, 143), parent_process="Wlnu"),
-            Process("Wlnu7", Label("W #rightarrow l#nu M_{W} 4000to6000"), color=(0, 188, 242), parent_process="Wlnu"),
-            Process("Wlnu8", Label("W #rightarrow l#nu M_{W} 6000"), color=(0, 178, 148), parent_process="Wlnu"),
-            #Process("Wlnu_postEE", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, parent_process="W_postEE"),
+            #Process("Wlnu", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, isWoffshell=True, parent_process="W_preEE"),
+            Process("Wlnu1", Label("W #rightarrow l#nu M_{W} 120to200"), color=(255, 241, 0), isWoffshell=True, parent_process="Wlnu"),
+            Process("Wlnu2", Label("W #rightarrow l#nu M_{W} 200to400"), color=(255, 140, 0), isWoffshell=True, parent_process="Wlnu"),
+            Process("Wlnu3", Label("W #rightarrow l#nu M_{W} 400to800"), color=(232, 17, 35), isWoffshell=True, parent_process="Wlnu"),
+            Process("Wlnu4", Label("W #rightarrow l#nu M_{W} 800to1500"), color=(236, 0, 140), isWoffshell=True, parent_process="Wlnu"),
+            Process("Wlnu5", Label("W #rightarrow l#nu M_{W} 1500to2500"), color=(104, 33, 122), isWoffshell=True, parent_process="Wlnu"),
+            Process("Wlnu6", Label("W #rightarrow l#nu M_{W} 2500to4000"), color=(0, 24, 143), isWoffshell=True, parent_process="Wlnu"),
+            Process("Wlnu7", Label("W #rightarrow l#nu M_{W} 4000to6000"), color=(0, 188, 242), isWoffshell=True, parent_process="Wlnu"),
+            Process("Wlnu8", Label("W #rightarrow l#nu M_{W} 6000"), color=(0, 178, 148), isWoffshell=True, parent_process="Wlnu"),
+            #Process("Wlnu_postEE", Label("off-shell W #rightarrow l#nu"), color=ROOT.kAzure+1, isWoffshell=True, parent_process="W_postEE"),
 
             # W on-shell
             # For W splitting
             Process("Wonshell_full", Label("onshell W #rightarrow l#nu"), color=ROOT.kAzure+10, parent_process="W_boson", isWjets=True),
             Process("Wonshell", Label("onshell W #rightarrow l#nu"), color=ROOT.kAzure+10, parent_process="Wonshell_full", isWjets=True),
-            Process("Wonshell_postEE", Label("onshell W #rightarrow l#nu"), color=ROOT.kAzure+10, parent_process="Wonshell_full", isWjets=True),           # Old - original
+            Process("Wonshell_postEE", Label("onshell W #rightarrow l#nu"), color=ROOT.kAzure+10, parent_process="Wonshell_full", isWjets=True),
+            # Old - original
             #Process("Wonshell", Label("onshell W #rightarrow l#nu"), color=ROOT.kAzure+10, parent_process="W_preEE", isWjets=True),
             #Process("Wonshell_postEE", Label("onshell W #rightarrow l#nu"), color=ROOT.kAzure+10, parent_process="W_postEE", isWjets=True),
             # W+4j
@@ -188,7 +255,7 @@ class Config(base_config):
             #Process("W_ptW_postEE", Label("boosted W #rightarrow l#nu"), color=(206, 30, 30), isWboost=True, parent_process="W_postEE"),
 
             ## Top ##
-            Process("Top", Label("Top"), color=(189, 31, 1)),
+            Process("Top", Label("Top"), color=(189, 31, 1), parent_process="background"),
             Process("Top_preEE", Label("Top"), color=(189, 31, 1), parent_process="Top"),
             Process("Top_postEE", Label("Top"), color=(189, 31, 1), parent_process="Top"),
             Process("TTbar", Label("t#bar{t}"), color=(255,255,0), parent_process="Top_preEE"),
@@ -197,18 +264,18 @@ class Config(base_config):
             Process("ST_postEE", Label("single t"), color=(255,255,0), parent_process="Top_postEE"),
 
             ## Z boson ##
-            Process("Z_boson", Label("Z/#gamma #rightarrow ll"), color=(169, 107, 89)),
-            Process("Z_boson_preEE", Label("Z/#gamma #rightarrow ll"), color=(169, 107, 89), parent_process="Z_boson"),
-            Process("Z_boson_postEE", Label("Z/#gamma #rightarrow ll"), color=(169, 107, 89), parent_process="Z_boson"),
-            Process("Zmumu", Label("Z/#gamma #rightarrow #mu#mu"), color=(206, 30, 30), parent_process="Z_boson_preEE"),
-            Process("Zmumu_postEE", Label("Z/#gamma #rightarrow #mu#mu"), color=(206, 30, 30), parent_process="Z_boson_postEE"),
-            Process("Ztautau", Label("Z/#gamma #rightarrow #tau#tau"), color=(208, 196, 31), parent_process="Z_boson_preEE"),
-            Process("Ztautau_postEE", Label("Z/#gamma #rightarrow #tau#tau"), color=(208, 196, 31), parent_process="Z_boson_postEE"),
-            Process("Znunu", Label("Z/#gamma #rightarrow #nu#nu"), color=(255, 128, 0), parent_process="Z_boson_preEE"),
-            Process("Znunu_postEE", Label("Z/#gamma #rightarrow #nu#nu"), color=(255, 128, 0), parent_process="Z_boson_postEE"),
+            Process("Z_boson", Label("Z/#gamma* #rightarrow ll"), color=(169, 107, 89), parent_process="background"),
+            Process("Z_boson_preEE", Label("Z/#gamma* #rightarrow ll"), color=(169, 107, 89), parent_process="Z_boson"),
+            Process("Z_boson_postEE", Label("Z/#gamma* #rightarrow ll"), color=(169, 107, 89), parent_process="Z_boson"),
+            Process("Zmumu", Label("Z/#gamma* #rightarrow #mu#mu"), color=(206, 30, 30), parent_process="Z_boson_preEE"),
+            Process("Zmumu_postEE", Label("Z/#gamma* #rightarrow #mu#mu"), color=(206, 30, 30), parent_process="Z_boson_postEE"),
+            Process("Ztautau", Label("Z/#gamma* #rightarrow #tau#tau"), color=(208, 196, 31), parent_process="Z_boson_preEE"),
+            Process("Ztautau_postEE", Label("Z/#gamma* #rightarrow #tau#tau"), color=(208, 196, 31), parent_process="Z_boson_postEE"),
+            Process("Znunu", Label("Z/#gamma* #rightarrow #nu#nu"), color=(255, 128, 0), parent_process="Z_boson_preEE"),
+            Process("Znunu_postEE", Label("Z/#gamma* #rightarrow #nu#nu"), color=(255, 128, 0), parent_process="Z_boson_postEE"),
 
             ## Di-Boson ##
-            Process("DiBoson", Label("DiBoson"), color=(131, 45, 182)),
+            Process("DiBoson", Label("DiBoson"), color=(131, 45, 182), parent_process="background"),
             Process("DiBoson_preEE", Label("DiBoson"), color=(131, 45, 182), parent_process="DiBoson"),
             Process("DiBoson_postEE", Label("DiBoson"), color=(131, 45, 182), parent_process="DiBoson"),
             Process("WW", Label("WW"), color=(36, 147, 25), parent_process="DiBoson_preEE"),
@@ -221,7 +288,7 @@ class Config(base_config):
             Process("Wgamma_postEE", Label("W#gamma"), color=(14, 75, 7), parent_process="DiBoson_postEE"),
 
             ## QCD ##
-            Process("QCD", Label("QCD"), color=(255, 169, 14)),
+            Process("QCD", Label("QCD"), color=(255, 169, 14), parent_process="background"),
             Process("QCD_preEE", Label("QCD"), color=(255, 169, 14), parent_process="QCD"),
             Process("QCD_postEE", Label("QCD"), color=(255, 169, 14), parent_process="QCD"),
             Process("QCD_Pt", Label("QCD"), color=(0, 0, 153), parent_process="QCD_preEE"),
@@ -281,7 +348,6 @@ class Config(base_config):
             ],
 
             ## For W' SSM limits ##
-
             "SSMlimits2022": [
                 "Wprime200",
                 "Wprime400",
@@ -306,6 +372,122 @@ class Config(base_config):
                 "ReRecoData2022",
             ],
 
+            ## For W' variable coupling limits ##
+            "CouplingLimits2022": [
+                "Wprime400_kR0.01",
+                "Wprime400_kR0.1",
+                "Wprime400",
+                "Wprime400_kR2",
+                "Wprime400_kR3",
+                "Wprime400_kR5",
+                "Wprime600_kR0.01",
+                "Wprime600_kR0.1",
+                "Wprime600",
+                "Wprime600_kR2",
+                "Wprime600_kR3",
+                "Wprime600_kR5",
+                "Wprime1000_kR0.01",
+                "Wprime1000_kR0.1",
+                "Wprime1000",
+                "Wprime1000_kR2",
+                "Wprime1000_kR3",
+                "Wprime1000_kR5",
+                "Wprime1600_kR0.01",
+                "Wprime1600_kR0.1",
+                "Wprime1600",
+                "Wprime1600_kR2",
+                "Wprime1600_kR3",
+                "Wprime1600_kR5",
+                "Wprime2000_kR0.01",
+                "Wprime2000_kR0.1",
+                "Wprime2000",
+                "Wprime2000_kR2",
+                "Wprime2000_kR3",
+                "Wprime2000_kR5",
+                "Wprime2600_kR0.01",
+                "Wprime2600_kR0.1",
+                "Wprime2600",
+                "Wprime2600_kR2",
+                "Wprime2600_kR3",
+                "Wprime2600_kR5",
+                "Wprime3000_kR0.01",
+                "Wprime3000_kR0.1",
+                "Wprime3000",
+                "Wprime3000_kR2",
+                "Wprime3000_kR3",
+                "Wprime3000_kR5",
+                "Wprime3600_kR0.01",
+                "Wprime3600_kR0.1",
+                "Wprime3600",
+                "Wprime3600_kR2",
+                "Wprime3600_kR3",
+                "Wprime3600_kR5",
+                "Wprime4000_kR0.01",
+                "Wprime4000_kR0.1",
+                "Wprime4000",
+                "Wprime4000_kR2",
+                "Wprime4000_kR3",
+                "Wprime4000_kR5",
+                "Wprime4600_kR0.01",
+                "Wprime4600_kR0.1",
+                "Wprime4600",
+                "Wprime4600_kR2",
+                "Wprime4600_kR3",
+                "Wprime4600_kR5",
+                "Wprime5000_kR0.01",
+                "Wprime5000_kR0.1",
+                "Wprime5000",
+                "Wprime5000_kR2",
+                "Wprime5000_kR3",
+                "Wprime5000_kR5",
+                "Wprime5600_kR0.01",
+                "Wprime5600_kR0.1",
+                "Wprime5600",
+                "Wprime5600_kR2",
+                "Wprime5600_kR3",
+                "Wprime5600_kR5",
+                "Wprime6000_kR0.01",
+                "Wprime6000_kR0.1",
+                "Wprime6000",
+                "Wprime6000_kR2",
+                "Wprime6000_kR3",
+                "Wprime6000_kR5",
+                "Wprime6600_kR0.01",
+                "Wprime6600_kR0.1",
+                "Wprime6600",
+                "Wprime6600_kR2",
+                "Wprime6600_kR3",
+                "Wprime6600_kR5",
+                "W_boson",
+                "Top",
+                "DiBoson",
+                "QCD",
+                "Z_boson",
+                "ReRecoData2022",
+            ],            
+            
+            ## For Systematic contribution plot ##
+            "SystPlot": [
+                "Wprime200",
+                "Wprime400",
+                "Wprime600",
+                "Wprime1000",
+                "Wprime1600",
+                "Wprime2000",
+                "Wprime2600",
+                "Wprime3000",
+                "Wprime3600",
+                "Wprime4000",
+                "Wprime4600",
+                "Wprime5000",
+                "Wprime5600",
+                "Wprime6000",
+                "Wprime6600",
+                "background",
+                "ReRecoData2022",
+            ],
+
+            
             ########## CHECKS W SAMPLES ##########
             "Woffshell_pythia": [
                 "Wmunu1_postEE",
@@ -416,6 +598,14 @@ class Config(base_config):
                 "W+4j_postEE",
             ],
 
+            ## Check PU/MET weights
+            "checkPUweights": [
+                "Zmumu_postEE",
+                "Ztautau_postEE",
+                "Znunu_postEE",
+            ],
+
+            
         }
 
         return ObjectCollection(processes), process_group_names, []
@@ -541,21 +731,21 @@ class Config(base_config):
                 dataset="/WprimetoMuNu_M-2000_kR-1p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
                     "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
                     "NANOAODSIM",
-                process=self.processes.get("Wprime2000_preEE"),
+                process=self.processes.get("Wprime2000"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.18979,), # From AN-21-096, all of them (NNLO)
-                #xs=0.001,), # For datacards
+                #xs=0.18979,), # From AN-21-096, all of them (NNLO)
+                xs=0.001,), # For datacards
 
             Dataset("Wprime2000_postEE",
                 dataset="/WprimetoMuNu_M-2000_kR-1p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
                     "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
                     "NANOAODSIM",
-                process=self.processes.get("Wprime2000_postEE"),
+                process=self.processes.get("Wprime2000"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.18979,
-                #xs=0.001,
+                #xs=0.18979,
+                xs=0.001,
                 tags=["postEE"]),
           
             Dataset("Wprime2600",
@@ -604,21 +794,21 @@ class Config(base_config):
                 dataset="/WprimetoMuNu_M-3600_kR-1p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
                     "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
                     "NANOAODSIM",
-                process=self.processes.get("Wprime3600_preEE"),
+                process=self.processes.get("Wprime3600"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.006262,),
-                #xs=0.001,), # For datacards
+                #xs=0.006262,),
+                xs=0.001,), # For datacards
 
             Dataset("Wprime3600_postEE",
                 dataset="/WprimetoMuNu_M-3600_kR-1p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
                     "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
                     "NANOAODSIM",
-                process=self.processes.get("Wprime3600_postEE"),
+                process=self.processes.get("Wprime3600"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.006262,
-                #xs=0.001,
+                #xs=0.006262,
+                xs=0.001,
                 tags=["postEE"]),
             
             Dataset("Wprime4000",
@@ -688,21 +878,21 @@ class Config(base_config):
                 dataset="/WprimetoMuNu_M-5600_kR-1p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
                     "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
                     "NANOAODSIM",
-                process=self.processes.get("Wprime5600_preEE"),
+                process=self.processes.get("Wprime5600"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.000411,),
-                #xs=0.001,), # For datacards
+                #xs=0.000411,),
+                xs=0.001,), # For datacards
 
             Dataset("Wprime5600_postEE",
                 dataset="/WprimetoMuNu_M-5600_kR-1p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
                     "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
                     "NANOAODSIM",
-                process=self.processes.get("Wprime5600_postEE"),
+                process=self.processes.get("Wprime5600"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.000411,
-                #xs=0.001,
+                #xs=0.000411,
+                xs=0.001,
                 tags=["postEE"]),
 
             Dataset("Wprime6000",
@@ -746,6 +936,1352 @@ class Config(base_config):
                 #xs=0.000174,
                 xs=0.001,
                 tags=["postEE"]),
+
+            ## Variable coupling signals
+
+            Dataset("Wprime400_kR0.01",
+                dataset="/WprimetoMuNu_M-400_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime400_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime400_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-400_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime400_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime400_kR0.1",
+                dataset="/WprimetoMuNu_M-400_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime400_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime400_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-400_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime400_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime400_kR2",
+                dataset="/WprimetoMuNu_M-400_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime400_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime400_kR2_postEE",
+                dataset="/WprimetoMuNu_M-400_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime400_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime400_kR3",
+                dataset="/WprimetoMuNu_M-400_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime400_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime400_kR3_postEE",
+                dataset="/WprimetoMuNu_M-400_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime400_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime400_kR5",
+                dataset="/WprimetoMuNu_M-400_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime400_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime400_kR5_postEE",
+                dataset="/WprimetoMuNu_M-400_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime400_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+
+
+            Dataset("Wprime600_kR0.01",
+                dataset="/WprimetoMuNu_M-600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime600_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime600_kR0.1",
+                dataset="/WprimetoMuNu_M-600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime600_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime600_kR2",
+                dataset="/WprimeToMuNu_M-600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer23NanoAODv12-130X_mcRun3_2023_realistic_v15-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                    xs=0.001,), # Hayq ue usar la del 23, la del 22 no existe
+
+            Dataset("Wprime600_kR2_postEE",
+                dataset="/WprimetoMuNu_M-600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime600_kR3",
+                dataset="/WprimetoMuNu_M-600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime600_kR3_postEE",
+                dataset="/WprimetoMuNu_M-600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime600_kR5",
+                dataset="/WprimetoMuNu_M-600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime600_kR5_postEE",
+                dataset="/WprimetoMuNu_M-600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+
+
+            Dataset("Wprime1000_kR0.01",
+                dataset="/WprimetoMuNu_M-1000_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1000_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime1000_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-1000_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1000_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime1000_kR0.1",
+                dataset="/WprimetoMuNu_M-1000_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1000_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime1000_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-1000_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1000_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime1000_kR2",
+                dataset="/WprimetoMuNu_M-1000_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1000_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime1000_kR2_postEE",
+                dataset="/WprimetoMuNu_M-1000_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1000_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime1000_kR3",
+                dataset="/WprimetoMuNu_M-1000_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1000_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime1000_kR3_postEE",
+                dataset="/WprimetoMuNu_M-1000_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1000_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime1000_kR5",
+                dataset="/WprimetoMuNu_M-1000_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1000_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime1000_kR5_postEE",
+                dataset="/WprimetoMuNu_M-1000_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1000_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+
+
+            Dataset("Wprime1600_kR0.01",
+                dataset="/WprimetoMuNu_M-1600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime1600_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-1600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime1600_kR0.1",
+                dataset="/WprimetoMuNu_M-1600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime1600_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-1600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime1600_kR2",
+                dataset="/WprimetoMuNu_M-1600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime1600_kR2_postEE",
+                dataset="/WprimetoMuNu_M-1600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime1600_kR3",
+                dataset="/WprimetoMuNu_M-1600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime1600_kR3_postEE",
+                dataset="/WprimetoMuNu_M-1600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime1600_kR5",
+                dataset="/WprimetoMuNu_M-1600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime1600_kR5_postEE",
+                dataset="/WprimetoMuNu_M-1600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime1600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+
+            Dataset("Wprime2000_kR0.01",
+                dataset="/WprimetoMuNu_M-2000_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2000_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime2000_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-2000_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2000_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime2000_kR0.1",
+                dataset="/WprimetoMuNu_M-2000_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2000_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime2000_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-2000_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2000_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime2000_kR2",
+                dataset="/WprimetoMuNu_M-2000_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2000_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime2000_kR2_postEE",
+                dataset="/WprimetoMuNu_M-2000_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2000_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime2000_kR3",
+                dataset="/WprimetoMuNu_M-2000_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2000_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime2000_kR3_postEE",
+                dataset="/WprimetoMuNu_M-2000_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2000_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime2000_kR5",
+                dataset="/WprimetoMuNu_M-2000_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2000_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime2000_kR5_postEE",
+                dataset="/WprimetoMuNu_M-2000_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2000_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+
+
+            Dataset("Wprime2600_kR0.01",
+                dataset="/WprimetoMuNu_M-2600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime2600_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-2600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime2600_kR0.1",
+                dataset="/WprimetoMuNu_M-2600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime2600_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-2600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime2600_kR2",
+                dataset="/WprimetoMuNu_M-2600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime2600_kR2_postEE",
+                dataset="/WprimetoMuNu_M-2600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime2600_kR3",
+                dataset="/WprimetoMuNu_M-2600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime2600_kR3_postEE",
+                dataset="/WprimetoMuNu_M-2600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime2600_kR5",
+                dataset="/WprimetoMuNu_M-2600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime2600_kR5_postEE",
+                dataset="/WprimetoMuNu_M-2600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime2600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+
+
+            Dataset("Wprime3000_kR0.01",
+                dataset="/WprimetoMuNu_M-3000_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3000_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime3000_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-3000_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3000_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime3000_kR0.1",
+                dataset="/WprimetoMuNu_M-3000_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3000_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime3000_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-3000_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3000_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime3000_kR2",
+                dataset="/WprimetoMuNu_M-3000_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3000_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime3000_kR2_postEE",
+                dataset="/WprimetoMuNu_M-3000_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3000_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime3000_kR3",
+                dataset="/WprimetoMuNu_M-3000_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3000_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime3000_kR3_postEE",
+                dataset="/WprimetoMuNu_M-3000_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3000_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime3000_kR5",
+                dataset="/WprimetoMuNu_M-3000_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3000_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime3000_kR5_postEE",
+                dataset="/WprimetoMuNu_M-3000_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3000_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+
+            Dataset("Wprime3600_kR0.01",
+                dataset="/WprimetoMuNu_M-3600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime3600_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-3600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime3600_kR0.1",
+                dataset="/WprimetoMuNu_M-3600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime3600_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-3600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime3600_kR2",
+                dataset="/WprimetoMuNu_M-3600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime3600_kR2_postEE",
+                dataset="/WprimetoMuNu_M-3600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime3600_kR3",
+                dataset="/WprimetoMuNu_M-3600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime3600_kR3_postEE",
+                dataset="/WprimetoMuNu_M-3600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime3600_kR5",
+                dataset="/WprimetoMuNu_M-3600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime3600_kR5_postEE",
+                dataset="/WprimetoMuNu_M-3600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime3600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+
+
+            Dataset("Wprime4000_kR0.01",
+                dataset="/WprimetoMuNu_M-4000_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4000_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime4000_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-4000_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4000_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime4000_kR0.1",
+                dataset="/WprimetoMuNu_M-4000_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4000_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime4000_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-4000_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4000_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime4000_kR2",
+                dataset="/WprimetoMuNu_M-4000_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4000_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime4000_kR2_postEE",
+                dataset="/WprimetoMuNu_M-4000_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4000_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime4000_kR3",
+                dataset="/WprimetoMuNu_M-4000_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4000_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime4000_kR3_postEE",
+                dataset="/WprimetoMuNu_M-4000_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4000_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime4000_kR5",
+                dataset="/WprimetoMuNu_M-4000_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4000_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime4000_kR5_postEE",
+                dataset="/WprimetoMuNu_M-4000_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4000_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+
+            Dataset("Wprime4600_kR0.01",
+                dataset="/WprimetoMuNu_M-4600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime4600_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-4600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime4600_kR0.1",
+                dataset="/WprimetoMuNu_M-4600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime4600_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-4600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime4600_kR2",
+                dataset="/WprimetoMuNu_M-4600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime4600_kR2_postEE",
+                dataset="/WprimetoMuNu_M-4600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime4600_kR3",
+                dataset="/WprimetoMuNu_M-4600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime4600_kR3_postEE",
+                dataset="/WprimetoMuNu_M-4600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime4600_kR5",
+                dataset="/WprimetoMuNu_M-4600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime4600_kR5_postEE",
+                dataset="/WprimetoMuNu_M-4600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime4600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+
+            Dataset("Wprime5000_kR0.01",
+                dataset="/WprimetoMuNu_M-5000_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5000_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime5000_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-5000_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5000_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime5000_kR0.1",
+                dataset="/WprimetoMuNu_M-5000_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5000_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime5000_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-5000_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5000_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime5000_kR2",
+                dataset="/WprimetoMuNu_M-5000_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5000_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime5000_kR2_postEE",
+                dataset="/WprimetoMuNu_M-5000_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5000_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime5000_kR3",
+                dataset="/WprimetoMuNu_M-5000_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5000_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime5000_kR3_postEE",
+                dataset="/WprimetoMuNu_M-5000_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5000_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime5000_kR5",
+                dataset="/WprimetoMuNu_M-5000_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5000_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime5000_kR5_postEE",
+                dataset="/WprimetoMuNu_M-5000_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5000_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+
+            Dataset("Wprime5600_kR0.01",
+                dataset="/WprimetoMuNu_M-5600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime5600_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-5600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime5600_kR0.1",
+                dataset="/WprimetoMuNu_M-5600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime5600_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-5600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime5600_kR2",
+                dataset="/WprimetoMuNu_M-5600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime5600_kR2_postEE",
+                dataset="/WprimetoMuNu_M-5600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime5600_kR3",
+                dataset="/WprimetoMuNu_M-5600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime5600_kR3_postEE",
+                dataset="/WprimetoMuNu_M-5600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime5600_kR5",
+                dataset="/WprimetoMuNu_M-5600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime5600_kR5_postEE",
+                dataset="/WprimetoMuNu_M-5600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime5600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+
+            
+            Dataset("Wprime6000_kR0.01",
+                dataset="/WprimetoMuNu_M-6000_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6000_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime6000_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-6000_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6000_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime6000_kR0.1",
+                dataset="/WprimetoMuNu_M-6000_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6000_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime6000_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-6000_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6000_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime6000_kR2",
+                dataset="/WprimetoMuNu_M-6000_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6000_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime6000_kR2_postEE",
+                dataset="/WprimetoMuNu_M-6000_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6000_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime6000_kR3",
+                dataset="/WprimetoMuNu_M-6000_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6000_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime6000_kR3_postEE",
+                dataset="/WprimetoMuNu_M-6000_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6000_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime6000_kR5",
+                dataset="/WprimetoMuNu_M-6000_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6000_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime6000_kR5_postEE",
+                dataset="/WprimetoMuNu_M-6000_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6000_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+       
+            Dataset("Wprime6600_kR0.01",
+                dataset="/WprimetoMuNu_M-6600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime6600_kR0.01_postEE",
+                dataset="/WprimetoMuNu_M-6600_kR-0p01_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6600_kR0.01"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+            
+            Dataset("Wprime6600_kR0.1",
+                dataset="/WprimetoMuNu_M-6600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime6600_kR0.1_postEE",
+                dataset="/WprimetoMuNu_M-6600_kR-0p1_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6600_kR0.1"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime6600_kR2",
+                dataset="/WprimetoMuNu_M-6600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime6600_kR2_postEE",
+                dataset="/WprimetoMuNu_M-6600_kR-2p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6600_kR2"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime6600_kR3",
+                dataset="/WprimetoMuNu_M-6600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime6600_kR3_postEE",
+                dataset="/WprimetoMuNu_M-6600_kR-3p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6600_kR3"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),
+     
+            Dataset("Wprime6600_kR5",
+                dataset="/WprimetoMuNu_M-6600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22NanoAODv12-130X_mcRun3_2022_realistic_v5-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="preEE",
+                xs=0.001,), # For datacards
+
+            Dataset("Wprime6600_kR5_postEE",
+                dataset="/WprimetoMuNu_M-6600_kR-5p0_LO_TuneCP5_13p6TeV_madgraph-pythia8/"
+                    "Run3Summer22EENanoAODv12-130X_mcRun3_2022_realistic_postEE_v6-v2/"
+                    "NANOAODSIM",
+                process=self.processes.get("Wprime6600_kR5"),
+                #prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                xs=0.001,
+                tags=["postEE"]),     
+
             
 
             ### W off-shell ###
@@ -1106,7 +2642,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="preEE",
-                xs=167.1*1.143,), # From Jeongeun --> GenXSecAnalyzer (LO) x k-factor for madgraph // NOTE: Using final additive + mixed k-factors updated in October2024
+                xs=167.1,), # From Jeongeun --> GenXSecAnalyzer (LO) // NOTE: Final additive + mixed k-factors updated in October2024 in plotting
 
             Dataset("Wlnu120to200_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-120to200_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -1116,7 +2652,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 #merging={"preselection":3}, # Descomenta para el proximo reprocess!!!
                 runPeriod="postEE",
-                xs=167.1*1.143, 
+                xs=167.1, 
                 tags=["postEE"]),
 
             Dataset("Wlnu200to400",
@@ -1126,7 +2662,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu2"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=20.43*1.217,), 
+                xs=20.43,), 
 
             Dataset("Wlnu200to400_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-200to400_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -1135,7 +2671,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=20.43*1.217, 
+                xs=20.43, 
                 tags=["postEE"]),
 
             Dataset("Wlnu400to800",
@@ -1145,7 +2681,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu3"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=1.596*1.215,), 
+                xs=1.596,), 
 
             Dataset("Wlnu400to800_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-400to800_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -1154,7 +2690,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=1.596*1.215,
+                xs=1.596,
                 tags=["postEE"]),
 
             Dataset("Wlnu800to1500",
@@ -1164,7 +2700,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu4"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.1095*1.214,),
+                xs=0.1095,),
 
             Dataset("Wlnu800to1500_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-800to1500_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -1173,7 +2709,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.1095*1.214,
+                xs=0.1095,
                 tags=["postEE"]),
 
             Dataset("Wlnu1500to2500",
@@ -1183,7 +2719,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu5"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.006377*1.168,), 
+                xs=0.006377,), 
 
             Dataset("Wlnu1500to2500_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-1500to2500_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -1192,7 +2728,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.006377*1.168,
+                xs=0.006377,
                 tags=["postEE"]),
 
             Dataset("Wlnu2500to4000",
@@ -1202,7 +2738,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu6"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.0003464*1.148,),
+                xs=0.0003464,),
 
             Dataset("Wlnu2500to4000_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-2500to4000_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -1211,7 +2747,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.0003464*1.148,
+                xs=0.0003464,
                 tags=["postEE"]),
 
             Dataset("Wlnu4000to6000",
@@ -1221,7 +2757,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu7"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.00001074*1.102,), 
+                xs=0.00001074,), 
 
             Dataset("Wlnu4000to6000_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-4000to6000_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -1230,7 +2766,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.00001074*1.102,
+                xs=0.00001074,
                 tags=["postEE"]),
 
             Dataset("Wlnu6000",
@@ -1240,7 +2776,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu8"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.0000004198*1.084,), 
+                xs=0.0000004198,), 
 
             Dataset("Wlnu6000_postEE",
                 dataset="/WtoLNu-4Jets_MLNu-6000_TuneCP5_13p6TeV_madgraphMLM-pythia8/"
@@ -1249,7 +2785,7 @@ class Config(base_config):
                 process=self.processes.get("Wlnu_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.0000004198*1.084,
+                xs=0.0000004198,
                 tags=["postEE"]),
 
         
@@ -1262,7 +2798,7 @@ class Config(base_config):
                 process=self.processes.get("Wonshell"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=67710.0*0.9214,), # From SMP-22-017: Theoretical xs at NNNLO(QCD)xNLO(EWK) is 62390 pb ==> k-fact = 0.9214
+                xs=67710.0,), # From SMP-22-017: Theoretical xs at NNNLO(QCD)xNLO(EWK) is 62390 pb ==> k-fact (at plotting) = 0.9214 (0.9290 / 0.9119)
 
             Dataset("Wjets_postEE",
                 dataset="/WtoLNu-2Jets_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1271,7 +2807,7 @@ class Config(base_config):
                 process=self.processes.get("Wonshell_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=67710.0*0.9214,
+                xs=67710.0,
                 tags=["postEE"]),
 
             ## W + 4jets inclusive (LO) ##
@@ -1427,7 +2963,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="preEE",
-                xs=4379*0.9214,), # From GenXSecAnalyzer (NLO) x NNLO k-factor from inclusive W+2j sample
+                xs=4379,), # From GenXSecAnalyzer (NLO) // NNLO k-factor from inclusive W+2j sample at plotting
 
             Dataset("Wlnu_ptW-40to100_1J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-40to100_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1437,7 +2973,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="postEE",
-                xs=4379*0.9214,
+                xs=4379,
                 tags=["postEE"]),
             
             Dataset("Wlnu_ptW-40to100_2J",
@@ -1448,7 +2984,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="preEE",
-                xs=1604*0.9214,), # From GenXSecAnalyzer (NLO)
+                xs=1604,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-40to100_2J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-40to100_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1458,7 +2994,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="postEE",
-                xs=1604*0.9214,
+                xs=1604,
                 tags=["postEE"]),
             
             Dataset("Wlnu_ptW-100to200_1J",
@@ -1469,7 +3005,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="preEE",
-                xs=367.5*0.9214,), # From GenXSecAnalyzer (NLO)
+                xs=367.5,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-100to200_1J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-100to200_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1479,7 +3015,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="postEE",
-                xs=367.5*0.9214,
+                xs=367.5,
                 tags=["postEE"]),
             
             Dataset("Wlnu_ptW-100to200_2J",
@@ -1490,7 +3026,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="preEE",
-                xs=420.7*0.9214,), # From GenXSecAnalyzer (NLO)
+                xs=420.7,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-100to200_2J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-100to200_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1500,7 +3036,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":3},
                 runPeriod="postEE",
-                xs=420.7*0.9214,
+                xs=420.7,
                 tags=["postEE"]),
                     
             Dataset("Wlnu_ptW-200to400_1J",
@@ -1511,7 +3047,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="preEE",
-                xs=25.63*0.9214,), # From GenXSecAnalyzer (NLO)
+                xs=25.63,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-200to400_1J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-200to400_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1521,7 +3057,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="postEE",
-                xs=25.63*0.9214,
+                xs=25.63,
                 tags=["postEE"]),
             
             Dataset("Wlnu_ptW-200to400_2J",
@@ -1532,7 +3068,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="preEE",
-                xs=54.60*0.9214,), # From GenXSecAnalyzer (NLO)
+                xs=54.60,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-200to400_2J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-200to400_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1542,7 +3078,7 @@ class Config(base_config):
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 merging={"preselection":2},
                 runPeriod="postEE",
-                xs=54.60*0.9214,
+                xs=54.60,
                 tags=["postEE"]),
                                     
             Dataset("Wlnu_ptW-400to600_1J",
@@ -1552,7 +3088,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW4"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.873*0.9214,), # From GenXSecAnalyzer (NLO)
+                xs=0.873,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-400to600_1J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-400to600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1561,7 +3097,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.873*0.9214,
+                xs=0.873,
                 tags=["postEE"]),
             
             Dataset("Wlnu_ptW-400to600_2J",
@@ -1571,7 +3107,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW4"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=3.124*0.9214,), # From GenXSecAnalyzer (NLO)
+                xs=3.124,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-400to600_2J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-400to600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1580,7 +3116,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=3.124*0.9214,
+                xs=3.124,
                 tags=["postEE"]),
                                                 
             Dataset("Wlnu_ptW-600_1J",
@@ -1590,7 +3126,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW5"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.1025*0.9214,), # From GenXSecAnalyzer (NLO)
+                xs=0.1025,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-600_1J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-600_1J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1599,7 +3135,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.1025*0.9214,
+                xs=0.1025,
                 tags=["postEE"]),
             
             Dataset("Wlnu_ptW-600_2J",
@@ -1609,7 +3145,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW5"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="preEE",
-                xs=0.5262*0.9214,), # From GenXSecAnalyzer (NLO)
+                xs=0.5262,), # From GenXSecAnalyzer (NLO)
 
             Dataset("Wlnu_ptW-600_2J_postEE",
                 dataset="/WtoLNu-2Jets_PTLNu-600_2J_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/"
@@ -1618,7 +3154,7 @@ class Config(base_config):
                 process=self.processes.get("W_ptW_postEE"),
                 prefix="xrootd-es-cie.ciemat.es:1096//",
                 runPeriod="postEE",
-                xs=0.5262*0.9214,
+                xs=0.5262,
                 tags=["postEE"]),
             
             
@@ -3256,7 +4792,7 @@ class Config(base_config):
             Feature("deltaPhi_Corr", "acos(cos(Muon_phi.at(goodMuIdx) - CorrMET_phi))", binning=(40, 2.5, math.pi),
                 x_title=Label("#Delta#phi(p_{T}^{#mu}, p_{T}^{miss}) Corr."),
                 units="rad"),
-            
+
         ]
 
 
@@ -3498,54 +5034,286 @@ class Config(base_config):
 
         ]
 
+        ### For PDF plots ###
+        mTforPDF = [
+            Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )",
+                binning=(80, 80, 8000),
+                x_title=Label("m_{T}"),
+                units="GeV"),
+        ]
+
+        ### For ScaleMap Region Population ###
+        etas = [-2.4, -2.1, -1.2, 0, 1.2, 2.1, 2.4]
+        phis_deg = [-180, -60, 60, 180]
+        phis = [-math.pi, -math.pi/3.0, math.pi/3.0, math.pi]
+        axis = []
+        selections = []
+
+        for i in range(len(etas)-1):
+            for j in range(len(phis)-1):
+                axis.append(str(etas[i])+" < #eta < "+str(etas[i+1]) + " , " + str(phis_deg[j])+" < #phi < "+str(phis_deg[j+1]))
+                selections.append( "(Muon_eta.at(goodMuIdx) > " + str(etas[i]) + " && Muon_eta.at(goodMuIdx) <= " + str(etas[i+1]) + " && Muon_phi.at(goodMuIdx) > " + str(phis[j]) + " && Muon_phi.at(goodMuIdx) <= " + str(phis[j+1]) + ")" )
+                
+        mT_regions = []
+        
+        for x,sel in enumerate(selections):
+            mT_regions.append( Feature("mT_%s" %x, "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )", 
+            binning=(70, 80, 7000),
+            selection=sel,
+            x_title=Label("m_{T}  " + axis[x]),
+            units="GeV"), )
+
+            
         #### mT for limit extraction ####
+        binningResolution = [400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3300, 3600, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000]
+        lastBinMerged = [400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3300, 3600, 4000, 9000]
+        binningErrorPt = [400, 500, 600, 700, 800, 900, 1000, 1200, 1400, 1700, 2000, 2400, 3000, 3600, 5000, 6000, 7000, 9000]
         
         mT_limit = [
 
-            Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )", binning=(67, 300, 7000),
-                systematics=["MET_typeI"],
+            # Type-I + TuneP
+            #Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
+            #    binning=(69, 120, 7000),
+            #    systematics=["CMS_scale_met_2022"],
+            #    x_title=Label("m_{T}"),
+            #    units="GeV"),
+
+            # ONLY Type-I
+            Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=(66, 400, 7000),
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+            
+            Feature("mT_binRes", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=binningResolution,
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+            
+            Feature("mT_lastBinMerge", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=lastBinMerged,
+                systematics=["CMS_scale_met_2022"],
                 x_title=Label("m_{T}"),
                 units="GeV"),
 
+            Feature("mT_pTerror", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=binningErrorPt,
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+
+            ## mT with QCD cleaning (MET-mu cut) ##
+
+            Feature("mT_reference", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=binningErrorPt,
+                systematics=["CMS_scale_met_2022"],
+                selection="METnoMu_pt > 250 ? dPhi_METnoMu > 0.4 : 1",
+                x_title=Label("m_{T}"),
+                units="GeV"),
+                                    
+            Feature("mT_tight", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=binningErrorPt,
+                systematics=["CMS_scale_met_2022"],
+                selection="METnoMu_pt > 150 ? dPhi_METnoMu > 0.2 : 1",
+                x_title=Label("m_{T}"),
+                units="GeV"),
+
+            Feature("mT_tight2", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )",
+                binning=(86, 400, 9000),
+                selection="METnoMu_pt > 150 ? dPhi_METnoMu > 0.2 : 1",
+                x_title=Label("m_{T}"),
+                units="GeV"),
+            
+            ## mTs for convenor checks ##
+            
+            Feature("mT_200_eta2.0", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=(68, 200, 7000),
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+                        
+            Feature("mT_300_eta2.0", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=(67, 300, 7000),
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+                        
+            Feature("mT_400_eta2.0", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=(66, 400, 7000),
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+            
+            # mT for Goodness of Fit
+            Feature("mT_GoF_200", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=(18, 200, 2000),
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+
+            Feature("mT_GoF_300", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=(17, 300, 2000),
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+            
+            Feature("mT_GoF_400", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=(16, 400, 2000),
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+            
+            # mT for Goodness of Fit --> |eta| < 2.0
+            Feature("mT_GoF_200_eta2.0", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=(18, 200, 2000),
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+
+            Feature("mT_GoF_300_eta2.0", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=(17, 300, 2000),
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+            
+            Feature("mT_GoF_400_eta2.0", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+                binning=(16, 400, 2000),
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+            
+            
             ## Weights for systematics ##
             Feature("puWeight", "puWeight", binning=(20, 0, 2),
-                systematics=["pileup"],
+                systematics=["CMS_pileup"],
                 x_title=Label("puWeight")),
 
             Feature("mu_recoSF_weight", "mu_recoSF_weight", binning=(20, 0, 2),
-                systematics=["muRecoSF"],
+                systematics=["CMS_eff_m_reco_2022"],
                 x_title=Label("mu_recoSF_weight")),
             
             Feature("mu_idSF_weight", "mu_idSF_weight", binning=(20, 0, 2),
-                systematics=["muIdSF"],
+                systematics=["CMS_eff_m_id_2022"],
                 x_title=Label("mu_idSF_weight")),
             
             Feature("mu_isoSF_weight", "mu_isoSF_weight", binning=(20, 0, 2),
-                systematics=["muIsoSF"],
+                systematics=["CMS_eff_m_iso_2022"],
                 x_title=Label("mu_isoSF_weight")),
             
             Feature("mu_hltSF_weight", "mu_hltSF_weight", binning=(20, 0, 2),
-                systematics=["muTrigSF"],
+                systematics=["CMS_eff_m_trigger_2022"],
                 x_title=Label("mu_hltSF_weight")),
 
             Feature("btag_weight", "btag_weight", binning=(20, 0, 2),
-                systematics=["btagSF"],
+                systematics=["CMS_eff_b_2022"],
                 x_title=Label("btag_weight")),
 
+            Feature("Wkfact", "Wkfact", binning=(20, 0, 2),
+                systematics=["CMS_EXO24021_W_kfactor"],
+                x_title=Label("W k-factor")),
+
+            Feature("PDFweight_total", "PDFweight_total", binning=(20, 0, 2),
+                systematics=["pdf_qqbar"],
+                x_title=Label("PDF uncertainty")),
+            
+            Feature("muonScale", "muonScale", binning=(20, 0, 2),
+                systematics=["CMS_scale_m_2022"],
+                x_title=Label("Muon p_{T} scale")),
+
             ## Features for non-weight systematics ##
-            Feature("CorrMET_pt", "CorrMET_pt", binning=(50, 35, 4000),
-                systematics=["MET_typeI"],
+            # Type-I + TuneP
+            #Feature("CorrMET_pt", "CorrMET_pt", binning=(50, 35, 4000),
+            #    systematics=["CMS_scale_met_2022"],
+            #    x_title=Label("p_{T}^{miss}"),
+            #    units="GeV"),
+
+            #Feature("CorrMET_phi", "CorrMET_phi", binning=(50, -math.pi, math.pi),
+            #    systematics=["CMS_scale_met_2022"],
+            #    x_title=Label("p_{T}^{miss} #phi"),
+            #    units="rad"),
+
+            # ONLY Type-I
+            Feature("TypeICorrMET_pt", "TypeICorrMET_pt", binning=(50, 35, 4000),
+                systematics=["CMS_scale_met_2022"],
                 x_title=Label("p_{T}^{miss}"),
                 units="GeV"),
 
-            Feature("CorrMET_phi", "CorrMET_phi", binning=(50, -math.pi, math.pi),
-                systematics=["MET_typeI"],
+            Feature("TypeICorrMET_phi", "TypeICorrMET_phi", binning=(50, -math.pi, math.pi),
+                systematics=["CMS_scale_met_2022"],
                 x_title=Label("p_{T}^{miss} #phi"),
-                units="rad"),
+                units="rad"),            
 
         ]
+
+        #### QCD checks: MET no muon ####
+        
+        MET_noMuon = [
+
+            Feature("METnoMu_pt", "METnoMu_pt", binning=(40, 0, 2000),
+                x_title=Label("p_{T}^{miss} - #mu"),
+                units="GeV"),
+
+            Feature("METnoMu_phi", "METnoMu_phi", binning=(40, -math.pi, math.pi),
+                x_title=Label("p_{T}^{miss} - #mu #phi "),
+                units="rad"),
+
+            Feature("dPhi_METnoMu", "dPhi_METnoMu", binning=(40, 0, math.pi),
+                x_title=Label("#Delta#phi(p_{T}^{#mu}, p_{T}^{miss} - #mu)"),
+                ),
             
-        return ObjectCollection(features_presel)
+            Feature("muon_eta", "Muon_eta.at(goodMuIdx)", binning=(40, -2.4, 2.4),
+                x_title=Label("#mu #eta")),
+
+            Feature("muon_phi", "Muon_phi.at(goodMuIdx)", binning=(40, -math.pi, math.pi),
+                x_title=Label("#mu #phi"),
+                units="rad"),
+
+            Feature("muon_pt", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)", binning=(50, 50, 3000),
+                x_title=Label("p_{T}^{#mu}"),
+                units="GeV"),
+            
+        ]
+
+        QCD_reduction = [
+            
+            Feature("mT_orig", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )",
+                binning=(86, 400, 9000),
+                x_title=Label("m_{T}"),
+                units="GeV"),
+                        
+            Feature("mT_reference", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )",
+                binning=(86, 400, 9000),
+                selection="METnoMu_pt > 250 ? dPhi_METnoMu > 0.4 : 1",
+                x_title=Label("m_{T}"),
+                units="GeV"),
+                                    
+            Feature("mT_loose", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )",
+                binning=(86, 400, 9000),
+                selection="METnoMu_pt > 500 ? dPhi_METnoMu > 0.4 : 1",
+                x_title=Label("m_{T}"),
+                units="GeV"),
+                                    
+            Feature("mT_tight", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )",
+                binning=(86, 400, 9000),
+                selection="METnoMu_pt > 150 ? dPhi_METnoMu > 0.4 : 1",
+                x_title=Label("m_{T}"),
+                units="GeV"),
+                                    
+            Feature("mT_tightDphi", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )",
+                binning=(86, 400, 9000),
+                selection="METnoMu_pt > 250 ? dPhi_METnoMu > 0.2 : 1",
+                x_title=Label("m_{T}"),
+                units="GeV"),
+        ]
+            
+        return ObjectCollection(mT_limit)
 
     def add_versions(self):
         versions = {}
@@ -3557,21 +5325,29 @@ class Config(base_config):
 
         weights.total_events_weights = ["genWeight", "puWeight"]
 
-        weights.preselection  = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_hltSF_weight", "mu_recoSF_weight", "btag_weight"]
-        weights.kin_selection = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_hltSF_weight", "mu_recoSF_weight"]#, "HTkfact"]
+        weights.preselection  = ["genWeight", "puWeight", "mu_idSF_weight", "mu_isoSF_weight", "mu_hltSF_weight", "mu_recoSF_weight", "btag_weight", "Wkfact", "PDFweight_total", "muonScale"]
+        
+        ### For PDF plots ###
+        #weights.preselection  = ["genWeight", "puWeight", "PDFweight"]
 
         return weights
 
     def add_systematics(self):
         systematics = [
-            Systematic("pileup", ""),
-            Systematic("muRecoSF", ""),
-            Systematic("muIdSF", ""),
-            Systematic("muIsoSF", ""),
-            Systematic("muTrigSF", ""),
-            Systematic("btagSF", ""),
+            Systematic("CMS_pileup", ""),
+            Systematic("CMS_eff_m_reco_2022", ""),
+            Systematic("CMS_eff_m_id_2022", ""),
+            Systematic("CMS_eff_m_iso_2022", ""),
+            Systematic("CMS_eff_m_trigger_2022", ""),
+            Systematic("CMS_scale_m_2022", ""),
+            Systematic("CMS_eff_b_2022", ""),
+            Systematic("CMS_EXO24021_W_kfactor", ""),
+            Systematic("pdf_qqbar", ""),
 
-            Systematic("MET_typeI",""),
+            # Type-I + TuneP
+            #Systematic("CMS_scale_met_2022",""),
+            # ONLY Type-I
+            Systematic("CMS_scale_met_2022","", Up="_JESTotalUp", Down="_JESTotalDown"),
         ]
 
         return ObjectCollection(systematics)

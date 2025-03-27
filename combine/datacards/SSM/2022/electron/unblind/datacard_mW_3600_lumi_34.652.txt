@@ -1,0 +1,31 @@
+# channels
+imax *
+# backgrounds
+jmax *
+# nuisance
+kmax *
+---------------
+shapes * * histograms_mW_3600_lumi_34.652.root $PROCESS $PROCESS_$SYSTEMATIC
+---------------
+bin channel
+observation 8802.0
+---------------
+bin    channel channel channel channel channel channel
+process Wprime3600 W_boson DiBoson Z_boson Top QCD
+process 0 1 2 3 4 5
+rate    23.2364445942  7446.814369 264.011228 54.570398 1138.939920 43.326882
+---------------
+CMS_pileup_ shape 1 1 1 1 1 1
+CMS_eff_e_trigger_2022_ shape 1 1 1 1 1 1
+pdf_qqbar_ shape 0 1 1 1 1 1
+CMS_eff_e_id_2022_ shape 1 1 1 1 1 1
+qcd_scale_ shape 0 1 1 1 1 1
+CMS_scale_met_2022_ shape 1 1 1 1 1 1
+CMS_EXO24021_W_kfactor_ shape 0 1 0 0 0 0
+cross_section_ttbar lnN 0 0 0 0 1.050000 0
+lumi_13p6TeV_2022 lnN 1.014000 1.014000 1.014000 1.014000 1.014000 1.014000
+cross_section_QCD lnN 0 0 0 0 0 1.500000
+CMS_EXO24021_Wprime_PDF+as lnN 1.099000 0 0 0 0 0
+cross_section_VV lnN 0 0 1.040000 0 0 0
+cross_section_Z lnN 0 0 0 1.020000 0 0
+* autoMCStats 10

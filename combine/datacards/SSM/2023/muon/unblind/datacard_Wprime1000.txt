@@ -1,0 +1,32 @@
+imax    1 number of bins
+jmax    5 number of processes minus 1
+kmax    * number of nuisance parameters
+----------------------------------------------------------------------------------------------------------------------------
+shapes data_obs * /eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/SSMlimit_mT400_Unblind/root/mT__pg_SSMlimits2023.root histograms/PromptData2023
+shapes * * /eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/SSMlimit_mT400_Unblind/root/mT__pg_SSMlimits2023.root histograms/$PROCESS histograms/$PROCESS_$SYSTEMATIC
+----------------------------------------------------------------------------------------------------------------------------
+bin          muon_channel   
+observation  8739
+-----------------------------------------------------------------------------------------------------------------------------
+bin                                   muon_channel   muon_channel   muon_channel   muon_channel   muon_channel   muon_channel
+process                               Wprime1000     W_boson        Top            Z_boson        DiBoson        QCD       
+process                               0              1              2              3              4              5 
+rate                                  18.354165      6769.4524      604.66850      306.22792      332.14069      81.002024
+-----------------------------------------------------------------------------------------------------------------------------
+cross_section_ttbar         lnN       -              -              1.050          -              -              -
+cross_section_Z             lnN       -              -              -              1.020          -              -
+cross_section_VV            lnN       -              -              -              -              1.040          -
+cross_section_QCD           lnN       -              -              -              -              -              1.50
+lumi_13p6TeV_2023           lnN       1.013          1.013          1.013          1.013          1.013          1.013
+CMS_EXO24021_Wprime_PDF+as  lnN       1.026          -              -              -              -              -
+CMS_pileup_                 shape     1              1              1              1              1              1
+CMS_eff_m_reco_2023_        shape     1              1              1              1              1              1
+CMS_eff_m_id_2023_          shape     1              1              1              1              1              1
+CMS_eff_m_iso_2023_         shape     1              1              1              1              1              1
+CMS_eff_m_trigger_2023_     shape     1              1              1              1              1              1
+CMS_eff_b_2023_             shape     1              1              1              1              1              1
+CMS_scale_met_2023_         shape     1              1              1              1              1              1
+CMS_scale_m_2023_           shape     1              1              1              1              1              1
+CMS_EXO24021_W_kfactor_     shape     -              1              -              -              -              -
+pdf_qqbar_                  shape     -              1              1              1              1              -
+* autoMCStats 10
