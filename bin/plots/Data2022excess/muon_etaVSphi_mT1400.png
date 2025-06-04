@@ -1,0 +1,84 @@
+{
+//========= Macro generated from object: muonEtaPhi/
+//========= by ROOT version6.34.04
+   
+   TH2F *muonEtaPhi__1 = new TH2F("muonEtaPhi__1","",20,-2.5,2.5,20,-3.2,3.2);
+   muonEtaPhi__1->SetBinContent(37,1);
+   muonEtaPhi__1->SetBinContent(50,1);
+   muonEtaPhi__1->SetBinContent(54,1);
+   muonEtaPhi__1->SetBinContent(57,1);
+   muonEtaPhi__1->SetBinContent(81,1);
+   muonEtaPhi__1->SetBinContent(93,1);
+   muonEtaPhi__1->SetBinContent(96,1);
+   muonEtaPhi__1->SetBinContent(97,1);
+   muonEtaPhi__1->SetBinContent(99,1);
+   muonEtaPhi__1->SetBinContent(101,1);
+   muonEtaPhi__1->SetBinContent(115,4);
+   muonEtaPhi__1->SetBinContent(120,3);
+   muonEtaPhi__1->SetBinContent(122,1);
+   muonEtaPhi__1->SetBinContent(135,2);
+   muonEtaPhi__1->SetBinContent(139,1);
+   muonEtaPhi__1->SetBinContent(141,1);
+   muonEtaPhi__1->SetBinContent(143,1);
+   muonEtaPhi__1->SetBinContent(144,2);
+   muonEtaPhi__1->SetBinContent(145,1);
+   muonEtaPhi__1->SetBinContent(156,1);
+   muonEtaPhi__1->SetBinContent(163,2);
+   muonEtaPhi__1->SetBinContent(164,1);
+   muonEtaPhi__1->SetBinContent(165,1);
+   muonEtaPhi__1->SetBinContent(166,1);
+   muonEtaPhi__1->SetBinContent(168,1);
+   muonEtaPhi__1->SetBinContent(169,1);
+   muonEtaPhi__1->SetBinContent(173,1);
+   muonEtaPhi__1->SetBinContent(189,2);
+   muonEtaPhi__1->SetBinContent(205,1);
+   muonEtaPhi__1->SetBinContent(206,1);
+   muonEtaPhi__1->SetBinContent(213,1);
+   muonEtaPhi__1->SetBinContent(224,2);
+   muonEtaPhi__1->SetBinContent(226,1);
+   muonEtaPhi__1->SetBinContent(228,2);
+   muonEtaPhi__1->SetBinContent(230,1);
+   muonEtaPhi__1->SetBinContent(236,1);
+   muonEtaPhi__1->SetBinContent(249,1);
+   muonEtaPhi__1->SetBinContent(252,1);
+   muonEtaPhi__1->SetBinContent(257,1);
+   muonEtaPhi__1->SetBinContent(265,1);
+   muonEtaPhi__1->SetBinContent(270,1);
+   muonEtaPhi__1->SetBinContent(279,2);
+   muonEtaPhi__1->SetBinContent(296,1);
+   muonEtaPhi__1->SetBinContent(299,1);
+   muonEtaPhi__1->SetBinContent(314,1);
+   muonEtaPhi__1->SetBinContent(316,1);
+   muonEtaPhi__1->SetBinContent(317,1);
+   muonEtaPhi__1->SetBinContent(319,1);
+   muonEtaPhi__1->SetBinContent(321,1);
+   muonEtaPhi__1->SetBinContent(326,1);
+   muonEtaPhi__1->SetBinContent(343,2);
+   muonEtaPhi__1->SetBinContent(360,1);
+   muonEtaPhi__1->SetBinContent(368,2);
+   muonEtaPhi__1->SetBinContent(384,1);
+   muonEtaPhi__1->SetBinContent(385,1);
+   muonEtaPhi__1->SetBinContent(388,1);
+   muonEtaPhi__1->SetBinContent(393,1);
+   muonEtaPhi__1->SetBinContent(404,1);
+   muonEtaPhi__1->SetBinContent(421,1);
+   muonEtaPhi__1->SetBinContent(424,2);
+   muonEtaPhi__1->SetBinContent(432,1);
+   muonEtaPhi__1->SetBinContent(447,1);
+   muonEtaPhi__1->SetBinContent(459,1);
+   muonEtaPhi__1->SetEntries(78);
+
+   Int_t ci;      // for color index setting
+   TColor *color; // for color definition with alpha
+   ci = TColor::GetColor("#000099");
+   muonEtaPhi__1->SetLineColor(ci);
+   muonEtaPhi__1->GetXaxis()->SetLabelFont(42);
+   muonEtaPhi__1->GetXaxis()->SetTitleOffset(1);
+   muonEtaPhi__1->GetXaxis()->SetTitleFont(42);
+   muonEtaPhi__1->GetYaxis()->SetLabelFont(42);
+   muonEtaPhi__1->GetYaxis()->SetTitleFont(42);
+   muonEtaPhi__1->GetZaxis()->SetLabelFont(42);
+   muonEtaPhi__1->GetZaxis()->SetTitleOffset(1);
+   muonEtaPhi__1->GetZaxis()->SetTitleFont(42);
+   muonEtaPhi__1->Draw("");
+}

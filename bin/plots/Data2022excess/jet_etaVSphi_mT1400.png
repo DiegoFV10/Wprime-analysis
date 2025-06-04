@@ -1,0 +1,77 @@
+{
+//========= Macro generated from object: jetEtaPhi/
+//========= by ROOT version6.34.04
+   
+   TH2F *jetEtaPhi__2 = new TH2F("jetEtaPhi__2","",20,-2.5,2.5,20,-3.2,3.2);
+   jetEtaPhi__2->SetBinContent(50,1);
+   jetEtaPhi__2->SetBinContent(58,1);
+   jetEtaPhi__2->SetBinContent(60,1);
+   jetEtaPhi__2->SetBinContent(68,1);
+   jetEtaPhi__2->SetBinContent(76,1);
+   jetEtaPhi__2->SetBinContent(77,1);
+   jetEtaPhi__2->SetBinContent(80,1);
+   jetEtaPhi__2->SetBinContent(82,1);
+   jetEtaPhi__2->SetBinContent(91,1);
+   jetEtaPhi__2->SetBinContent(97,1);
+   jetEtaPhi__2->SetBinContent(105,2);
+   jetEtaPhi__2->SetBinContent(114,1);
+   jetEtaPhi__2->SetBinContent(116,1);
+   jetEtaPhi__2->SetBinContent(119,1);
+   jetEtaPhi__2->SetBinContent(120,1);
+   jetEtaPhi__2->SetBinContent(125,1);
+   jetEtaPhi__2->SetBinContent(130,1);
+   jetEtaPhi__2->SetBinContent(140,1);
+   jetEtaPhi__2->SetBinContent(146,1);
+   jetEtaPhi__2->SetBinContent(162,1);
+   jetEtaPhi__2->SetBinContent(164,2);
+   jetEtaPhi__2->SetBinContent(167,1);
+   jetEtaPhi__2->SetBinContent(178,1);
+   jetEtaPhi__2->SetBinContent(184,1);
+   jetEtaPhi__2->SetBinContent(186,1);
+   jetEtaPhi__2->SetBinContent(223,1);
+   jetEtaPhi__2->SetBinContent(230,1);
+   jetEtaPhi__2->SetBinContent(253,1);
+   jetEtaPhi__2->SetBinContent(257,2);
+   jetEtaPhi__2->SetBinContent(266,1);
+   jetEtaPhi__2->SetBinContent(277,1);
+   jetEtaPhi__2->SetBinContent(282,1);
+   jetEtaPhi__2->SetBinContent(296,1);
+   jetEtaPhi__2->SetBinContent(297,1);
+   jetEtaPhi__2->SetBinContent(320,2);
+   jetEtaPhi__2->SetBinContent(321,1);
+   jetEtaPhi__2->SetBinContent(341,1);
+   jetEtaPhi__2->SetBinContent(346,1);
+   jetEtaPhi__2->SetBinContent(356,1);
+   jetEtaPhi__2->SetBinContent(359,2);
+   jetEtaPhi__2->SetBinContent(364,1);
+   jetEtaPhi__2->SetBinContent(365,2);
+   jetEtaPhi__2->SetBinContent(377,1);
+   jetEtaPhi__2->SetBinContent(379,1);
+   jetEtaPhi__2->SetBinContent(380,1);
+   jetEtaPhi__2->SetBinContent(381,1);
+   jetEtaPhi__2->SetBinContent(382,1);
+   jetEtaPhi__2->SetBinContent(385,1);
+   jetEtaPhi__2->SetBinContent(387,1);
+   jetEtaPhi__2->SetBinContent(402,2);
+   jetEtaPhi__2->SetBinContent(409,1);
+   jetEtaPhi__2->SetBinContent(411,1);
+   jetEtaPhi__2->SetBinContent(422,1);
+   jetEtaPhi__2->SetBinContent(425,1);
+   jetEtaPhi__2->SetBinContent(429,1);
+   jetEtaPhi__2->SetBinContent(446,1);
+   jetEtaPhi__2->SetBinContent(450,1);
+   jetEtaPhi__2->SetBinContent(453,1);
+   jetEtaPhi__2->SetEntries(65);
+
+   ci = TColor::GetColor("#000099");
+   jetEtaPhi__2->SetLineColor(ci);
+   jetEtaPhi__2->GetXaxis()->SetLabelFont(42);
+   jetEtaPhi__2->GetXaxis()->SetTitleOffset(1);
+   jetEtaPhi__2->GetXaxis()->SetTitleFont(42);
+   jetEtaPhi__2->GetYaxis()->SetLabelFont(42);
+   jetEtaPhi__2->GetYaxis()->SetTitleFont(42);
+   jetEtaPhi__2->GetZaxis()->SetLabelFont(42);
+   jetEtaPhi__2->GetZaxis()->SetTitleOffset(1);
+   jetEtaPhi__2->GetZaxis()->SetTitleFont(42);
+   jetEtaPhi__2->Draw("");
+}

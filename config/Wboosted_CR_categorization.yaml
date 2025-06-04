@@ -11,18 +11,6 @@ HLT Trigger path:
     parameters:
         year: self.config.year
 
-W on-shell Stitching:
-    name: Wonshell_Overlap
-    path: Wprime.Modules.Wboson_Stitching
-    parameters:
-        isWjets: self.dataset.process.get_aux('isWjets', False)
-
-W boosted Stitching:
-    name: Wboosted_Overlap
-    path: Wprime.Modules.Wboson_Stitching
-    parameters:
-        isWboost: self.dataset.process.get_aux('isWboost', False)
-
 ECAL tower filter:
     name: ECALTowerFilter
     path: Wprime.Modules.METfilters
@@ -87,9 +75,9 @@ Jet cleanup:
     name: jetCleanup
     path: Wprime.Modules.plotUtils
 
-APPLY KINEMATIC SELECTION:
-    name: kinSel
-    path: Wprime.Modules.kinematicSelection
+APPLY BOOSTED-W CONTROL REGION:
+    name: Wboosted
+    path: Wprime.Modules.WboostedCR
     parameters:
         year: self.config.year
         runPeriod: self.dataset.runPeriod

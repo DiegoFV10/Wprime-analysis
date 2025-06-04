@@ -70,6 +70,7 @@ action() {
 	[ -z "$CMT_STORE_EOS" ] && export CMT_STORE_EOS="/pnfs/ciemat.es/data/cms/store/user/diegof/cmt"
     elif [ -n "$CMT_CERN_USER" ]; then
 	[ -z "$CMT_STORE_EOS" ] && export CMT_STORE_EOS="/eos/user/${CMT_CERN_USER:0:1}/$CMT_CERN_USER/cmt"
+	#[ -z "$CMT_STORE_EOS" ] && export CMT_STORE_EOS="/eos/user/d/delacruz/for_Diego" # For Begoña
 	#[ -z "$CMT_STORE_EOS_MUOPOG" ] && export CMT_STORE_EOS_MUOPOG="/eos/cms/store/group/phys_muon/diegof/cmt" # UNCOMMENT FOR MUOPOG
     fi
     [ -z "$CMT_STORE" ] && export CMT_STORE="$CMT_STORE_EOS"
@@ -403,7 +404,8 @@ action() {
 	if [ -n "$CMT_STORE_EOS_MUOPOG" ]; then
 	    export LAW_TARGET_TMP_DIR="/eos/cms/store/group/phys_muon/diegof/tmp/"
 	else
-	    export LAW_TARGET_TMP_DIR="/eos/home-d/diegof/tmp/"
+	    #export LAW_TARGET_TMP_DIR="/eos/home-d/diegof/tmp/"
+	    export LAW_TARGET_TMP_DIR="/eos/cms/store/group/phys_muon/diegof/tmp/"
 	fi
     else
         export LAW_TARGET_TMP_DIR="/pnfs/ciemat.es/data/cms/store/user/diegof/tmp/"

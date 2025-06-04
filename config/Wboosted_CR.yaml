@@ -51,12 +51,18 @@ Jet cleanup:
     name: jetCleanup
     path: Wprime.Modules.plotUtils
 
-APPLY KINEMATIC SELECTION:
-    name: kinSel
-    path: Wprime.Modules.kinematicSelection
+APPLY BOOSTED-W CONTROL REGION:
+    name: Wboosted
+    path: Wprime.Modules.WboostedCR
     parameters:
         year: self.config.year
         runPeriod: self.dataset.runPeriod
+
+DO GEN-MATCH FOR GEN-PT/RECO-PT:
+    name: genMatch
+    path: Wprime.Modules.WboostedCR
+    parameters:
+        isWboost: self.dataset.process.get_aux('isWboost', False)
 
 PUweight from correctionlib:
     name: puWeightRun3

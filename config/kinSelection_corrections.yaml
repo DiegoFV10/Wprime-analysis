@@ -19,6 +19,8 @@ Type-I MET correction:
 TuneP MET correction:
     name: TunePcorrectedMET
     path: Wprime.Modules.METcorrections
+    parameters:
+        isMC: self.dataset.process.isMC
 
 MET filters:
     name: METfilter

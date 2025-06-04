@@ -372,7 +372,7 @@ void limitCurve(){
   //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "unblind");
   //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "unblind_binRes");
   //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "unblind_lastBinMerge");
-  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "unblind_pTerror");
+  plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "unblind_pTerror");
   //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "unblind_QCDloose");
   //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "2022", "muon", "unblind_QCDtight");
   
@@ -387,6 +387,6 @@ void limitCurve(){
 
   // Electron & muon combined
   //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "22+23", "ele+mu", "mT200");
-  plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "22+23", "ele+mu", "unblind_pTerror");
+  //plotLimits("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/outputs/", "SSM", "22+23", "ele+mu", "unblind_pTerror");
   
 }

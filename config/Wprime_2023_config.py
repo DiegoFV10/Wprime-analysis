@@ -4615,88 +4615,20 @@ class Config(base_config):
         mT_limit = [
 
             # Type-I + TuneP
-            #Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
-            #    binning=(69, 120, 7000),
+            Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
+                binning=binningErrorPt,
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
+                systematics=["CMS_scale_met_2023"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+
+            # ONLY Type-I
+            #Feature("mT_pTerror", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
+            #    binning=binningErrorPt,
+            #    selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
             #    systematics=["CMS_scale_met_2023"],
             #    x_title=Label("m_{T}"),
             #    units="GeV"),
-
-            # ONLY Type-I
-            Feature("mT_binRes", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-                binning=binningResolution,
-                systematics=["CMS_scale_met_2023"],
-                x_title=Label("m_{T}"),
-                units="GeV"),
-            
-            Feature("mT_pTerror", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-                binning=binningErrorPt,
-                systematics=["CMS_scale_met_2023"],
-                x_title=Label("m_{T}"),
-                units="GeV"),
-
-            ## mTs for convenor checks ##
-            
-            Feature("mT_200_eta2.0", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-                binning=(68, 200, 7000),
-                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
-                systematics=["CMS_scale_met_2023"],
-                x_title=Label("m_{T}"),
-                units="GeV"),
-                        
-            Feature("mT_300_eta2.0", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-                binning=(67, 300, 7000),
-                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
-                systematics=["CMS_scale_met_2023"],
-                x_title=Label("m_{T}"),
-                units="GeV"),
-                        
-            Feature("mT_400_eta2.0", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-                binning=(66, 400, 7000),
-                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
-                systematics=["CMS_scale_met_2023"],
-                x_title=Label("m_{T}"),
-                units="GeV"),
-            
-            # mT for Goodness of Fit
-            Feature("mT_GoF_200", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-                binning=(18, 200, 2000),
-                systematics=["CMS_scale_met_2023"],
-                x_title=Label("m_{T}"),
-                units="GeV"),
-
-            Feature("mT_GoF_300", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-                binning=(17, 300, 2000),
-                systematics=["CMS_scale_met_2023"],
-                x_title=Label("m_{T}"),
-                units="GeV"),
-            
-            Feature("mT_GoF_400", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-                binning=(16, 400, 2000),
-                systematics=["CMS_scale_met_2023"],
-                x_title=Label("m_{T}"),
-                units="GeV"),
-            
-            # mT for Goodness of Fit --> |eta| < 2.0
-            Feature("mT_GoF_200_eta2.0", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-                binning=(18, 200, 2000),
-                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
-                systematics=["CMS_scale_met_2023"],
-                x_title=Label("m_{T}"),
-                units="GeV"),
-
-            Feature("mT_GoF_300_eta2.0", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-                binning=(17, 300, 2000),
-                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
-                systematics=["CMS_scale_met_2023"],
-                x_title=Label("m_{T}"),
-                units="GeV"),
-            
-            Feature("mT_GoF_400_eta2.0", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-                binning=(16, 400, 2000),
-                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
-                systematics=["CMS_scale_met_2023"],
-                x_title=Label("m_{T}"),
-                units="GeV"),
 
 
             ## Weights for systematics ##
@@ -4738,30 +4670,70 @@ class Config(base_config):
 
             ## Features for non-weight systematics ##
             # Type-I + TuneP
-            #Feature("CorrMET_pt", "CorrMET_pt", binning=(50, 35, 4000),
-            #    systematics=["CMS_scale_met_2023"],
-            #    x_title=Label("p_{T}^{miss}"),
-            #    units="GeV"),
-
-            #Feature("CorrMET_phi", "CorrMET_phi", binning=(50, -math.pi, math.pi),
-            #    systematics=["CMS_scale_met_2023"],
-            #    x_title=Label("p_{T}^{miss} #phi"),
-            #    units="rad"),
-
-            # ONLY Type-I
-            Feature("TypeICorrMET_pt", "TypeICorrMET_pt", binning=(50, 35, 4000),
+            Feature("CorrMET_pt", "CorrMET_pt", binning=(50, 35, 4000),
                 systematics=["CMS_scale_met_2023"],
                 x_title=Label("p_{T}^{miss}"),
                 units="GeV"),
 
-            Feature("TypeICorrMET_phi", "TypeICorrMET_phi", binning=(50, -math.pi, math.pi),
+            Feature("CorrMET_phi", "CorrMET_phi", binning=(50, -math.pi, math.pi),
                 systematics=["CMS_scale_met_2023"],
                 x_title=Label("p_{T}^{miss} #phi"),
                 units="rad"),
+
+            # ONLY Type-I
+            #Feature("TypeICorrMET_pt", "TypeICorrMET_pt", binning=(50, 35, 4000),
+            #    systematics=["CMS_scale_met_2023"],
+            #    x_title=Label("p_{T}^{miss}"),
+            #    units="GeV"),
+
+            #Feature("TypeICorrMET_phi", "TypeICorrMET_phi", binning=(50, -math.pi, math.pi),
+            #    systematics=["CMS_scale_met_2023"],
+            #    x_title=Label("p_{T}^{miss} #phi"),
+            #    units="rad"),
             
         ]
-        
-        return ObjectCollection(mT_limit)
+
+        check_AbsIso = [
+
+            Feature("mT_Ref", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) )",
+                binning=(35, 80, 7000),
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
+                x_title=Label("m_{T} Ref."),
+                units="GeV"),
+            
+            Feature("mT_RelIso", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) )",
+                binning=(35, 80, 7000),
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0 && Muon_tkRelIso.at(goodMuIdx) < 0.1",
+                x_title=Label("m_{T} Ref."),
+                units="GeV"),
+                        
+            Feature("mT_Iso10", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) )",
+                binning=(35, 80, 7000),
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0 && Muon_tkRelIso.at(goodMuIdx)*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) < 10.0",
+                x_title=Label("m_{T} AbsIso < 10"),
+                units="GeV"),
+                                   
+            Feature("mT_Iso20", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) )",
+                binning=(35, 80, 7000),
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0 && Muon_tkRelIso.at(goodMuIdx)*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) < 20.0",
+                x_title=Label("m_{T} AbsIso < 20"),
+                units="GeV"),
+                                    
+            Feature("mT_Iso50", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) )",
+                binning=(35, 80, 7000),
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0 && Muon_tkRelIso.at(goodMuIdx)*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) < 50.0",
+                x_title=Label("m_{T} AbsIso < 50"),
+                units="GeV"),
+                                    
+            Feature("mT_Iso100", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) )",
+                binning=(35, 80, 7000),
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0 && Muon_tkRelIso.at(goodMuIdx)*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) < 100.0",
+                x_title=Label("m_{T} AbsIso < 100"),
+                units="GeV"),
+            
+        ]
+            
+        return ObjectCollection(check_AbsIso)
 
     def add_versions(self):
         versions = {}
@@ -4790,9 +4762,9 @@ class Config(base_config):
             Systematic("pdf_qqbar", ""),
 
             # Type-I + TuneP
-            #Systematic("CMS_scale_met_2023",""),
+            Systematic("CMS_scale_met_2023",""),
             # ONLY Type-I
-            Systematic("CMS_scale_met_2023","", Up="_JESTotalUp", Down="_JESTotalDown"),
+            #Systematic("CMS_scale_met_2023","", Up="_JESTotalUp", Down="_JESTotalDown"),
         ]
 
         return ObjectCollection(systematics)

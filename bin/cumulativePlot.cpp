@@ -44,28 +44,24 @@ void cumulative(string original, string year, string runPeriod=""){
   TFile *f1 =  TFile::Open(original.c_str());
   // Original histos
   /*
-  TH1D* Wprime2000_orig     = (TH1D*) f1->Get(("histograms/Wprime2000"+runPeriod).c_str());
-  TH1D* Wprime3600_orig     = (TH1D*) f1->Get(("histograms/Wprime3600"+runPeriod).c_str());
-  TH1D* Wprime5600_orig     = (TH1D*) f1->Get(("histograms/Wprime5600"+runPeriod).c_str());
+  TH1D* Wprime2000_orig     = (TH1D*) f1->Get("histograms/Wprime2000");
+  TH1D* Wprime3600_orig     = (TH1D*) f1->Get("histograms/Wprime3600");
+  TH1D* Wprime5600_orig     = (TH1D*) f1->Get("histograms/Wprime5600");
   */
-  TH1D* W_boson_orig;
-  if(runPeriod != "")
-    W_boson_orig            = (TH1D*) f1->Get(("histograms/W"+runPeriod).c_str());
-  else
-    W_boson_orig            = (TH1D*) f1->Get("histograms/W_boson");
-  TH1D* Top_orig            = (TH1D*) f1->Get(("histograms/Top"+runPeriod).c_str());
-  TH1D* Z_boson_orig        = (TH1D*) f1->Get(("histograms/Z_boson"+runPeriod).c_str());
-  TH1D* DiBoson_orig        = (TH1D*) f1->Get(("histograms/DiBoson"+runPeriod).c_str());
-  TH1D* QCD_orig            = (TH1D*) f1->Get(("histograms/QCD"+runPeriod).c_str());
+  TH1D* W_boson_orig        = (TH1D*) f1->Get("histograms/W_boson");           
+  TH1D* Top_orig            = (TH1D*) f1->Get("histograms/Top");
+  TH1D* Z_boson_orig        = (TH1D*) f1->Get("histograms/Z_boson");
+  TH1D* DiBoson_orig        = (TH1D*) f1->Get("histograms/DiBoson");
+  TH1D* QCD_orig            = (TH1D*) f1->Get("histograms/QCD");
   TString data_name;
   if (year == "2022")
-    data_name = "histograms/ReRecoData2022"+runPeriod;
+    data_name = "histograms/ReRecoData2022";
   else if (year == "2023")
-    data_name = "histograms/PromptData2023"+runPeriod;
+    data_name = "histograms/PromptData2023";
   TH1D* Data_orig           = (TH1D*) f1->Get(data_name);
   TH1D* background_orig     = (TH1D*) f1->Get("histograms/background");
 
-  int nBins  = W_boson_orig->GetNbinsX();
+  const int nBins  = W_boson_orig->GetNbinsX();
   float Xmin = W_boson_orig->GetXaxis()->GetXmin();
   float Xmax = W_boson_orig->GetXaxis()->GetXmax();
 
@@ -128,6 +124,15 @@ void cumulative(string original, string year, string runPeriod=""){
     QCD           ->SetBinContent(i+1, QCD_new[i]);
     Data          ->SetBinContent(i+1, Data_new[i]);
     background    ->SetBinContent(i+1, bkg_new[i]);
+
+    //// PRINT EVT. NUMBERS ////
+    if(i == 6)
+      cout << "mT > 1 TeV ==> # Obs. " << Data_new[i] << " / # Exp. " << bkg_new[i] << endl;
+    if(i == 16)
+      cout << "mT > 2 TeV ==> # Obs. " << Data_new[i] << " / # Exp. " << bkg_new[i] << endl;
+    if(i == 26)
+      cout << "mT > 3 TeV ==> # Obs. " << Data_new[i] << " / # Exp. " << bkg_new[i] << endl;   
+    ////////////////////////////
 
   } // Loop over cumulative bins
 
@@ -264,10 +269,12 @@ void cumulative(string original, string year, string runPeriod=""){
 
   string lumi;
   if (year == "2022"){
-    if (runPeriod == "_preEE")
+    if (runPeriod == "preEE")
       lumi = "8.1";
-    else if (runPeriod == "_postEE")
+    else if (runPeriod == "postEE")
       lumi = "27.0";
+    else if (runPeriod == "E")
+      lumi = "5.8";
     else
       lumi = "34.7";
   }
@@ -282,7 +289,7 @@ void cumulative(string original, string year, string runPeriod=""){
 
 
   /// Save Plot ///
-  mT->SaveAs(("plots/cumulative/mT_cumulative_"+ year + runPeriod + ".png").c_str());
+  //mT->SaveAs(("plots/cumulative/mT_cumulative_"+ year + runPeriod + ".png").c_str());
 
 }// End of main 
 
@@ -292,6 +299,9 @@ void cumulativePlot(){
   //cumulative("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/preEE_kinselection_allW_HTkfact-LOtoNNLO/root/mT__pg_2022ReReco_preEE.root", "2022", "_preEE");
   //cumulative("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/postEE_kinselection_allW_HTkfact-LOtoNNLO/root/mT__pg_2022ReReco_postEE.root", "2022", "_postEE");  
   //cumulative("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/SSMlimit_mT400_Unblind_ext-NoSignal/root/mT_9TeV__pg_SSMlimits2022.root", "2022");
+  //cumulative("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/mT_kinSel_preEE/root/mT_9TeV__pg_SSMlimits2022.root", "2022", "preEE");
+  //cumulative("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/mT_kinSel_postEE/root/mT_9TeV__pg_SSMlimits2022.root", "2022", "postEE");
+  //cumulative("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/mT_kinSel_eraE/root/mT_9TeV__pg_SSMlimits2022.root", "2022", "E");
 
   cumulative("/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/SSMlimit_mT400_Unblind_NoSignal/root/mT__pg_SSMlimits2023.root", "2023");
 
