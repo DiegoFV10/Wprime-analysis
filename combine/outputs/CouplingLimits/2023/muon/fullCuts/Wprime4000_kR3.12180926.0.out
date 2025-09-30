@@ -1,0 +1,1390 @@
+ <<< Combine >>> 
+ <<< v10.0.2 >>>
+>>> Used OpenSSL to get a truly random seed -190455184
+>>> Method used is MarkovChainMC
+============================================================
+Analyzing bin errors for: prop_binmuon_channel
+Poisson cut-off: 10
+Processes excluded for sums: Wprime4000_kR3
+============================================================
+Bin        Contents        Error           Notes                         
+0          4246.903912     16.603230       total sum                     
+0          4245.728997     16.603213       excluding marked processes    
+0          65391.000000    255.716640      Unweighted events, alpha=0.064946
+  => Total parameter prop_binmuon_channel_bin0[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+1          1622.134987     7.828086        total sum                     
+1          1621.101079     7.828053        excluding marked processes    
+1          42886.000000    207.089353      Unweighted events, alpha=0.037824
+  => Total parameter prop_binmuon_channel_bin1[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+2          722.386389      4.795565        total sum                     
+2          721.396648      4.795515        excluding marked processes    
+2          22630.000000    150.432709      Unweighted events, alpha=0.031922
+  => Total parameter prop_binmuon_channel_bin2[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+3          360.170535      3.009426        total sum                     
+3          359.285774      3.009355        excluding marked processes    
+3          14254.000000    119.390117      Unweighted events, alpha=0.025268
+  => Total parameter prop_binmuon_channel_bin3[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+4          192.009696      3.360937        total sum                     
+4          191.190097      3.360877        excluding marked processes    
+4          3236.000000     56.885851       Unweighted events, alpha=0.059336
+  => Total parameter prop_binmuon_channel_bin4[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+5          112.954996      1.192264        total sum                     
+5          112.217111      1.192110        excluding marked processes    
+5          8861.000000     94.132885       Unweighted events, alpha=0.012747
+  => Total parameter prop_binmuon_channel_bin5[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+6          108.455162      1.524294        total sum                     
+6          107.129583      1.524073        excluding marked processes    
+6          4941.000000     70.292247       Unweighted events, alpha=0.021950
+  => Total parameter prop_binmuon_channel_bin6[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+7          42.177160       0.658332        total sum                     
+7          41.104515       0.657922        excluding marked processes    
+7          3903.000000     62.473995       Unweighted events, alpha=0.010806
+  => Total parameter prop_binmuon_channel_bin7[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+8          24.752268       0.587605        total sum                     
+8          23.449391       0.587056        excluding marked processes    
+8          1596.000000     39.949969       Unweighted events, alpha=0.015509
+  => Total parameter prop_binmuon_channel_bin8[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+9          9.438805        0.395238        total sum                     
+9          8.355840        0.394559        excluding marked processes    
+9          448.000000      21.166010       Unweighted events, alpha=0.021069
+  => Total parameter prop_binmuon_channel_bin9[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+10         4.632049        0.252988        total sum                     
+10         3.506378        0.251887        excluding marked processes    
+10         194.000000      13.928388       Unweighted events, alpha=0.023877
+  => Total parameter prop_binmuon_channel_bin10[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+11         2.627395        0.181921        total sum                     
+11         1.363219        0.180174        excluding marked processes    
+11         57.000000       7.549834        Unweighted events, alpha=0.046095
+  => Total parameter prop_binmuon_channel_bin11[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+12         1.426932        0.289830        total sum                     
+12         0.530791        0.289065        excluding marked processes    
+12         3.000000        1.732051        Unweighted events, alpha=0.475644
+  => Number of weighted events is below Poisson threshold
+    Wprime4000_kR3       0.896140        0.021042                                      
+                         1814.000000     42.591079       Unweighted events, alpha=0.000494
+      => Parameter prop_binmuon_channel_bin12_Wprime4000_kR3[0.00,-7.00,7.00] to be Gaussian constrained
+  ----------------------------------------------------------
+    W_boson              0.216692        0.001181                                      
+                         33653.000000    183.447540      Unweighted events, alpha=0.000006
+      => Parameter prop_binmuon_channel_bin12_W_boson[0.00,-7.00,7.00] to be Gaussian constrained
+  ----------------------------------------------------------
+    Top                  0.000000        0.000000                                      
+      => Error is zero, ignore      
+  ----------------------------------------------------------
+    Z_boson              0.004094        0.000500                                      
+                         67.000000       8.185353        Unweighted events, alpha=0.000061
+      => Parameter prop_binmuon_channel_bin12_Z_boson[0.00,-7.00,7.00] to be Gaussian constrained
+  ----------------------------------------------------------
+    DiBoson              0.288910        0.288561                                      
+                         1.000000        1.000000        Unweighted events, alpha=0.288910
+      => Product of prop_binmuon_channel_bin12_DiBoson[1.00,0.00,30.85] and const [1.0000] to be Poisson constrained
+  ----------------------------------------------------------
+    QCD                  0.021095        0.017013                                      
+                         2.000000        1.414214        Unweighted events, alpha=0.010547
+      => Product of prop_binmuon_channel_bin12_QCD[2.00,0.00,33.79] and const [0.5000] to be Poisson constrained
+  ----------------------------------------------------------
+------------------------------------------------------------
+13         0.680433        0.017498        total sum                     
+13         0.067145        0.000584        excluding marked processes    
+13         13239.000000    115.060853      Unweighted events, alpha=0.000051
+  => Total parameter prop_binmuon_channel_bin13[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+14         0.023237        0.003035        total sum                     
+14         0.003967        0.000043        excluding marked processes    
+14         8482.000000     92.097774       Unweighted events, alpha=0.000003
+  => Total parameter prop_binmuon_channel_bin14[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+15         0.009079        0.004033        total sum                     
+15         0.005625        0.003835        excluding marked processes    
+15         2.000000        1.414214        Unweighted events, alpha=0.004540
+  => Number of weighted events is below Poisson threshold
+    Wprime4000_kR3       0.003454        0.001250                                      
+                         8.000000        2.828427        Unweighted events, alpha=0.000432
+      => Product of prop_binmuon_channel_bin15_Wprime4000_kR3[8.00,0.12,47.91] and const [0.1250] to be Poisson constrained
+  ----------------------------------------------------------
+    W_boson              0.000849        0.000021                                      
+                         1670.000000     40.865633       Unweighted events, alpha=0.000001
+      => Parameter prop_binmuon_channel_bin15_W_boson[0.00,-7.00,7.00] to be Gaussian constrained
+  ----------------------------------------------------------
+    Top                  0.000000        0.000000                                      
+      => Error is zero, ignore      
+  ----------------------------------------------------------
+    Z_boson              0.000011        0.000003                                      
+                         16.000000       4.000000        Unweighted events, alpha=0.000001
+      => Parameter prop_binmuon_channel_bin15_Z_boson[0.00,-7.00,7.00] to be Gaussian constrained
+  ----------------------------------------------------------
+    DiBoson              0.000000        0.000000                                      
+      => Error is zero, ignore      
+  ----------------------------------------------------------
+    QCD                  0.004765        0.003834                                      
+                         2.000000        1.414214        Unweighted events, alpha=0.002383
+      => Product of prop_binmuon_channel_bin15_QCD[2.00,0.00,33.79] and const [0.5000] to be Poisson constrained
+  ----------------------------------------------------------
+------------------------------------------------------------
+Channel muon_channel will use autoMCStats with settings: event-threshold=10, include-signal=0, hist-mode=1
+Generate toy 1/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.53688 +/- 0.0171524 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 2/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.24244 +/- 0.019695 @ 95% credibility (15 tries)
+Done in 0.13 min (cpu), 0.14 min (real)
+Generate toy 3/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.72449 +/- 0.0197897 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 4/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.29867 +/- 0.0114387 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 5/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.34448 +/- 0.0110633 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 6/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.28705 +/- 0.0129417 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 7/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.26108 +/- 0.0249088 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 8/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.4844 +/- 0.0130885 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.16 min (real)
+Generate toy 9/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.79833 +/- 0.0177574 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 10/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.05694 +/- 0.0235171 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 11/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.48843 +/- 0.0230128 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 12/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.55691 +/- 0.0169604 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 13/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.59626 +/- 0.0140315 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 14/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.49933 +/- 0.0177738 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 15/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.86611 +/- 0.0311317 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 16/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.58127 +/- 0.0129486 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 17/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.5827 +/- 0.0168649 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 18/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.93545 +/- 0.00988006 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 19/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.885039 +/- 0.00900576 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 20/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.90179 +/- 0.0102577 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.19 min (real)
+Generate toy 21/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.49195 +/- 0.01234 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 22/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.62579 +/- 0.0159618 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 23/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.97882 +/- 0.0155785 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 24/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.06431 +/- 0.0198171 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 25/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.45511 +/- 0.0141536 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 26/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.04565 +/- 0.0118604 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 27/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.08135 +/- 0.011085 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 28/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.26198 +/- 0.0132249 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 29/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.12862 +/- 0.0140627 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 30/250
+
+ -- MarkovChainMC -- 
+Limit: r < 3.03247 +/- 0.0182828 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 31/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.09168 +/- 0.0102971 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 32/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.33588 +/- 0.0119127 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.17 min (real)
+Generate toy 33/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.00095 +/- 0.00993995 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 34/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.60523 +/- 0.0126415 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 35/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.58761 +/- 0.013434 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 36/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.17429 +/- 0.0132386 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 37/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.13859 +/- 0.00953637 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 38/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.16842 +/- 0.0100299 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 39/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.19314 +/- 0.0185997 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.19 min (real)
+Generate toy 40/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.03245 +/- 0.0159997 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 41/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.43487 +/- 0.00953983 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 42/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.55677 +/- 0.0195378 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 43/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.95576 +/- 0.0121063 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 44/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.96219 +/- 0.0118721 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 45/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.20868 +/- 0.0149579 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 46/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.3406 +/- 0.00456855 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 47/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.14332 +/- 0.0171112 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 48/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.21119 +/- 0.0118932 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 49/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.38915 +/- 0.00544812 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 50/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.31466 +/- 0.0138831 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 51/250
+
+ -- MarkovChainMC -- 
+Limit: r < 3.01539 +/- 0.0276092 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 52/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.77612 +/- 0.014531 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 53/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.68375 +/- 0.0270144 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 54/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.06347 +/- 0.0161229 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 55/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.951747 +/- 0.0128243 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 56/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.80547 +/- 0.00584502 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 57/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.06113 +/- 0.013965 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 58/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.57711 +/- 0.00802183 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 59/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.38057 +/- 0.0157731 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 60/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.26077 +/- 0.0197342 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 61/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.37833 +/- 0.0151831 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.17 min (real)
+Generate toy 62/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.1568 +/- 0.0123755 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 63/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.996114 +/- 0.0147128 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 64/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.25518 +/- 0.0110103 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 65/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.2817 +/- 0.00719198 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 66/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.00173 +/- 0.00978878 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 67/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.03153 +/- 0.0115129 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 68/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.40596 +/- 0.0154695 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 69/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.15716 +/- 0.0155845 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 70/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.05639 +/- 0.0118287 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 71/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.12822 +/- 0.0205666 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 72/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.27845 +/- 0.0341626 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 73/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.02134 +/- 0.00690006 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 74/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.16769 +/- 0.00786979 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 75/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.50719 +/- 0.0204258 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 76/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.61739 +/- 0.0180955 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 77/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.83837 +/- 0.0132621 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.19 min (real)
+Generate toy 78/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.41334 +/- 0.0149555 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 79/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.55328 +/- 0.0193709 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 80/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.822459 +/- 0.00832124 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 81/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.40769 +/- 0.0126987 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 82/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.16958 +/- 0.0166874 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 83/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.19659 +/- 0.017385 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 84/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.45077 +/- 0.0063486 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 85/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.37528 +/- 0.00811925 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.21 min (real)
+Generate toy 86/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.98723 +/- 0.0172595 @ 95% credibility (15 tries)
+Done in 0.21 min (cpu), 0.21 min (real)
+Generate toy 87/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.22974 +/- 0.0179686 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.19 min (real)
+Generate toy 88/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.92644 +/- 0.0197813 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 89/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.54836 +/- 0.0320687 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 90/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.65088 +/- 0.0178948 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 91/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.16387 +/- 0.0108278 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 92/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.42793 +/- 0.0153484 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 93/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.34998 +/- 0.0137653 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 94/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.879532 +/- 0.0100182 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 95/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.35066 +/- 0.0199755 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 96/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.44432 +/- 0.0159947 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 97/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.14395 +/- 0.015109 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 98/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.88769 +/- 0.0206916 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 99/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.09404 +/- 0.0228518 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 100/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.55066 +/- 0.0121299 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 101/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.40801 +/- 0.00870523 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 102/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.44609 +/- 0.0185678 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 103/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.37421 +/- 0.0135665 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 104/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.09262 +/- 0.0158118 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 105/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.32275 +/- 0.0181581 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 106/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.13331 +/- 0.0119705 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 107/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.69726 +/- 0.00992368 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 108/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.89362 +/- 0.0226345 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 109/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.17381 +/- 0.0204056 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 110/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.14566 +/- 0.00945586 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 111/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.38726 +/- 0.0213677 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 112/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.7747 +/- 0.0250253 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 113/250
+
+ -- MarkovChainMC -- 
+Limit: r < 3.00194 +/- 0.013855 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 114/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.38443 +/- 0.0126878 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 115/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.43978 +/- 0.0296743 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 116/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.853572 +/- 0.00982272 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 117/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.9262 +/- 0.0188754 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 118/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.57436 +/- 0.0233721 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 119/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.60575 +/- 0.0232148 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 120/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.49519 +/- 0.010294 @ 95% credibility (15 tries)
+Done in 0.21 min (cpu), 0.21 min (real)
+Generate toy 121/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.43058 +/- 0.0185823 @ 95% credibility (15 tries)
+Done in 0.22 min (cpu), 0.22 min (real)
+Generate toy 122/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.46465 +/- 0.0183091 @ 95% credibility (15 tries)
+Done in 0.22 min (cpu), 0.22 min (real)
+Generate toy 123/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.3766 +/- 0.0136095 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 124/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.38213 +/- 0.024728 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 125/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.868059 +/- 0.0080143 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 126/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.14201 +/- 0.0116933 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 127/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.11561 +/- 0.0191361 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 128/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.941271 +/- 0.0131028 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 129/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.62436 +/- 0.0116628 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 130/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.776747 +/- 0.0118823 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 131/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.04265 +/- 0.0135431 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 132/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.74827 +/- 0.0226104 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 133/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.43881 +/- 0.0225089 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 134/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.245 +/- 0.00977502 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 135/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.89965 +/- 0.0221086 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 136/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.69718 +/- 0.0258319 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 137/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.20009 +/- 0.0206942 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 138/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.16518 +/- 0.023903 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 139/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.73508 +/- 0.0194418 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 140/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.07832 +/- 0.0102814 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 141/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.82695 +/- 0.0219797 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 142/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.42524 +/- 0.020662 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 143/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.52627 +/- 0.0166453 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 144/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.53996 +/- 0.0243317 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 145/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.0996 +/- 0.00838088 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 146/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.37151 +/- 0.0343597 @ 95% credibility (15 tries)
+Done in 0.21 min (cpu), 0.21 min (real)
+Generate toy 147/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.50941 +/- 0.0229588 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.21 min (real)
+Generate toy 148/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.17218 +/- 0.0127075 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.20 min (real)
+Generate toy 149/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.4133 +/- 0.0145671 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 150/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.18889 +/- 0.0216965 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 151/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.59503 +/- 0.0116684 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 152/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.40322 +/- 0.00913656 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 153/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.32354 +/- 0.0111747 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 154/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.864801 +/- 0.0120329 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 155/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.11999 +/- 0.0131265 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 156/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.3266 +/- 0.015181 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 157/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.74896 +/- 0.0168088 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 158/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.91167 +/- 0.0146466 @ 95% credibility (15 tries)
+Done in 0.13 min (cpu), 0.13 min (real)
+Generate toy 159/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.42044 +/- 0.0131196 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 160/250
+
+ -- MarkovChainMC -- 
+Limit: r < 3.00371 +/- 0.033855 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 161/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.15074 +/- 0.0107902 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 162/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.48706 +/- 0.0145862 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 163/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.86641 +/- 0.024964 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 164/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.48558 +/- 0.018271 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 165/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.91643 +/- 0.0235563 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 166/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.016 +/- 0.0101871 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 167/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.9001 +/- 0.0384007 @ 95% credibility (15 tries)
+Done in 0.22 min (cpu), 0.22 min (real)
+Generate toy 168/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.02894 +/- 0.00753296 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 169/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.29968 +/- 0.0147099 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 170/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.09892 +/- 0.0104469 @ 95% credibility (15 tries)
+Done in 0.13 min (cpu), 0.13 min (real)
+Generate toy 171/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.19922 +/- 0.0055729 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 172/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.753122 +/- 0.00884952 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 173/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.77709 +/- 0.0169772 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 174/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.30761 +/- 0.0144046 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 175/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.91428 +/- 0.014104 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 176/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.946926 +/- 0.011253 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 177/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.33691 +/- 0.0147134 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 178/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.8692 +/- 0.0186433 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 179/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.91209 +/- 0.0248307 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 180/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.67999 +/- 0.0390146 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 181/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.04826 +/- 0.0125975 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 182/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.06786 +/- 0.0132219 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 183/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.76392 +/- 0.0169836 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 184/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.32607 +/- 0.0215604 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 185/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.12644 +/- 0.0113547 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 186/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.40423 +/- 0.00850847 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 187/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.53229 +/- 0.00965071 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 188/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.1672 +/- 0.0335708 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 189/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.4395 +/- 0.00826834 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 190/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.69952 +/- 0.0156752 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 191/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.61397 +/- 0.0134298 @ 95% credibility (15 tries)
+Done in 0.13 min (cpu), 0.13 min (real)
+Generate toy 192/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.45826 +/- 0.018816 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 193/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.71189 +/- 0.015556 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 194/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.33715 +/- 0.017866 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 195/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.88058 +/- 0.0242499 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.19 min (real)
+Generate toy 196/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.32716 +/- 0.0261981 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 197/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.13806 +/- 0.0122809 @ 95% credibility (15 tries)
+Done in 0.13 min (cpu), 0.14 min (real)
+Generate toy 198/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.97275 +/- 0.0134765 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 199/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.73143 +/- 0.0123848 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 200/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.29711 +/- 0.0175303 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 201/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.96367 +/- 0.0191044 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 202/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.57678 +/- 0.0133889 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 203/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.28426 +/- 0.0168049 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 204/250
+
+ -- MarkovChainMC -- 
+Limit: r < 3.35895 +/- 0.0181267 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 205/250
+
+ -- MarkovChainMC -- 
+Limit: r < 3.34277 +/- 0.0167576 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 206/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.07338 +/- 0.0163496 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 207/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.33284 +/- 0.0122947 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 208/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.883727 +/- 0.00552361 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.18 min (real)
+Generate toy 209/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.68924 +/- 0.0197423 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 210/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.02605 +/- 0.00359304 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 211/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.68074 +/- 0.024881 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 212/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.01701 +/- 0.0254879 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 213/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.31682 +/- 0.0132402 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 214/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.988856 +/- 0.0120921 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 215/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.53658 +/- 0.0236401 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 216/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.53403 +/- 0.0133533 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 217/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.94864 +/- 0.0138859 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 218/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.60559 +/- 0.0190707 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 219/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.12532 +/- 0.0261316 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 220/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.65578 +/- 0.0131103 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 221/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.55023 +/- 0.0153662 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 222/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.37256 +/- 0.0141098 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 223/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.1581 +/- 0.0145089 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 224/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.16168 +/- 0.0185556 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 225/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.924175 +/- 0.012529 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 226/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.75736 +/- 0.0148122 @ 95% credibility (15 tries)
+Done in 0.21 min (cpu), 0.21 min (real)
+Generate toy 227/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.60533 +/- 0.0167675 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 228/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.65764 +/- 0.0172505 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 229/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.22964 +/- 0.00970676 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 230/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.29174 +/- 0.00984522 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 231/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.1528 +/- 0.0184895 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 232/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.73207 +/- 0.0181578 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 233/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.20355 +/- 0.0128781 @ 95% credibility (15 tries)
+Done in 0.14 min (cpu), 0.14 min (real)
+Generate toy 234/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.57082 +/- 0.014734 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 235/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.21063 +/- 0.0143197 @ 95% credibility (15 tries)
+Done in 0.15 min (cpu), 0.15 min (real)
+Generate toy 236/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.20247 +/- 0.0122986 @ 95% credibility (15 tries)
+Done in 0.18 min (cpu), 0.18 min (real)
+Generate toy 237/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.96613 +/- 0.0159275 @ 95% credibility (15 tries)
+Done in 0.17 min (cpu), 0.17 min (real)
+Generate toy 238/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.942387 +/- 0.00932525 @ 95% credibility (15 tries)
+Done in 0.16 min (cpu), 0.16 min (real)
+Generate toy 239/250
+
+ -- MarkovChainMC -- 
+Limit: r < 3.27417 +/- 0.0149185 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 240/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.43466 +/- 0.0299744 @ 95% credibility (15 tries)
+Done in 0.22 min (cpu), 0.22 min (real)
+Generate toy 241/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.15459 +/- 0.0102757 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 242/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.00306 +/- 0.0176775 @ 95% credibility (15 tries)
+Done in 0.21 min (cpu), 0.21 min (real)
+Generate toy 243/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.9722 +/- 0.0203314 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 244/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.58042 +/- 0.0105235 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.19 min (real)
+Generate toy 245/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.46645 +/- 0.0207104 @ 95% credibility (15 tries)
+Done in 0.22 min (cpu), 0.22 min (real)
+Generate toy 246/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.67364 +/- 0.0226246 @ 95% credibility (15 tries)
+Done in 0.22 min (cpu), 0.22 min (real)
+Generate toy 247/250
+
+ -- MarkovChainMC -- 
+Limit: r < 2.48249 +/- 0.0146635 @ 95% credibility (15 tries)
+Done in 0.22 min (cpu), 0.22 min (real)
+Generate toy 248/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.46852 +/- 0.0108467 @ 95% credibility (15 tries)
+Done in 0.21 min (cpu), 0.21 min (real)
+Generate toy 249/250
+
+ -- MarkovChainMC -- 
+Limit: r < 1.04667 +/- 0.0127687 @ 95% credibility (15 tries)
+Done in 0.20 min (cpu), 0.20 min (real)
+Generate toy 250/250
+
+ -- MarkovChainMC -- 
+Limit: r < 0.885419 +/- 0.0125261 @ 95% credibility (15 tries)
+Done in 0.19 min (cpu), 0.20 min (real)
+mean   expected limit: r < 1.5967 +/- 0.0346854 @ 95%CL (250 toyMC)
+median expected limit: r < 1.46339 @ 95%CL (250 toyMC)
+   68% expected band : 1.09892 < r < 2.16168
+   95% expected band : 0.868059 < r < 3.00371

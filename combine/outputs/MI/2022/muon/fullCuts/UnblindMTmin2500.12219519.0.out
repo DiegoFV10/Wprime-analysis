@@ -1,0 +1,20 @@
+ <<< Combine >>> 
+ <<< v10.0.2 >>>
+>>> Used OpenSSL to get a truly random seed 906043190
+>>> Method used is MarkovChainMC
+============================================================
+Analyzing bin errors for: prop_binmuon_channel
+Poisson cut-off: 10
+Processes excluded for sums: Signal
+============================================================
+Bin        Contents        Error           Notes                         
+0          36.081978       5.886926        total sum                     
+0          1.429977        0.062428        excluding marked processes    
+0          525.000000      22.912878       Unweighted events, alpha=0.068728
+  => Total parameter prop_binmuon_channel_bin0[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+Channel muon_channel will use autoMCStats with settings: event-threshold=10, include-signal=0, hist-mode=1
+
+ -- MarkovChainMC -- 
+Limit: r < 0.203753 +/- 0.000468179 @ 95% credibility (300 tries)
+Done in 1.49 min (cpu), 1.50 min (real)

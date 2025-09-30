@@ -1,0 +1,52 @@
+ <<< Combine >>> 
+ <<< v10.0.2 >>>
+>>> Used OpenSSL to get a truly random seed 2141109541
+>>> Method used is MarkovChainMC
+============================================================
+Analyzing bin errors for: prop_binmuon22
+Poisson cut-off: 10
+Processes excluded for sums: Signal
+============================================================
+Bin        Contents        Error           Notes                         
+0          34.979661       5.886595        total sum                     
+0          0.327661        0.001926        excluding marked processes    
+0          28949.000000    170.144057      Unweighted events, alpha=0.001208
+  => Total parameter prop_binmuon22_bin0[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+============================================================
+Analyzing bin errors for: prop_binmuon23
+Poisson cut-off: 10
+Processes excluded for sums: Signal
+============================================================
+Bin        Contents        Error           Notes                         
+0          27.672726       5.213881        total sum                     
+0          0.571726        0.289066        excluding marked processes    
+0          4.000000        2.000000        Unweighted events, alpha=6.918182
+  => Number of weighted events is below Poisson threshold
+    Signal               27.101000       5.205862                                      
+                         27.000000       5.196152        Unweighted events, alpha=1.003741
+      => Parameter prop_binmuon23_bin0_Signal[0.00,-7.00,7.00] to be Gaussian constrained
+  ----------------------------------------------------------
+    W_boson              0.256721        0.001257                                      
+                         41687.000000    204.173945      Unweighted events, alpha=0.000006
+      => Parameter prop_binmuon23_bin0_W_boson[0.00,-7.00,7.00] to be Gaussian constrained
+  ----------------------------------------------------------
+    Z_boson              0.004805        0.000501                                      
+                         92.000000       9.591663        Unweighted events, alpha=0.000052
+      => Parameter prop_binmuon23_bin0_Z_boson[0.00,-7.00,7.00] to be Gaussian constrained
+  ----------------------------------------------------------
+    DiBoson              0.289105        0.288561                                      
+                         1.000000        1.000000        Unweighted events, alpha=0.289105
+      => Product of prop_binmuon23_bin0_DiBoson[1.00,0.00,30.85] and const [1.0000] to be Poisson constrained
+  ----------------------------------------------------------
+    QCD                  0.021095        0.017013                                      
+                         2.000000        1.414214        Unweighted events, alpha=0.010547
+      => Product of prop_binmuon23_bin0_QCD[2.00,0.00,33.79] and const [0.5000] to be Poisson constrained
+  ----------------------------------------------------------
+------------------------------------------------------------
+Channel muon22 will use autoMCStats with settings: event-threshold=10, include-signal=0, hist-mode=1
+Channel muon23 will use autoMCStats with settings: event-threshold=10, include-signal=0, hist-mode=1
+
+ -- MarkovChainMC -- 
+Limit: r < 0.0939406 +/- 0.00017739 @ 95% credibility (300 tries)
+Done in 2.56 min (cpu), 2.58 min (real)

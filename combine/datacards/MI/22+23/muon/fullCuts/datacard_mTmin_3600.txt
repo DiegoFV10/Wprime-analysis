@@ -1,0 +1,39 @@
+Combination of muon22=../../../2022/muon/fullCuts/datacard_mTmin_3600_lumi_34.65.txt  muon23=../../../2023/muon/fullCuts/datacard_mTmin_3600_lumi_27.10.txt
+imax 2 number of bins
+jmax 3 number of processes minus 1
+kmax 21 number of nuisance parameters
+----------------------------------------------------------------------------------------------------------------------------------
+shapes *       muon22  ../../../2022/muon/fullCuts/histograms_mTmin_3600_lumi_34.65.root $PROCESS $PROCESS_$SYSTEMATIC
+shapes *       muon23  ../../../2023/muon/fullCuts/histograms_mTmin_3600_lumi_27.10.root $PROCESS $PROCESS_$SYSTEMATIC
+----------------------------------------------------------------------------------------------------------------------------------
+bin          muon22  muon23
+observation  0       0     
+----------------------------------------------------------------------------------------------------------------------------------
+bin                                          muon22      muon22      muon22      muon23      muon23      muon23      muon23    
+process                                      Signal      W_boson     Z_boson     Signal      W_boson     Z_boson     DiBoson   
+process                                      0           1           2           0           1           2           3         
+rate                                         34.652      0.0497249   0.00084598  27.101      0.0400291   0.0007104   0.00019555
+----------------------------------------------------------------------------------------------------------------------------------
+CMS_EXO24021_W_kfactor_   shape              -           1.0         1.0         -           1.0         1.0         1.0       
+CMS_eff_b_2022_         shape                -           1.0         1.0         -           -           -           -         
+CMS_eff_b_2023_         shape                -           -           -           -           1.0         1.0         1.0       
+CMS_eff_m_id_2022_      shape                -           1.0         1.0         -           -           -           -         
+CMS_eff_m_id_2023_      shape                -           -           -           -           1.0         1.0         1.0       
+CMS_eff_m_iso_2022_     shape                -           1.0         1.0         -           -           -           -         
+CMS_eff_m_iso_2023_     shape                -           -           -           -           1.0         1.0         1.0       
+CMS_eff_m_reco_2022_    shape                -           1.0         1.0         -           -           -           -         
+CMS_eff_m_reco_2023_    shape                -           -           -           -           1.0         1.0         1.0       
+CMS_eff_m_trigger_2022_   shape              -           1.0         1.0         -           -           -           -         
+CMS_eff_m_trigger_2023_   shape              -           -           -           -           1.0         1.0         1.0       
+CMS_pileup_             shape                -           1.0         1.0         -           1.0         1.0         1.0       
+CMS_scale_m_2022_       shape                -           1.0         1.0         -           -           -           -         
+CMS_scale_m_2023_       shape                -           -           -           -           1.0         1.0         1.0       
+CMS_scale_met_2022_     shape                -           1.0         1.0         -           -           -           -         
+CMS_scale_met_2023_     shape                -           -           -           -           1.0         1.0         1.0       
+cross_section_VV        lnN                  -           -           -           -           -           -           1.04      
+cross_section_Z         lnN                  -           -           1.02        -           -           1.02        -         
+lumi_13p6TeV_2022       lnN                  1.014       1.014       1.014       -           -           -           -         
+lumi_13p6TeV_2023       lnN                  -           -           -           1.013       1.013       1.013       1.013     
+pdf_qqbar_              shape                -           1.0         1.0         -           1.0         1.0         1.0       
+muon22 autoMCStats 10 0 1
+muon23 autoMCStats 10 0 1

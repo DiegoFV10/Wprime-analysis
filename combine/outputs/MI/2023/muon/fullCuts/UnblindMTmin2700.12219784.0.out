@@ -1,0 +1,40 @@
+ <<< Combine >>> 
+ <<< v10.0.2 >>>
+>>> Used OpenSSL to get a truly random seed 1805228256
+>>> Method used is MarkovChainMC
+============================================================
+Analyzing bin errors for: prop_binmuon_channel
+Poisson cut-off: 10
+Processes excluded for sums: Signal
+============================================================
+Bin        Contents        Error           Notes                         
+0          28.024930       5.213910        total sum                     
+0          0.923930        0.289574        excluding marked processes    
+0          10.000000       3.162278        Unweighted events, alpha=2.802493
+  => Number of weighted events is below Poisson threshold
+    Signal               27.101000       5.205862                                      
+                         27.000000       5.196152        Unweighted events, alpha=1.003741
+      => Parameter prop_binmuon_channel_bin0_Signal[0.00,-7.00,7.00] to be Gaussian constrained
+  ----------------------------------------------------------
+    W_boson              0.585883        0.002564                                      
+                         52229.000000    228.536649      Unweighted events, alpha=0.000011
+      => Parameter prop_binmuon_channel_bin0_W_boson[0.00,-7.00,7.00] to be Gaussian constrained
+  ----------------------------------------------------------
+    Z_boson              0.010411        0.000522                                      
+                         398.000000      19.949937       Unweighted events, alpha=0.000026
+      => Parameter prop_binmuon_channel_bin0_Z_boson[0.00,-7.00,7.00] to be Gaussian constrained
+  ----------------------------------------------------------
+    DiBoson              0.306541        0.289062                                      
+                         1.000000        1.000000        Unweighted events, alpha=0.306541
+      => Product of prop_binmuon_channel_bin0_DiBoson[1.00,0.00,30.85] and const [1.0000] to be Poisson constrained
+  ----------------------------------------------------------
+    QCD                  0.021095        0.017013                                      
+                         2.000000        1.414214        Unweighted events, alpha=0.010547
+      => Product of prop_binmuon_channel_bin0_QCD[2.00,0.00,33.79] and const [0.5000] to be Poisson constrained
+  ----------------------------------------------------------
+------------------------------------------------------------
+Channel muon_channel will use autoMCStats with settings: event-threshold=10, include-signal=0, hist-mode=1
+
+ -- MarkovChainMC -- 
+Limit: r < 0.169303 +/- 0.00050423 @ 95% credibility (300 tries)
+Done in 1.30 min (cpu), 1.32 min (real)

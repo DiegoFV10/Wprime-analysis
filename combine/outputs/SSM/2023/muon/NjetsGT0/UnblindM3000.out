@@ -1,0 +1,95 @@
+ <<< Combine >>> 
+ <<< v10.0.2 >>>
+>>> Used OpenSSL to get a truly random seed -209834539
+>>> Method used is MarkovChainMC
+============================================================
+Analyzing bin errors for: prop_binmuon_channel
+Poisson cut-off: 10
+Processes excluded for sums: Wprime3000
+============================================================
+Bin        Contents        Error           Notes                         
+0          1503.830726     8.825213        total sum                     
+0          1503.736046     8.825210        excluding marked processes    
+0          29033.000000    170.390727      Unweighted events, alpha=0.051797
+  => Total parameter prop_binmuon_channel_bin0[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+1          598.676794      5.778301        total sum                     
+1          598.582453      5.778297        excluding marked processes    
+1          10731.000000    103.590540      Unweighted events, alpha=0.055789
+  => Total parameter prop_binmuon_channel_bin1[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+2          274.081421      3.076510        total sum                     
+2          273.962046      3.076501        excluding marked processes    
+2          7930.000000     89.050547       Unweighted events, alpha=0.034563
+  => Total parameter prop_binmuon_channel_bin2[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+3          138.248934      2.138621        total sum                     
+3          138.128577      2.138607        excluding marked processes    
+3          4172.000000     64.591021       Unweighted events, alpha=0.033137
+  => Total parameter prop_binmuon_channel_bin3[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+4          75.215450       3.131861        total sum                     
+4          75.049992       3.131848        excluding marked processes    
+4          574.000000      23.958297       Unweighted events, alpha=0.131037
+  => Total parameter prop_binmuon_channel_bin4[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+5          45.908258       0.733952        total sum                     
+5          45.737693       0.733894        excluding marked processes    
+5          3884.000000     62.321746       Unweighted events, alpha=0.011820
+  => Total parameter prop_binmuon_channel_bin5[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+6          44.578130       1.313885        total sum                     
+6          44.147371       1.313801        excluding marked processes    
+6          1129.000000     33.600595       Unweighted events, alpha=0.039485
+  => Total parameter prop_binmuon_channel_bin6[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+7          17.802091       0.466116        total sum                     
+7          17.339371       0.465865        excluding marked processes    
+7          1385.000000     37.215588       Unweighted events, alpha=0.012853
+  => Total parameter prop_binmuon_channel_bin7[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+8          11.583074       0.505692        total sum                     
+8          10.729127       0.505266        excluding marked processes    
+8          451.000000      21.236761       Unweighted events, alpha=0.025683
+  => Total parameter prop_binmuon_channel_bin8[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+9          5.278874        0.391187        total sum                     
+9          4.286528        0.390552        excluding marked processes    
+9          120.000000      10.954451       Unweighted events, alpha=0.043991
+  => Total parameter prop_binmuon_channel_bin9[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+10         3.363724        0.252008        total sum                     
+10         1.802595        0.250442        excluding marked processes    
+10         52.000000       7.211103        Unweighted events, alpha=0.064687
+  => Total parameter prop_binmuon_channel_bin10[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+11         3.624191        0.045313        total sum                     
+11         0.560716        0.023075        excluding marked processes    
+11         590.000000      24.289916       Unweighted events, alpha=0.006143
+  => Total parameter prop_binmuon_channel_bin11[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+12         0.860440        0.025531        total sum                     
+12         0.129662        0.017041        excluding marked processes    
+12         58.000000       7.615773        Unweighted events, alpha=0.014835
+  => Total parameter prop_binmuon_channel_bin12[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+13         0.055114        0.003134        total sum                     
+13         0.034332        0.000407        excluding marked processes    
+13         7114.000000     84.344532       Unweighted events, alpha=0.000008
+  => Total parameter prop_binmuon_channel_bin13[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+14         0.002220        0.000058        total sum                     
+14         0.002171        0.000032        excluding marked processes    
+14         4726.000000     68.745909       Unweighted events, alpha=0.000000
+  => Total parameter prop_binmuon_channel_bin14[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+15         0.000970        0.000495        total sum                     
+15         0.000475        0.000013        excluding marked processes    
+15         1438.000000     37.920970       Unweighted events, alpha=0.000001
+  => Total parameter prop_binmuon_channel_bin15[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+Channel muon_channel will use autoMCStats with settings: event-threshold=10, include-signal=0, hist-mode=1
+
+ -- MarkovChainMC -- 
+Limit: r < 1.02521 +/- 0.00181581 @ 95% credibility (300 tries)
+Done in 3.25 min (cpu), 3.32 min (real)

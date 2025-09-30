@@ -1,0 +1,32 @@
+ <<< Combine >>> 
+ <<< v10.0.2 >>>
+>>> Used OpenSSL to get a truly random seed -921985015
+>>> Method used is MarkovChainMC
+============================================================
+Analyzing bin errors for: prop_binmuon22
+Poisson cut-off: 10
+Processes excluded for sums: Signal
+============================================================
+Bin        Contents        Error           Notes                         
+0          50.848235       5.901072        total sum                     
+0          16.196235       0.413092        excluding marked processes    
+0          1537.000000     39.204592       Unweighted events, alpha=0.033083
+  => Total parameter prop_binmuon22_bin0[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+============================================================
+Analyzing bin errors for: prop_binmuon23
+Poisson cut-off: 10
+Processes excluded for sums: Signal
+============================================================
+Bin        Contents        Error           Notes                         
+0          40.898163       5.237952        total sum                     
+0          13.797163       0.578917        excluding marked processes    
+0          568.000000      23.832751       Unweighted events, alpha=0.072004
+  => Total parameter prop_binmuon23_bin0[0.00,-7.00,7.00] to be Gaussian constrained
+------------------------------------------------------------
+Channel muon22 will use autoMCStats with settings: event-threshold=10, include-signal=0, hist-mode=1
+Channel muon23 will use autoMCStats with settings: event-threshold=10, include-signal=0, hist-mode=1
+
+ -- MarkovChainMC -- 
+Limit: r < 0.385706 +/- 0.000925399 @ 95% credibility (300 tries)
+Done in 2.56 min (cpu), 2.60 min (real)

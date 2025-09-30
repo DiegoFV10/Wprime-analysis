@@ -307,6 +307,10 @@ class Config(base_config):
             Process("JetMET_Data2022", Label("Data"), color=(0, 0, 0), isData=True),
             Process("JetMET2022_postEE", Label("Data"), color=(0, 0, 0), isData=True, parent_process="JetMET_Data2022"),
 
+            # EGamma
+            Process("EGamma2022", Label("Data"), color=(0, 0, 0), isData=True),
+            Process("EGamma2022_preEE", Label("Data"), color=(0, 0, 0), isData=True, parent_process="EGamma2022"),
+            Process("EGamma2022_postEE", Label("Data"), color=(0, 0, 0), isData=True, parent_process="EGamma2022"),
 
         ]
 
@@ -555,6 +559,19 @@ class Config(base_config):
             "Wbkg_LOvsNLO_stitching": [
                 "Wonshell",
                 "Wlnu",
+            ],
+
+            "SpikeW": [
+                "Wonshell",
+                "Wlnu1",
+                "Wlnu2",
+                "Wlnu3",
+                "Wlnu4",
+                "Wlnu5",
+                "Wlnu6",
+                "Wlnu7",
+                "Wlnu8",
+                "W_ptW",
             ],
                 
             ######################################
@@ -4411,9 +4428,35 @@ class Config(base_config):
                 runEra="G",
                 tags=["JetMET"]),
 
+            
+            # EGamma Datasets
 
+            Dataset("EGamma_E",
+                dataset="/EGamma/Run2022E-22Sep2023-v1/NANOAOD",
+                process=self.processes.get("EGamma2022_postEE"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                runEra="E",
+                tags=["EGamma"]),
+            
+            Dataset("EGamma_F",
+                dataset="/EGamma/Run2022F-22Sep2023-v1/NANOAOD",
+                process=self.processes.get("EGamma2022_postEE"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                runEra="F",
+                tags=["EGamma"]),
+
+            Dataset("EGamma_G",
+                dataset="/EGamma/Run2022G-22Sep2023-v2/NANOAOD",
+                process=self.processes.get("EGamma2022_postEE"),
+                prefix="xrootd-es-cie.ciemat.es:1096//",
+                runPeriod="postEE",
+                runEra="G",
+                tags=["EGamma"]),
 
         ]
+        
         return ObjectCollection(datasets)
 
     def add_features(self):
@@ -4899,6 +4942,120 @@ class Config(base_config):
 
         ]
 
+        
+        ### Kinematic-Selection Plots After Unblinding ###
+
+        features_kinsel_unblinded = [
+
+            Feature("muon_pt", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)", binning=(50, 100, 2000),
+                x_title=Label("p_{T}^{#mu}"),
+                units="GeV"),
+
+            Feature("muon_pt_tail", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)", binning=(50, 100, 4000),
+                x_title=Label("p_{T}^{#mu}"),
+                units="GeV"),
+
+            Feature("muon_eta", "Muon_eta.at(goodMuIdx)", binning=(50, -2.4, 2.4),
+                x_title=Label("#mu #eta")),
+
+            Feature("muon_phi", "Muon_phi.at(goodMuIdx)", binning=(50, -math.pi, math.pi),
+                x_title=Label("#mu #phi"),
+                units="rad"),
+
+            # Fully Corrected MET: Type-I + TuneP 
+            Feature("CorrMET_pt", "CorrMET_pt", binning=(50, 100, 2000),
+                x_title=Label("p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("CorrMET_pt_tail", "CorrMET_pt", binning=(50, 100, 4000),
+                x_title=Label("p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("CorrMET_phi", "CorrMET_phi", binning=(50, -math.pi, math.pi),
+                x_title=Label("p_{T}^{miss} #phi"),
+                units="rad"),
+
+            Feature("mT_CorrMET", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) )",
+                binning=(46, 400, 4000),
+                x_title=Label("m_{T}"),
+                units="GeV"),
+
+            Feature("mT_CorrMET_tail", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) )",
+                binning=(66, 400, 7000),
+                x_title=Label("m_{T}"),
+                units="GeV"),
+
+            Feature("muonPt_over_CorrMET", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/CorrMET_pt", binning=(40, 0.4, 1.5),
+                x_title=Label("p_{T}^{#mu}/p_{T}^{miss}")),
+
+            Feature("deltaPhi_Corr", "acos(cos(Muon_phi.at(goodMuIdx) - CorrMET_phi))", binning=(40, 2.5, math.pi),
+                x_title=Label("#Delta#phi(p_{T}^{#mu}, p_{T}^{miss})"),
+                units="rad"),
+            
+            # JERC corrected jets
+            Feature("CorrNjets", "nGoodJets_corr", binning=(8, 0, 8),
+                x_title=Label("Njets")),
+
+            Feature("CorrJet1_btagScore", "Jet_btagDeepFlavB.at(goodJets_corr.at(0))", binning=(50, 0, 1),
+                selection="nGoodJets_corr > 0",
+                x_title=Label("leading jet DeepJet score")),
+
+            Feature("CorrJet1_pt", "CorrJet_pt.at(goodJets_corr.at(0))", binning=(50, 30, 1500),
+		selection="nGoodJets_corr > 0",
+                x_title=Label("leading jet p_{T}"),
+                units="GeV"),
+
+	    Feature("CorrJet1_eta", "Jet_eta.at(goodJets_corr.at(0))", binning=(50, -2.5, 2.5),
+		selection="nGoodJets_corr > 0",
+                x_title=Label("leading jet #eta")),
+
+            # PileUp plot
+            Feature("nVertices", "PV_npvsGood", binning=(80, 0, 80),
+                x_title=Label("# of vertices")),
+            
+            ## Checks: Sin correcciones MET
+            Feature("T1CorrMET_pt", "TypeICorrMET_pt", binning=(50, 100, 2000),
+                x_title=Label("p_{T}^{miss} TypeI-corr."),
+                units="GeV"),
+
+            Feature("T1CorrMET_phi", "TypeICorrMET_phi", binning=(50, -math.pi, math.pi),
+                x_title=Label("p_{T}^{miss} #phi TypeI-corr."),
+                units="rad"),
+
+            Feature("mT_T1CorrMET", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*TypeICorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi)) )",
+                binning=(36, 400, 4000),
+                x_title=Label("m_{T} TypeI-corr."),
+                units="GeV"),
+
+            Feature("muonPt_over_T1CorrMET", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/TypeICorrMET_pt", binning=(40, 0.4, 1.5),
+                x_title=Label("p_{T}^{#mu}/p_{T}^{miss} TypeI-corr.")),
+
+            Feature("deltaPhi_T1Corr", "acos(cos(Muon_phi.at(goodMuIdx) - TypeICorrMET_phi))", binning=(40, 2.5, math.pi),
+                x_title=Label("#Delta#phi(p_{T}^{#mu}, p_{T}^{miss}) TypeI-corr."),
+                units="rad"),
+
+            Feature("MET_pt", "PuppiMET_pt", binning=(50, 100, 2000),
+                x_title=Label("p_{T}^{miss} Uncorr."),
+                units="GeV"),
+
+            Feature("MET_phi", "PuppiMET_phi", binning=(50, -math.pi, math.pi),
+                x_title=Label("p_{T}^{miss} #phi Uncorr."),
+                units="rad"),
+
+            Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*PuppiMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - PuppiMET_phi)) )",
+                binning=(36, 400, 4000),
+                x_title=Label("m_{T} Uncorr."),
+                units="GeV"),
+
+            Feature("muonPt_over_MET", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/PuppiMET_pt", binning=(40, 0.4, 1.5),
+                x_title=Label("p_{T}^{#mu}/p_{T}^{miss} Uncorr.")),
+
+            Feature("deltaPhi", "acos(cos(Muon_phi.at(goodMuIdx) - PuppiMET_phi))", binning=(40, 2.5, math.pi),
+                x_title=Label("#Delta#phi(p_{T}^{#mu}, p_{T}^{miss}) Uncorr."),
+                units="rad"),
+
+        ]
+        
 
         ### GEN-Level Plots ###
 
@@ -5172,41 +5329,16 @@ class Config(base_config):
         
         binningResolution = [400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3300, 3600, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000, 8500, 9000]
         lastBinMerged = [400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3300, 3600, 4000, 9000]
-        binningErrorPt = [400, 500, 600, 700, 800, 900, 1000, 1200, 1400, 1700, 2000, 2400, 3000, 3600, 5000, 6000, 7000, 9000]
+        binningErrorPt = [400, 500, 600, 700, 800, 900, 1000, 1200, 1400, 1700, 2000, 2400, 3000, 3600, 5000, 6000, 7000]
         
         mT_limit = [
 
             # Type-I + TuneP
             Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
                 binning=binningErrorPt,
-                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
                 systematics=["CMS_scale_met_2022"],
                 x_title=Label("m_{T}"),
                 units="GeV"),
-
-            
-            # ONLY Type-I
-            #Feature("mT_pTerror", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-            #    binning=binningErrorPt,
-            #    selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
-            #    systematics=["CMS_scale_met_2022"],
-            #    x_title=Label("m_{T}"),
-            #    units="GeV"),
-
-            ## mT with QCD cleaning (MET-mu cut) ##
-            #Feature("mT_reference", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-            #    binning=binningErrorPt,
-            #    systematics=["CMS_scale_met_2022"],
-            #    selection="METnoMu_pt > 250 ? dPhi_METnoMu > 0.4 : 1",
-            #    x_title=Label("m_{T}"),
-            #    units="GeV"),
-                                    
-            #Feature("mT_tight", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{TypeICorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{TypeICorrMET_phi}})) )",
-            #    binning=binningErrorPt,
-            #    systematics=["CMS_scale_met_2022"],
-            #    selection="METnoMu_pt > 150 ? dPhi_METnoMu > 0.2 : 1",
-            #    x_title=Label("m_{T}"),
-            #    units="GeV"),
             
             
             ## Weights for systematics ##
@@ -5331,7 +5463,7 @@ class Config(base_config):
                 x_title=Label("m_{T}"),
                 units="GeV"),
                                     
-            Feature("mT_finalCut", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - ICorrMET_phi)) )",
+            Feature("mT_finalCut", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) )",
                 binning=(86, 400, 9000),
                 selection="METnoMu_pt > 150 ? dPhi_METnoMu > 0.2 : 1",
                 x_title=Label("m_{T}"),
@@ -5386,29 +5518,32 @@ class Config(base_config):
                 ),            
             
             Feature("TightId", "Muon_tightId.at(goodMuIdx)", binning=(2, 0, 2),
+                selection="Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) > 1000.0",
                 x_title=Label("Tight ID"),
                 ),
                         
             Feature("TightId_HP", "Muon_tightId.at(goodMuIdx)", binning=(2, 0, 2),
-                selection="Muon_highPurity.at(goodMuIdx)",
+                selection="Muon_highPurity.at(goodMuIdx) && Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) > 1000.0",
                 x_title=Label("Tight ID with High-Purity"),
                 ),
             
             Feature("mvaMuonId", "Muon_mvaMuID.at(goodMuIdx)", binning=(50, 0.0, 1.0),
+                selection="Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) > 1000.0",
                 x_title=Label("Muon MVA ID"),
                 ),
                         
             Feature("mvaMuonId_HP", "Muon_mvaMuID.at(goodMuIdx)", binning=(50, 0.0, 1.0),
-                selection="Muon_highPurity.at(goodMuIdx)",
+                selection="Muon_highPurity.at(goodMuIdx) && Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) > 1000.0",
                 x_title=Label("Muon MVA ID with High-Purity"),
                 ),
                         
             Feature("promptMvaId", "Muon_mvaTTH.at(goodMuIdx)", binning=(50, -1.0, 1.0),
+                selection="Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) > 1000.0",
                 x_title=Label("Prompt MVA ID"),
                 ),
                         
             Feature("promptMvaId_HP", "Muon_mvaTTH.at(goodMuIdx)", binning=(50, -1.0, 1.0),
-                selection="Muon_highPurity.at(goodMuIdx)",
+                selection="Muon_highPurity.at(goodMuIdx) && Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx) > 1000.0",
                 x_title=Label("Prompt MVA ID with High-Purity"),
                 ),
         ]
@@ -5416,13 +5551,13 @@ class Config(base_config):
         WprimeHP = [
             
             Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) )",
-                binning=(35, 80, 7000),
+                binning=(10, 1000, 2000),
                 selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
                 x_title=Label("m_{T}"),
                 units="GeV"),
                         
             Feature("mT_HP", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) )",
-                binning=(35, 80, 7000),
+                binning=(10, 1000, 2000),
                 selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0 && Muon_highPurity.at(goodMuIdx) == 1",
                 x_title=Label("m_{T} (High-Purity)"),
                 units="GeV"),
@@ -5438,9 +5573,475 @@ class Config(base_config):
                 selection="Muon_highPurity.at(goodMuIdx)",
                 x_title=Label("p_{T}^{gen}/p_{T}^{reco} with High-Purity"),
                 ),
+                                    
+            Feature("muon_pTgen_over_pTreco_eta2.1", "Muon_genPt / (Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx))", binning=(50, 0, 1.8),
+                selection="fabs(Muon_eta.at(goodMuIdx)) > 2.1",
+                x_title=Label("p_{T}^{gen}/p_{T}^{reco} (|#eta| > 2.1)"),
+                ),
+                                    
+            Feature("muon_pTgen_over_pTreco_HP_eta2.1", "Muon_genPt / (Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx))", binning=(50, 0, 1.8),
+                selection="fabs(Muon_eta.at(goodMuIdx)) > 2.1 && Muon_highPurity.at(goodMuIdx)",
+                x_title=Label("p_{T}^{gen}/p_{T}^{reco} (|#eta| > 2.1) with High-Purity"),
+                ),
+                                    
+            Feature("muon_eta", "Muon_eta.at(goodMuIdx)", binning=(50, -2.4, 2.4),
+                x_title=Label("#eta"),
+                ),
         ]
+        
+        mT_progressiveCuts = [
+                                                
+            Feature("mT_ref", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
+                binning=(86, 400, 9000),
+                blinded_range=[2000,10000],
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T} (Reference)"),
+                units="GeV"),
+                                                            
+            Feature("mT_etaCut", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
+                binning=(86, 400, 9000),
+                blinded_range=[2000,10000],
+                systematics=["CMS_scale_met_2022"],
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0",
+                x_title=Label("m_{T} (|#eta| < 2.0)"),
+                units="GeV"),
+                                                                        
+            Feature("mT_etaHPcut", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
+                binning=(86, 400, 9000),
+                blinded_range=[2000,10000],
+                systematics=["CMS_scale_met_2022"],
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0 && Muon_highPurity.at(goodMuIdx) == 1",
+                x_title=Label("m_{T} (|#eta| < 2.0 + HP)"),
+                units="GeV"),
+                                                                                    
+            Feature("mT_etaHPmetNoMuCut", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
+                binning=(86, 400, 9000),
+                blinded_range=[2000,10000],
+                systematics=["CMS_scale_met_2022"],
+                selection="fabs(Muon_eta.at(goodMuIdx)) < 2.0 && Muon_highPurity.at(goodMuIdx) == 1 && (METnoMu_pt > 150 ? dPhi_METnoMu > 0.2 : 1)",
+                x_title=Label("m_{T} (|#eta| < 2.0 + HP + MET-#mu)"),
+                units="GeV"),
+
+            ## Weights for systematics ##
+            Feature("puWeight", "puWeight", binning=(100, 0, 10),
+                systematics=["CMS_pileup"],
+                x_title=Label("puWeight")),
+            ## BORARR ##
+            Feature("DeltapuWeight_up", "fabs(puWeight_up-puWeight)/puWeight", binning=(100, 0, 0.1),
+                x_title=Label("DeltapuWeight_up")),
             
-        return ObjectCollection(WboostCR)
+            Feature("DeltapuWeight_down", "fabs(puWeight_down-puWeight)/puWeight", binning=(100, 0, 0.1),
+                x_title=Label("DeltapuWeight_down")),
+            ############
+            Feature("mu_recoSF_weight", "mu_recoSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_reco_2022"],
+                x_title=Label("mu_recoSF_weight")),
+            
+            Feature("mu_idSF_weight", "mu_idSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_id_2022"],
+                x_title=Label("mu_idSF_weight")),
+            
+            Feature("mu_isoSF_weight", "mu_isoSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_iso_2022"],
+                x_title=Label("mu_isoSF_weight")),
+            
+            Feature("mu_hltSF_weight", "mu_hltSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_trigger_2022"],
+                x_title=Label("mu_hltSF_weight")),
+
+            Feature("btag_weight", "btag_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_b_2022"],
+                x_title=Label("btag_weight")),
+
+            Feature("Wkfact", "Wkfact", binning=(20, 0, 2),
+                systematics=["CMS_EXO24021_W_kfactor"],
+                x_title=Label("W k-factor")),
+
+            Feature("PDFweight_total", "PDFweight_total", binning=(20, 0, 2),
+                systematics=["pdf_qqbar"],
+                x_title=Label("PDF uncertainty")),
+            
+            Feature("muonScale", "muonScale", binning=(20, 0, 2),
+                systematics=["CMS_scale_m_2022"],
+                x_title=Label("Muon p_{T} scale")),
+
+            Feature("CorrMET_pt", "CorrMET_pt", binning=(50, 35, 4000),
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("CorrMET_phi", "CorrMET_phi", binning=(50, -math.pi, math.pi),
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("p_{T}^{miss} #phi"),
+                units="rad"),
+        ]
+
+        ### Feedback L2s + systs. for pT, MET  ###
+        binningErrorForPtMET = [200, 260, 320, 380, 440, 500, 600, 700, 850, 1000, 1200, 1500, 1800, 2300, 2800, 3400, 4000]
+        
+        mT_pT_MET = [
+
+            # mT with Njets > 0
+            Feature("mT_jets", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
+                binning=binningErrorPt,
+                selection="nGoodJets_corr > 0",
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T} (Njets > 0)"),
+                units="GeV"),
+
+            # mT with Njets = 0
+            Feature("mT_0jets", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
+                binning=binningErrorPt,
+                selection="nGoodJets_corr == 0",
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T} (Njets = 0)"),
+                units="GeV"),
+
+            # mT with deltaPhi(jet1, MET) > 0.4
+            Feature("mT_dPhiJetMET", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
+                binning=binningErrorPt,
+                selection="nGoodJets_corr > 0 ? deltaPhi_LeadJetMET > 0.4 : 1",
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T} (#Delta#phi(jet1,MET) > 0.4)"),
+                units="GeV"),
+
+            # pT & MET with var. binning
+            Feature("muon_pt", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)",
+                binning=binningErrorForPtMET,
+                x_title=Label("p_{T}^{#mu}"),
+                units="GeV"),
+
+            Feature("MET", "{{CorrMET_pt}}",
+                binning=binningErrorForPtMET,
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("p_{T}^{miss}"),
+                units="GeV"),
+
+            # pT & MET for 0 jets
+            Feature("muon_pt_0jets", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)",
+                binning=binningErrorForPtMET,
+                selection="nGoodJets_corr == 0",
+                x_title=Label("p_{T}^{#mu}"),
+                units="GeV"),
+
+            Feature("MET_0jets", "{{CorrMET_pt}}",
+                binning=binningErrorForPtMET,
+                selection="nGoodJets_corr == 0",
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("p_{T}^{miss}"),
+                units="GeV"),
+            
+            # pT & MET for Njets > 0
+            Feature("muon_pt_jets", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)",
+                binning=binningErrorForPtMET,
+                selection="nGoodJets_corr > 0",
+                x_title=Label("p_{T}^{#mu} (Njets > 0)"),
+                units="GeV"),
+
+            Feature("MET_jets", "{{CorrMET_pt}}",
+                binning=binningErrorForPtMET,
+                selection="nGoodJets_corr > 0",
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("p_{T}^{miss} (Njets > 0)"),
+                units="GeV"),
+            
+            
+            ## Weights for systematics ##
+            Feature("puWeight", "puWeight", binning=(20, 0, 2),
+                systematics=["CMS_pileup"],
+                x_title=Label("puWeight")),
+
+            Feature("mu_recoSF_weight", "mu_recoSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_reco_2022"],
+                x_title=Label("mu_recoSF_weight")),
+            
+            Feature("mu_idSF_weight", "mu_idSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_id_2022"],
+                x_title=Label("mu_idSF_weight")),
+            
+            Feature("mu_isoSF_weight", "mu_isoSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_iso_2022"],
+                x_title=Label("mu_isoSF_weight")),
+            
+            Feature("mu_hltSF_weight", "mu_hltSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_trigger_2022"],
+                x_title=Label("mu_hltSF_weight")),
+
+            Feature("btag_weight", "btag_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_b_2022"],
+                x_title=Label("btag_weight")),
+
+            Feature("Wkfact", "Wkfact", binning=(20, 0, 2),
+                systematics=["CMS_EXO24021_W_kfactor"],
+                x_title=Label("W k-factor")),
+
+            Feature("PDFweight_total", "PDFweight_total", binning=(20, 0, 2),
+                systematics=["pdf_qqbar"],
+                x_title=Label("PDF uncertainty")),
+            
+            Feature("muonScale", "muonScale", binning=(20, 0, 2),
+                systematics=["CMS_scale_m_2022"],
+                x_title=Label("Muon p_{T} scale")),
+
+            ## Features for non-weight systematics ##
+            Feature("CorrMET_pt", "CorrMET_pt", binning=(50, 35, 4000),
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("CorrMET_phi", "CorrMET_phi", binning=(50, -math.pi, math.pi),
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("p_{T}^{miss} #phi"),
+                units="rad"),           
+
+        ]
+
+        deltaPhi = [
+
+            Feature("deltaPhi_before", "acos(cos(Muon_phi.at(goodMuIdx) - CorrMET_phi))", binning=(40, 0, math.pi),
+                x_title=Label("#Delta#phi(p_{T}^{#mu}, p_{T}^{miss})"),
+                units="rad"),
+            
+            Feature("deltaPhi_after", "acos(cos(Muon_phi.at(goodMuIdx) - CorrMET_phi))", binning=(40, 2.5, math.pi),
+                x_title=Label("#Delta#phi(p_{T}^{#mu}, p_{T}^{miss})"),
+                units="rad"),           
+            
+        ]
+
+        deltaPhiJetsMET = [
+
+            Feature("deltaPhi_JetsMET", "deltaPhi_JetsMET", binning=(40, 0, math.pi),
+                selection="nGoodJets_corr > 0",
+                x_title=Label("#Delta#phi(jets, p_{T}^{miss})"),
+                units="rad"),
+            
+            Feature("deltaPhi_LeadJetMET", "deltaPhi_LeadJetMET", binning=(40, 0, math.pi),
+                selection="nGoodJets_corr > 0",
+                x_title=Label("#Delta#phi(leading jet, p_{T}^{miss})"),
+                units="rad"),           
+            
+        ]
+
+        ### Convenor checks: No 0-jet bin ###
+        mT_no0jets = [
+
+            # Remove 0-jets only for 2022EE
+            Feature("mT_noZeroJets2022EE", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
+                binning=binningErrorPt,
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+
+            # Remove 0-jets for all years (Njets > 0)
+            Feature("mT_noZeroJets", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
+                binning=binningErrorPt,
+                selection="nGoodJets_corr > 0",
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T} (Njets > 0)"),
+                units="GeV"),
+            
+            
+            ## Weights for systematics ##
+            Feature("puWeight", "puWeight", binning=(20, 0, 2),
+                systematics=["CMS_pileup"],
+                x_title=Label("puWeight")),
+
+            Feature("mu_recoSF_weight", "mu_recoSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_reco_2022"],
+                x_title=Label("mu_recoSF_weight")),
+            
+            Feature("mu_idSF_weight", "mu_idSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_id_2022"],
+                x_title=Label("mu_idSF_weight")),
+            
+            Feature("mu_isoSF_weight", "mu_isoSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_iso_2022"],
+                x_title=Label("mu_isoSF_weight")),
+            
+            Feature("mu_hltSF_weight", "mu_hltSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_trigger_2022"],
+                x_title=Label("mu_hltSF_weight")),
+
+            Feature("btag_weight", "btag_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_b_2022"],
+                x_title=Label("btag_weight")),
+
+            Feature("Wkfact", "Wkfact", binning=(20, 0, 2),
+                systematics=["CMS_EXO24021_W_kfactor"],
+                x_title=Label("W k-factor")),
+
+            Feature("PDFweight_total", "PDFweight_total", binning=(20, 0, 2),
+                systematics=["pdf_qqbar"],
+                x_title=Label("PDF uncertainty")),
+            
+            Feature("muonScale", "muonScale", binning=(20, 0, 2),
+                systematics=["CMS_scale_m_2022"],
+                x_title=Label("Muon p_{T} scale")),
+
+            ## Features for non-weight systematics ##
+            Feature("CorrMET_pt", "CorrMET_pt", binning=(50, 35, 4000),
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("CorrMET_phi", "CorrMET_phi", binning=(50, -math.pi, math.pi),
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("p_{T}^{miss} #phi"),
+                units="rad"),          
+
+        ]
+
+        ## Preselection Final Plots ##
+        binningErrorPtpresel = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1200, 1400, 1700, 2000, 2400, 3000, 3600, 5000, 6000, 7000]
+        binningErrorForPtMETpresel = [50, 100, 150, 200, 260, 320, 380, 440, 500, 600, 700, 850, 1000, 1200, 1500, 1800, 2300, 2800, 3400, 4000]
+        
+        features_presel_final = [
+
+            Feature("muon_pt", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)",
+                binning=binningErrorForPtMETpresel,
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 50.0",
+                x_title=Label("p_{T}^{#mu}"),
+                units="GeV"),
+
+            Feature("muon_pt_mT400", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)",
+                binning=binningErrorForPtMETpresel,
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 400.0",
+                x_title=Label("p_{T}^{#mu} (m_{T} > 400 GeV)"),
+                units="GeV"),
+
+            Feature("muon_eta", "Muon_eta.at(goodMuIdx)", binning=(50, -2.4, 2.4),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 50.0",
+                x_title=Label("#mu #eta")),
+
+            Feature("muon_phi", "Muon_phi.at(goodMuIdx)", binning=(50, -math.pi, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 50.0",
+                x_title=Label("#mu #phi"),
+                units="rad"),
+
+            Feature("MET_pt", "CorrMET_pt",
+                binning=binningErrorForPtMETpresel,
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 50.0",
+                x_title=Label("p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("MET_pt_mT400", "CorrMET_pt",
+                binning=binningErrorForPtMETpresel,
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 400.0",
+                x_title=Label("p_{T}^{miss} (m_{T} > 400 GeV)"),
+                units="GeV"),
+
+            Feature("MET_phi", "CorrMET_phi", binning=(50, -math.pi, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 50.0",
+                x_title=Label("p_{T}^{miss} #phi"),
+                units="rad"),
+
+            Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) )",
+                binning=binningErrorPtpresel,
+                x_title=Label("m_{T}"),
+                units="GeV"),
+
+            Feature("muonPt_over_MET", "Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)/CorrMET_pt", binning=(50, 0, 6),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 50.0",
+                x_title=Label("p_{T}^{#mu}/p_{T}^{miss}")),
+
+            Feature("deltaPhi", "acos(cos(Muon_phi.at(goodMuIdx) - CorrMET_phi))", binning=(50, 0, math.pi),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 50.0",
+                x_title=Label("#Delta#phi(p_{T}^{#mu}, p_{T}^{miss})"),
+                units="rad"),
+
+            ##### JERC corrected jets #####
+
+            Feature("CorrNjets", "nGoodJets_corr", binning=(15, 0, 15),
+                selection="sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 50.0",
+                x_title=Label("Njets")),
+
+            Feature("CorrJet1_btagScore", "Jet_btagDeepFlavB.at(goodJets_corr.at(0))", binning=(50, 0, 1),
+                selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 50.0",
+                x_title=Label("leading jet DeepJet score")),
+
+            Feature("CorrJet1_pt", "CorrJet_pt.at(goodJets_corr.at(0))", binning=(50, 30, 1500),
+		selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 50.0",
+                x_title=Label("leading jet p_{T}"),
+                units="GeV"),
+
+	    Feature("CorrJet1_eta", "Jet_eta.at(goodJets_corr.at(0))", binning=(50, -2.5, 2.5),
+		selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 50.0",
+                x_title=Label("leading jet #eta")),
+
+            Feature("CorrJet1_phi", "Jet_phi.at(goodJets_corr.at(0))", binning=(50, -math.pi, math.pi),
+		selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 50.0",
+                x_title=Label("leading jet #phi")),
+
+            # PileUp plot
+            Feature("nVertices", "PV_npvsGood", binning=(80, 0, 80),
+                selection="nGoodJets_corr > 0 && sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*CorrMET_pt*(1 - cos(Muon_phi.at(goodMuIdx) - CorrMET_phi)) ) > 50.0",
+                x_title=Label("# of vertices")),
+    
+        ]
+
+        mT_MIlimit = [
+
+            # Type-I + TuneP
+            Feature("mT", "sqrt( 2*Muon_tunepRelPt.at(goodMuIdx)*Muon_pt.at(goodMuIdx)*{{CorrMET_pt}}*(1 - cos(Muon_phi.at(goodMuIdx) - {{CorrMET_phi}})) )",
+                binning=(36, 400, 4000),
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("m_{T}"),
+                units="GeV"),
+            
+            
+            ## Weights for systematics ##
+            Feature("puWeight", "puWeight", binning=(20, 0, 2),
+                systematics=["CMS_pileup"],
+                x_title=Label("puWeight")),
+
+            Feature("mu_recoSF_weight", "mu_recoSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_reco_2022"],
+                x_title=Label("mu_recoSF_weight")),
+            
+            Feature("mu_idSF_weight", "mu_idSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_id_2022"],
+                x_title=Label("mu_idSF_weight")),
+            
+            Feature("mu_isoSF_weight", "mu_isoSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_iso_2022"],
+                x_title=Label("mu_isoSF_weight")),
+            
+            Feature("mu_hltSF_weight", "mu_hltSF_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_m_trigger_2022"],
+                x_title=Label("mu_hltSF_weight")),
+
+            Feature("btag_weight", "btag_weight", binning=(20, 0, 2),
+                systematics=["CMS_eff_b_2022"],
+                x_title=Label("btag_weight")),
+
+            Feature("Wkfact", "Wkfact", binning=(20, 0, 2),
+                systematics=["CMS_EXO24021_W_kfactor"],
+                x_title=Label("W k-factor")),
+
+            Feature("PDFweight_total", "PDFweight_total", binning=(20, 0, 2),
+                systematics=["pdf_qqbar"],
+                x_title=Label("PDF uncertainty")),
+            
+            Feature("muonScale", "muonScale", binning=(20, 0, 2),
+                systematics=["CMS_scale_m_2022"],
+                x_title=Label("Muon p_{T} scale")),
+
+            ## Features for non-weight systematics ##
+            # Type-I + TuneP
+            Feature("CorrMET_pt", "CorrMET_pt", binning=(50, 35, 4000),
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("p_{T}^{miss}"),
+                units="GeV"),
+
+            Feature("CorrMET_phi", "CorrMET_phi", binning=(50, -math.pi, math.pi),
+                systematics=["CMS_scale_met_2022"],
+                x_title=Label("p_{T}^{miss} #phi"),
+                units="rad"),          
+
+        ]
+        
+        
+        return ObjectCollection(mT_MIlimit)
 
     def add_versions(self):
         versions = {}

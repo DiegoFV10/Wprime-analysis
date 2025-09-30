@@ -1,0 +1,107 @@
+Golden_JSON:
+    name: lumiFilterRDF
+    path: Wprime.Modules.lumiFilter
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+
+HLT Trigger path:
+    name: HLTpath
+    path: Wprime.Modules.HLTtrigger
+    parameters:
+        year: self.config.year
+
+W on-shell Stitching:
+    name: Wonshell_Overlap
+    path: Wprime.Modules.Wboson_Stitching
+    parameters:
+        isWjets: self.dataset.process.get_aux('isWjets', False)
+
+W boosted Stitching:
+    name: Wboosted_Overlap
+    path: Wprime.Modules.Wboson_Stitching
+    parameters:
+        isWboost: self.dataset.process.get_aux('isWboost', False)
+
+ECAL tower filter:
+    name: ECALTowerFilter
+    path: Wprime.Modules.METfilters
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+
+Preselection -> Single Muon Selection:
+    name: SingleMuonSelection
+    path: Wprime.Modules.SingleMuon_Selec
+
+JetEnergy Corrections:
+    name: JERC
+    path: Wprime.Modules.JetCorrections
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod
+        runEra: self.dataset.runEra
+
+Type-I MET correction:
+    name: TypeICorrectedMET
+    path: Wprime.Modules.METcorrections
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod
+        runEra: self.dataset.runEra
+
+Muon momentum Scale:
+    name: MuonScale
+    path: Wprime.Modules.muonScale
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod
+
+TuneP MET correction:
+    name: TunePcorrectedMET
+    path: Wprime.Modules.METcorrections
+    parameters:
+        isMC: self.dataset.process.isMC
+
+MET filters:
+    name: METfilter
+    path: Wprime.Modules.METfilters
+    parameters:
+        year: self.config.year
+
+Jet veto maps:
+    name: JetVetoMaps
+    path: Wprime.Modules.jetvetomap
+    parameters:
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod
+
+QCD check ==> MET without muon:
+    name: METnoMuon
+    path: Wprime.Modules.QCD_checks
+
+QCD check ==> deltaPhi(muon, MET-muon):
+    name: deltaPhiMETnoMuon
+    path: Wprime.Modules.QCD_checks
+
+deltaPhi(muon, MET):
+    name: deltaPhi
+    path: Wprime.Modules.plotUtils
+
+Jet cleanup:
+    name: jetCleanup
+    path: Wprime.Modules.plotUtils
+
+Compute deltaPhi(jets, MET):
+    name: dPhiJetsMET
+    path: Wprime.Modules.dPhiJetsMET
+
+APPLY KINEMATIC SELECTION:
+    name: kinSel
+    path: Wprime.Modules.kinematicSelection
+    parameters:
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod

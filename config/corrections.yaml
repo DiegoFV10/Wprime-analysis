@@ -7,6 +7,14 @@ JetEnergy Corrections:
         runPeriod: self.dataset.runPeriod
         runEra: self.dataset.runEra
 
+Muon momentum Scale:
+    name: MuonScale
+    path: Wprime.Modules.muonScale
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod
+
 Type-I MET correction:
     name: TypeICorrectedMET
     path: Wprime.Modules.METcorrections
@@ -54,15 +62,6 @@ Jet cleanup:
 #        isMC: self.dataset.process.isMC
 #        isPythia: self.dataset.process.get_aux('isPythia', False)
 
-#PUweight from ROOT files:
-#    name: puWeightRDF
-#    path: Corrections.LUM.puWeight
-#    parameters:
-#        isMC: self.dataset.process.isMC
-#        year: self.config.year
-#        isUL: self.dataset.has_tag('ul')
-#        postEE: self.dataset.has_tag('postEE')
-
 PUweight from correctionlib:
     name: puWeightRun3
     path: Wprime.Modules.puWeightCor
@@ -93,14 +92,6 @@ W background k-factors:
         isWoffshell: self.dataset.process.get_aux('isWoffshell', False)
         isWjets: self.dataset.process.get_aux('isWjets', False)
         isWboost: self.dataset.process.get_aux('isWboost', False)
-
-Muon momentum Scale:
-    name: MuonScale
-    path: Wprime.Modules.muonScale
-    parameters:
-        isMC: self.dataset.process.isMC
-        year: self.config.year
-        runPeriod: self.dataset.runPeriod
 
 Total PDF uncertainty:
     name: PDFuncertainty

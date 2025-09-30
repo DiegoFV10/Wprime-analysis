@@ -183,7 +183,7 @@ void GoFSingleChannel(string postfit, string data, string channel, string year){
   GoFbinned->SetFillColor(kAzure+1);
   GoFbinned->GetYaxis()->SetTitle("GoF score");
   GoFbinned->GetYaxis()->SetTitleOffset(1.3);
-  GoFbinned->GetXaxis()->SetRangeUser(200, 2000);
+  GoFbinned->GetXaxis()->SetRangeUser(400, 7000);
   GoFbinned->GetXaxis()->SetTitle("m_{T}  [GeV]");
   GoFbinned->GetXaxis()->SetTitleOffset(1.2);
   if(year == "2022")
@@ -192,7 +192,7 @@ void GoFSingleChannel(string postfit, string data, string channel, string year){
     GoFbinned->SetTitle("GoF bin-by-bin muon 2023");
   GoFbinned->Draw("ABX");
 
-  c->SaveAs(("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/checks/GoF/mT200_eta2.0/GoF_binned_" + channel + year + ".png").c_str());
+  c->SaveAs(("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/checks/GoF/fullCuts/GoF_binned_" + channel + year + ".png").c_str());
 }
 
 void SaturatedBinCheck(){
@@ -200,7 +200,9 @@ void SaturatedBinCheck(){
   //GoFSingleChannel("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/checks/GoF/mT200_eta2.0/fitDiagnostics_BkgFit_muon22.root", "/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/SSMlimit_PreAppFeedback/root/mT_GoF_200_eta2.0__pg_SSMlimits2022.root", "muon", "2022");
   //GoFSingleChannel("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/checks/GoF/mT200_eta2.0/fitDiagnostics_BkgFit_muon23.root", "/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/SSMlimit_PreAppFeedback/root/mT_GoF_200_eta2.0__pg_SSMlimits2023.root", "muon", "2023");
   //GoFSingleChannel("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/checks/fitDiagnostics_electron_2022.root", "/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/checks/histograms_mW_1000_lumi_34.653.root", "electron");
+  //GoFSingleChannel("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/checks/GoF/fullCuts/fitDiagnostics_muon22.root", "/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/SSMlimit_fullCuts/root/mT__pg_SSMlimits2022.root", "muon", "2022");
+  GoFSingleChannel("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/checks/GoF/fullCuts/fitDiagnostics_muon23.root", "/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/SSMlimit_fullCuts-v2/root/mT__pg_SSMlimits2023.root", "muon", "2023");
   
-  GoFMultiChannel("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/checks/GoF/mT200/fitDiagnostics_BkgFit_combination.root", "/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/SSMlimit_mT200_PreAppFinal/root/mT_GoF__pg_SSMlimits2022.root", "/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/SSMlimit_mT200_PreAppFinal/root/mT_GoF__pg_SSMlimits2023.root", "histograms_mW_2000_lumi_34.653.root", "histograms_mW_2000_lumi_27.862.root");
+  //GoFMultiChannel("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/combine/checks/GoF/mT200/fitDiagnostics_BkgFit_combination.root", "/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2022_config/cat_preselection/SSMlimit_mT200_PreAppFinal/root/mT_GoF__pg_SSMlimits2022.root", "/eos/user/d/diegof/cmt/FeaturePlot/Wprime_2023_config/cat_preselection/SSMlimit_mT200_PreAppFinal/root/mT_GoF__pg_SSMlimits2023.root", "histograms_mW_2000_lumi_34.653.root", "histograms_mW_2000_lumi_27.862.root");
   
 }

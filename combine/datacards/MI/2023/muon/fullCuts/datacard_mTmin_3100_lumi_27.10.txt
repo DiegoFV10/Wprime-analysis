@@ -1,0 +1,30 @@
+imax    1 number of bins
+jmax    4 number of processes minus 1
+kmax    * number of nuisance parameters
+----------------------------------------------------------------------------------------------------------------------------
+shapes * * histograms_mTmin_3100_lumi_27.10.root $PROCESS $PROCESS_$SYSTEMATIC
+----------------------------------------------------------------------------------------------------------------------------
+bin          muon_channel
+observation  1
+-----------------------------------------------------------------------------------------------------------------------------
+bin                                   muon_channel   muon_channel   muon_channel   muon_channel   muon_channel   
+process                               Signal         W_boson         Z_boson         DiBoson         QCD         
+process                               0              1              2              3              4              
+rate                                  27.101         0.19486         0.0032325         0.00054441         0.0042017         
+-----------------------------------------------------------------------------------------------------------------------------
+cross_section_QCD   lnN   -    -    -    -    1.50    
+cross_section_VV   lnN   -    -    -    1.040    -    
+cross_section_Z   lnN   -    -    1.020    -    -    
+cross_section_ttbar   lnN   -    -    -    -    -    
+lumi_13p6TeV_2023   lnN   1.013    1.013    1.013    1.013    1.013    
+CMS_pileup_     shape     -              1              1              1              1              
+CMS_eff_m_reco_2023_     shape     -              1              1              1              1              
+CMS_eff_m_id_2023_     shape     -              1              1              1              1              
+CMS_eff_m_iso_2023_     shape     -              1              1              1              1              
+CMS_eff_m_trigger_2023_     shape     -              1              1              1              1              
+CMS_eff_b_2023_     shape     -              1              1              1              1              
+CMS_scale_met_2023_     shape     -              1              1              1              1              
+CMS_scale_m_2023_     shape     -              1              1              1              1              
+CMS_EXO24021_W_kfactor_     shape     -              1              1              1              1              
+pdf_qqbar_     shape     -              1              1              1              1              
+* autoMCStats 10

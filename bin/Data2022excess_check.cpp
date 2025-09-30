@@ -54,8 +54,8 @@ void plotChecks(string filename, string selection){
 
   /// Read branches ///
   
-  const int size_max = 30;
-  const int size_max2 = 300;
+  const int size_max = 300;
+  const int size_max2 = 1000;
 
   UInt_t run =                      chain.SetBranchAddress("run",&run);
   UInt_t luminosityBlock =          chain.SetBranchAddress("luminosityBlock",&luminosityBlock);
@@ -113,9 +113,15 @@ void plotChecks(string filename, string selection){
   Bool_t el_HEEP[size_max];         chain.SetBranchAddress("Electron_cutBased_HEEP",&el_HEEP);
   UChar_t el_cutBased[size_max];    chain.SetBranchAddress("Electron_cutBased",&el_cutBased);
 
+  UChar_t nVertices =               chain.SetBranchAddress("PV_npvsGood", &nVertices);
+  Float_t PV_z =                    chain.SetBranchAddress("PV_z", &PV_z);
+
   /// Define histograms to plot ///
-  TH1F* muonPt    = new TH1F("muonPt", "", 20, 200, 2000);
-  TH1F* muonTuneP = new TH1F("muonTuneP", "", 20, 0, 5);
+  TH1F* muonPt    = new TH1F("muonPt", "", 18, 200, 2000);
+  TH1F* muonPt2   = new TH1F("muonPt2", "", 18, 200, 2000);
+  TH1F* muPtOverMET = new TH1F("muPtOverMET", "", 9, 0.4, 1.5);
+  TH1F* dPhiMuMET = new TH1F("dPhiMuMET", "", 8, 2.4, 3.2);
+  TH1F* muonTuneP = new TH1F("muonTuneP", "", 50, 0, 20);
   TH1F* muonEta   = new TH1F("muonEta", "", 20, -2.5, 2.5);
   TH1F* muonPhi   = new TH1F("muonPhi", "", 20, -3.2, 3.2);
   TH1F* muonPtErr = new TH1F("muonPtErr", "", 20, 0, 600);
@@ -124,6 +130,7 @@ void plotChecks(string filename, string selection){
   TH1I* muonCharge = new TH1I("muonCharge", "", 3, -1, 2);
   TH1I* muonHP    = new TH1I("muonHP", "", 2, 0, 2);
   TH1I* muonIndex = new TH1I("muonIndex", "", 4, 0, 4);
+  TH1I* muonNstat = new TH1I("muonNstat", "", 5, 0, 5);
   TH1F* MET       = new TH1F("MET", "", 20, 200, 2000);
   TH1F* METphi    = new TH1F("METphi", "", 20, -3.2, 3.2);
   TH1F* jetEta    = new TH1F("jetEta", "", 20, -2.5, 2.5);
@@ -132,11 +139,13 @@ void plotChecks(string filename, string selection){
   TH1F* eleEta    = new TH1F("eleEta", "", 20, -2.5, 2.5);
   TH1F* elePhi    = new TH1F("elePhi", "", 20, -3.2, 3.2);
   TH1I* eleHEEP   = new TH1I("eleHEEP", "", 2, 0, 2);
+  TH1I* nVert     = new TH1I("nVertices", "", 80, 0, 80);
+  TH1F* hPV_z     = new TH1F("hPV_z", "", 20, -10, 10);
 
   TH2F* muonEtaPhi = new TH2F("muonEtaPhi", "", 20, -2.5, 2.5, 20, -3.2, 3.2);
   TH2F* jetEtaPhi = new TH2F("jetEtaPhi", "", 20, -2.5, 2.5, 20, -3.2, 3.2);
-  TH2F* muonEtaJetEta = new TH2F("muonEtaJetEta", "", 20, -2.5, 2.5, 20, -2.5, 2.5);
-  TH2F* muonEtaEleEta = new TH2F("muonEtaEleEta", "", 20, -2.5, 2.5, 20, -2.5, 2.5);
+  TH2F* muonEtaJetEta = new TH2F("muonEtaJetEta", "", 20, -2.5, 2.5, 20, -3.2, 3.2);
+  TH2F* muonEtaEleEta = new TH2F("muonEtaEleEta", "", 20, -2.5, 2.5, 20, -3.2, 3.2);
   
   int counter = 0;
   
@@ -144,8 +153,8 @@ void plotChecks(string filename, string selection){
 
     chain.GetEntry(i);
 
-    if(i % 100 == 0) 
-      std::cout << "[Data2022excess_check.cpp] processed : " << i << " entries\r" << std::flush;
+    //if(i % 100 == 0) 
+    //  std::cout << "[Data2022excess_check.cpp] processed : " << i << " entries\r" << std::flush;
 
     double mT;
     if (selection == "presel")
@@ -154,12 +163,17 @@ void plotChecks(string filename, string selection){
       mT = sqrt( 2*mu_TunePRelPt[muIdx]*mu_pt[muIdx]*CorrMET_pt*(1.0 - cos(mu_phi[muIdx] - CorrMET_phi)) );
 
     //if (mT > 1000 && ((mu_eta[muIdx] > -1.6 && mu_eta[muIdx] < -1.2) || (mu_phi[muIdx] > -2.0 && mu_phi[muIdx] < -1.6)) ){
-    if (mT > 1000){
+    //if (mT > 1000){
     //if (mT > 1000 && ((mu_eta[muIdx] > -1.6 && mu_eta[muIdx] < -1.2) && (mu_phi[muIdx] > -2.0 && mu_phi[muIdx] < -1.6)) ){
-      
-      counter ++;
+    if (mu_pt[muIdx]*mu_TunePRelPt[muIdx] >= 500 && mu_pt[muIdx]*mu_TunePRelPt[muIdx] <= 700){// && goodJets_corr->size() == 0){// && mu_eta[muIdx] >= 0.5 && mu_eta[muIdx] <= 1.25){
 
-      muonPt->Fill(mu_pt[muIdx]);
+      counter ++;
+      cout << "Event " << i << " run:lumi:event --> " << run << ":" << luminosityBlock << ":" << event << endl;
+
+      muonPt->Fill(mu_pt[muIdx]*mu_TunePRelPt[muIdx]);
+      if (mu_eta[muIdx] >= 0.5 && mu_eta[muIdx] <= 1.25) muonPt2->Fill(mu_pt[muIdx]*mu_TunePRelPt[muIdx]);
+      muPtOverMET->Fill(mu_pt[muIdx]*mu_TunePRelPt[muIdx]/CorrMET_pt);
+      dPhiMuMET->Fill(acos(cos(mu_phi[muIdx] - CorrMET_phi)));
       muonTuneP->Fill(mu_TunePRelPt[muIdx]);
       muonEta->Fill(mu_eta[muIdx]);
       muonPhi->Fill(mu_phi[muIdx]);
@@ -171,6 +185,9 @@ void plotChecks(string filename, string selection){
       muonCharge->Fill(mu_ch[muIdx]);
       muonHP->Fill(mu_isHP[muIdx]);
       muonIndex->Fill(muIdx);
+      muonNstat->Fill(mu_nStations[muIdx]);
+      nVert->Fill(nVertices);
+      hPV_z->Fill(PV_z);
 
       muonEtaPhi->Fill(mu_eta[muIdx], mu_phi[muIdx]);
       
@@ -211,6 +228,8 @@ void plotChecks(string filename, string selection){
       } // Loop over electrons
       
     } // Check problematic events
+
+    //cout << "Event " << i << " run:lumi:event --> " << run << ":" << luminosityBlock << ":" << event << endl;
     
   } // Loop over entries
 
@@ -218,7 +237,18 @@ void plotChecks(string filename, string selection){
 
   TCanvas* c1 = new TCanvas();
   c1->cd();
+  muonPt->GetXaxis()->SetTitle("#mu p_{T}  (GeV)");
   muonPt->Draw("hist");
+  //c1->SaveAs("plots/Data2022excess/muon_pT_pT-700_jets.png");
+  TCanvas* c1p1 = new TCanvas();
+  c1p1->cd();
+  muonPt2->Draw("hist");
+  TCanvas* c1p2 = new TCanvas();
+  c1p2->cd();
+  muPtOverMET->Draw("hist");
+  TCanvas* c1p3 = new TCanvas();
+  c1p3->cd();
+  dPhiMuMET->Draw("hist");
   TCanvas* c2 = new TCanvas();
   c2->cd();
   muonTuneP->Draw("hist");
@@ -226,51 +256,61 @@ void plotChecks(string filename, string selection){
   c3->cd();
   muonEta->GetXaxis()->SetTitle("#mu #eta");
   muonEta->Draw("hist");
-  //c3->SaveAs("plots/Data2022excess/muon_eta_mT1000.png");
+  //c3->SaveAs("plots/Data2022excess/muon_eta_pT-700_jets.png");
   TCanvas* c4 = new TCanvas();
   c4->cd();
   muonPhi->GetXaxis()->SetTitle("#mu #phi  (rad)");
   muonPhi->Draw("hist");
-  //c4->SaveAs("plots/Data2022excess/muon_phi_mT1000.png");
+  //c4->SaveAs("plots/Data2022excess/muon_phi_pT-700_jets.png");
   //TCanvas* c5 = new TCanvas();
   //c5->cd();
   //MET->Draw("hist");
   //TCanvas* c6 = new TCanvas();
   //c6->cd();
   //METphi->Draw("hist");
-  TCanvas* c7 = new TCanvas();
-  c7->cd();
-  muonPtErr->Draw("hist");
+  //TCanvas* c7 = new TCanvas();
+  //c7->cd();
+  //muonPtErr->Draw("hist");
   //TCanvas* c8 = new TCanvas();
   //c8->cd();
   //muonIso->Draw("hist");
-  TCanvas* c9 = new TCanvas();
-  c9->cd();
-  jetEta->Draw("hist");
-  TCanvas* c10 = new TCanvas();
-  c10->cd();
-  jetPhi->Draw("hist");
-  TCanvas* c11 = new TCanvas();
-  c11->cd();
-  numberMuon->Draw("hist");
-  TCanvas* c12 = new TCanvas();
-  c12->cd();
-  eleEta->Draw("hist");
-  TCanvas* c13 = new TCanvas();
-  c13->cd();
-  elePhi->Draw("hist");
-  TCanvas* c14 = new TCanvas();
-  c14->cd();
-  eleHEEP->Draw("hist");
-  TCanvas* c15 = new TCanvas();
-  c15->cd();
-  muonCharge->Draw("hist");
-  TCanvas* c16 = new TCanvas();
-  c16->cd();
-  muonHP->Draw("hist");
-  TCanvas* c17 = new TCanvas();
-  c17->cd();
-  muonIndex->Draw("hist");
+  //TCanvas* c9 = new TCanvas();
+  //c9->cd();
+  //jetEta->Draw("hist");
+  //TCanvas* c10 = new TCanvas();
+  //c10->cd();
+  //jetPhi->Draw("hist");
+  //TCanvas* c11 = new TCanvas();
+  //c11->cd();
+  //numberMuon->Draw("hist");
+  //TCanvas* c12 = new TCanvas();
+  //c12->cd();
+  //eleEta->Draw("hist");
+  //TCanvas* c13 = new TCanvas();
+  //c13->cd();
+  //elePhi->Draw("hist");
+  //TCanvas* c14 = new TCanvas();
+  //c14->cd();
+  //eleHEEP->Draw("hist");
+  //TCanvas* c15 = new TCanvas();
+  //c15->cd();
+  //muonCharge->Draw("hist");
+  //TCanvas* c16 = new TCanvas();
+  //c16->cd();
+  //muonHP->Draw("hist");
+  //TCanvas* c17 = new TCanvas();
+  //c17->cd();
+  //muonIndex->Draw("hist");
+  TCanvas* c20 = new TCanvas();
+  c20->cd();
+  muonNstat->Draw("hist");
+  TCanvas* c18 = new TCanvas();
+  c18->cd();
+  nVert->Draw("hist");
+  //c18->SaveAs("plots/Data2022excess/nVert_pT-700.root");
+  TCanvas* c19 = new TCanvas();
+  c19->cd();
+  hPV_z->Draw("hist");
   
 
   TCanvas* c21 = new TCanvas();
@@ -278,31 +318,35 @@ void plotChecks(string filename, string selection){
   muonEtaPhi->GetXaxis()->SetTitle("#mu #eta");
   muonEtaPhi->GetYaxis()->SetTitle("#mu #phi  (rad)");
   muonEtaPhi->Draw("COLZ");
-  //if (selection == "presel")
-  //  c21->SaveAs("plots/Data2022excess/muon_etaVSphi_mT1000_presel.png");
-  //else
-  //  c21->SaveAs("plots/Data2022excess/muon_etaVSphi_mT1000.png");
-  TCanvas* c22 = new TCanvas();
-  c22->cd();
-  jetEtaPhi->Draw("COLZ");
+  //c21->SaveAs("plots/Data2022excess/muon_eta-phi_pT-700_jets.png");
+  //TCanvas* c22 = new TCanvas();
+  //c22->cd();
+  //jetEtaPhi->Draw("COLZ");
   //if (selection == "presel")
   //  c22->SaveAs("plots/Data2022excess/jet_etaVSphi_mT1000_presel.png");
   //else
   //  c22->SaveAs("plots/Data2022excess/jet_etaVSphi_mT1000.png");
-  TCanvas* c23 = new TCanvas();
-  c23->cd();
-  muonEtaJetEta->Draw("COLZ");
-  TCanvas* c24 = new TCanvas();
-  c24->cd();
-  muonEtaEleEta->Draw("COLZ");
+  //TCanvas* c23 = new TCanvas();
+  //c23->cd();
+  //muonEtaJetEta->Draw("COLZ");
+  //TCanvas* c24 = new TCanvas();
+  //c24->cd();
+  //muonEtaEleEta->Draw("COLZ");
+
   
 } // End of main 
 
 void Data2022excess_check(){
  
-  plotChecks("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/bin/txt/Data2022_newLepVeto.txt", "kinsel");
+  //plotChecks("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/bin/txt/Data2022_newLepVeto.txt", "kinsel");
   //plotChecks("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/bin/txt/Data2022_presel.txt", "presel");
   //plotChecks("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/bin/txt/Data2023_presel.txt", "presel");
+
+  //plotChecks("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/bin/txt/postEE_excessCheck.txt", "kinsel");
+  //plotChecks("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/bin/txt/postEE_excessCheck_presel.txt", "kinsel");
+
+  plotChecks("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/bin/txt/lastChecksPreApp2022.txt", "kinsel");
+  //plotChecks("/afs/cern.ch/user/d/diegof/Wprime/Wprime-analysis/bin/txt/lastChecksPreApp2023.txt", "kinsel");
 
 }
 

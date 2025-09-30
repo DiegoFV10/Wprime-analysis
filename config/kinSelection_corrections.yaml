@@ -16,6 +16,14 @@ Type-I MET correction:
         runPeriod: self.dataset.runPeriod
         runEra: self.dataset.runEra
 
+Muon momentum Scale:
+    name: MuonScale
+    path: Wprime.Modules.muonScale
+    parameters:
+        isMC: self.dataset.process.isMC
+        year: self.config.year
+        runPeriod: self.dataset.runPeriod
+
 TuneP MET correction:
     name: TunePcorrectedMET
     path: Wprime.Modules.METcorrections
@@ -50,6 +58,10 @@ deltaPhi(muon, MET):
 Jet cleanup:
     name: jetCleanup
     path: Wprime.Modules.plotUtils
+
+Compute deltaPhi(jets, MET):
+    name: dPhiJetsMET
+    path: Wprime.Modules.dPhiJetsMET
 
 APPLY KINEMATIC SELECTION:
     name: kinSel
@@ -90,14 +102,6 @@ W background k-factors:
         isWoffshell: self.dataset.process.get_aux('isWoffshell', False)
         isWjets: self.dataset.process.get_aux('isWjets', False)
         isWboost: self.dataset.process.get_aux('isWboost', False)
-
-Muon momentum Scale:
-    name: MuonScale
-    path: Wprime.Modules.muonScale
-    parameters:
-        isMC: self.dataset.process.isMC
-        year: self.config.year
-        runPeriod: self.dataset.runPeriod
 
 Total PDF uncertainty:
     name: PDFuncertainty
